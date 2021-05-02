@@ -6,16 +6,6 @@ import welcomePic from '../../assets/images/welcome.png'
 
 export default class Index extends Component {
 
-  componentWillMount () { }
-
-  componentDidMount () { }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
   toHome() {
     console.log('进入主页面')
     Taro.switchTab({
