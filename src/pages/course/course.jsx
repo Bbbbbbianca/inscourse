@@ -5,6 +5,7 @@ import { AtSearchBar } from 'taro-ui'
 import { APP_ROUTES } from "../../base/constant"
 import './course.scss'
 import heatPic from '../../assets/images/heat.png'
+import CourseService from '../../services/course.service'
 
 // TO DO:
 // function getCourses () {
@@ -63,7 +64,10 @@ export default class Course extends Component {
 
   onSearchClick () {
     // TO DO
-    console.log('开始搜索')
+	  console.log('开始搜索');
+	  this.setState({
+		  courses: CourseService.fetchOpenCourses('', 1, 'default', 1, 5)
+	  });
   }
 
   onViewDetail (id) {

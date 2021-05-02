@@ -4,14 +4,13 @@ import { View, Image, Button } from '@tarojs/components'
 import './index.scss'
 import { APP_ROUTES } from "../../base/constant";
 import welcomePic from '../../assets/images/welcome.png'
+import UserService from '../../services/user.service'
 
 export default class Index extends Component {
 
   toHome() {
-    console.log('进入主页面')
-    Taro.switchTab({
-      url: APP_ROUTES.COURSE
-    })
+	  console.log('进入主页面');
+	  UserService.wxLogin();
   }
 
   render () {
