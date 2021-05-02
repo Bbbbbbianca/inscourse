@@ -1,26 +1,3 @@
-/*
-export interface Course {
-	# 课程ID
-	course_id: int
-	# 上传者ID
-	author_id: int (User foreign key)
-	# 课程公开状态
-	status: int (Enumeration [public/private])
-	# 课程名
-	name: string (length limit)
-	# 课程简介
-	description: string (length limit)
-	# 课程评价（仅公开课程）
-	level: int
-	# 课程热度（仅公开课程）
-	heat: int
-	# 课程图标 url
-	imagePath: string
-	# 课程所属类别
-	category: int
-}
-*/
-
 /**
  * 
  * @param {string} courseName name of courses in the query result contains this string
@@ -29,7 +6,8 @@ export interface Course {
  * @param {int} pageNum which page to show, default to 1
  * @param {int} pageSize number of courses per page, default to 5
  */
-function fetchCourses(courseName, category, orderBy, pageNum = 1, pageSize = 5) {
+
+function fetchOpenCourses(courseName, category, orderBy, pageNum = 1, pageSize = 5) {
 	// mock
 	return [
 		{
@@ -77,4 +55,33 @@ function _convert_category(category, language = 'cn') {
 			if (language === 'en') return 'unknown category';
 			return '未知类别';
 	}
+}
+
+/**
+ * 用户新建课程
+ * @param {string} course_name 
+ * @param {string} description 
+ * @param {int} category 
+ */
+function upload_course(course_name, description, category) {
+	Taro.request({
+		url: BASE_URL + '/sys/uploadCourse',
+		header: {
+		  'HTTP_AUTHORIZATION': token
+		},
+		data: {
+			'name': course_name,
+			'description': description,
+			'category': category
+		},
+		method: 'POST',
+		success: function (res) {
+		  console.log(res.data)
+		  showHint(res.data.message, '', 'success')
+		},
+		fail: function (res) {
+		  console.log(res);
+		  showHint(res.message, '', 'fail');
+		}
+	  })
 }
