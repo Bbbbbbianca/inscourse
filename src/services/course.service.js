@@ -56,6 +56,28 @@ const CourseService = {
 				image_path: 'unknown',
 				category: 1
 			},
+			{
+				course_id: 4,
+				author_id: 1,
+				status: 1, // public status
+				name: 'Linear Algebra',
+				description: 'This is also a magical math course. You will not want to take this course .',
+				level: 4,
+				heat: 120,
+				image_path: 'unknown',
+				category: 1
+			},
+			{
+				course_id: 5,
+				author_id: 1,
+				status: 1, // public status
+				name: 'Cooking',
+				description: 'Let\'s go to the kitchen!',
+				level: 4,
+				heat: 120,
+				image_path: 'unknown',
+				category: 1
+			},
 		];
 	},
 
