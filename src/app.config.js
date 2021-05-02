@@ -1,6 +1,6 @@
 export default {
   pages: [
-    'pages/detail/detail',
+
     'pages/index/index',
     'pages/course/course',
     'pages/mine/mine',
@@ -8,6 +8,7 @@ export default {
     'pages/car/car',
     'pages/dailytask/dailytask',
     'pages/material/material',
+    'pages/detail/detail',
     'pages/schedule/schedule'
   ],
   tabBar: {

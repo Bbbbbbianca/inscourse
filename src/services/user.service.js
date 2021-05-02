@@ -6,6 +6,7 @@ const UserService = {
 	wxLogin: function() {
 		Taro.login({
 		  success: function (res) {
+			console.log(res.code);
 			Taro.request({
 			  url: UtilService.BASE_URL + '/sys/login',
 			  data: {

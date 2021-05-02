@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import Taro from '@tarojs/taro'
 import { View, Image, Button } from '@tarojs/components'
 import './index.scss'
-import { APP_ROUTES } from "../../base/constant";
 import welcomePic from '../../assets/images/welcome.png'
 import UserService from '../../services/user.service'
 
