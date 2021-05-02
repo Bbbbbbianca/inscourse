@@ -1,5 +1,6 @@
 import Taro from '@tarojs/taro'
 import UtilService from './utils'
+import { APP_ROUTES } from "../base/constant"
 
 const UserService = {
 	wxLogin: function() {
