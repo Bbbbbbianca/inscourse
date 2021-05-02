@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View} from '@tarojs/components'
+import { View } from '@tarojs/components'
 import './mine.scss'
 
 export default class Mine extends Component {

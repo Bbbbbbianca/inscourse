@@ -1,9 +1,9 @@
 export default {
   pages: [
-    'pages/course/course',
     'pages/index/index',
+    'pages/course/course',
     'pages/mine/mine',
-    'pages/plan/plan',
+    'pages/group/group',
     'pages/car/car',
     'pages/dailytask/dailytask',
     'pages/detail/detail',
@@ -24,7 +24,7 @@ export default {
         selectedIconPath: './assets/images/ic_course_selected.png'
       },
       {
-        pagePath: 'pages/plan/plan',
+        pagePath: 'pages/group/group',
         iconPath: './assets/images/ic_plan_normal.png',
         selectedIconPath: './assets/images/ic_plan_selected.png'
       }]

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { View} from '@tarojs/components'
-import './plan.scss'
+import { View } from '@tarojs/components'
+import './group.scss'
 
-export default class Plan extends Component {
+export default class Group extends Component {
 
   componentWillMount () { }
 
@@ -16,7 +16,7 @@ export default class Plan extends Component {
 
   render () {
     return (
-      <View className='plan'>
+      <View className='group'>
         111
       </View>
     )

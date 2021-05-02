@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Taro from '@tarojs/taro'
 import { View, Image, Button } from '@tarojs/components'
 import './index.scss'
+import { APP_ROUTES } from "../../base/constant";
 import welcomePic from '../../assets/images/welcome.png'
 
 export default class Index extends Component {
@@ -9,7 +10,7 @@ export default class Index extends Component {
   toHome() {
     console.log('进入主页面')
     Taro.switchTab({
-      url: '../course/course'
+      url: APP_ROUTES.COURSE
     })
   }
 
