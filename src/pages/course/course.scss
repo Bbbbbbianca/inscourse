@@ -18,24 +18,55 @@
     .course-item {
         width: 90%;
         height: 300px;
+        display: flex;
+        flex-direction: row;
         border-radius: 12px;
         background-color: $tf-color-brown6;
         box-shadow: 16px 16px 24px $tf-color-grey3;
         margin: 32px 0;
         .course-item-img {
-
+            width: 30%;
+            height: 250px;
+            border-radius: 12px;
+            margin: 24px 16px;
+            box-shadow: 2px 2px 3px $tf-color-brown7;
         }
 
-        .course-item-title {
+        .course-item-text {
+            display: flex;
+            flex-direction: column;
+            .course-item-title {
+                font-size: 40px;
+                font-family: "FangSong", "Wawati SC", "YouYuan";
+                margin-top: 24px;
+                margin-left: 16px;
+                color: $tf-color-brown8; 
+            }
+    
+            .course-item-dct {
+                font-size: 32px;
+                font-family: "FangSong", "Wawati SC", "YouYuan";
+                margin: 0 16px;
+                color: $tf-color-brown4; 
+            }
 
-        }
+            .course-item-heat-part {
+                bottom: 24px;
+                margin-right: 16px;;
+                display: flex;
+                flex-direction: row;
+                .course-item-heat-img {
+                    width: 40px;
+                    height: 40px;
+                    margin-right: 8px;
+                }
+                .course-item-heat {
+                    font-size: 24px;
+                    font-family: "FangSong", "Wawati SC", "YouYuan";
+                    color: $tf-color-brown8; 
+                }
 
-        .course-item-dct {
-
-        }
-
-        .course-item-heat {
-
+            }
         }
     }
 }
