@@ -3,6 +3,7 @@ import Taro from '@tarojs/taro'
 import { View, Image, Button } from '@tarojs/components'
 import './index.scss'
 import welcomePic from '../../assets/images/welcome.png'
+import UserService from '../../services/user.service'
 
 export default class Index extends Component {
 
@@ -17,10 +18,8 @@ export default class Index extends Component {
   componentDidHide () { }
 
   toHome() {
-    console.log('进入主页面')
-    Taro.switchTab({
-      url: '../course/course'
-    })
+	  console.log('正在登陆');
+	  UserService.wxLogin();
   }
 
   render () {
