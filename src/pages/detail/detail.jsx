@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Image } from '@tarojs/components'
+import { View, Image, Button } from '@tarojs/components'
 // import Taro from '@tarojs/taro'
 import './detail.scss'
 import heatPic from '../../assets/images/heat.png'
@@ -8,6 +8,7 @@ import heatPic from '../../assets/images/heat.png'
 // function getCourseDetail (id) {
 // }
 
+// TO DO:
 // function getCourseId () {
 //   if (Taro.getCurrentInstance().router.params.id) {
 //       return(Taro.getCurrentInstance().router.params.id)
@@ -27,7 +28,7 @@ export default class Detail extends Component {
         status: 1,
         image_path: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg', 
         name: '数学分析', 
-        description: '好学', 
+        description: '好学好学好学真的很好学，一学就会真的不是盖的', 
         heat: 234,
         level: 9,
         category: 1
@@ -35,32 +36,42 @@ export default class Detail extends Component {
     };
   }
   
+  toJoinCourse(id) {
+    console.log('join' + id)
+    // TO DO
+  }
 
 
   render () {
     return (
       <View className='detail'>
-        <View className='detail-course-msg'>
+        <View className='detail-msg'>
           <Image
             src={this.state.course.image_path}
-            className='course-course-msg-img'
+            className='detail-msg-img'
           />
-          <View className='course-course-msg-text'>
-            <View className='course-course-msg-top-part'>
-              <View className='course-course-msg-title'>
+          <View className='detail-msg-text'>
+            <View className='detail-msg-text-top'>
+              <View className='detail-msg-title'>
                 {this.state.course.name}
               </View>
+              <Button 
+                onClick={()=>{this.toJoinCourse(this.state.course.course_id)}}
+                className='detail-msg-button-join'
+              > 
+                加入
+              </Button>
             </View>
-            <View className='course-course-msg-dct'>
+            <View className='detail-msg-dct'>
               {this.state.course.description}
             </View>
-            <View className='course-course-msg-bottom-part'>
-              <View className='course-item-heat'>
+            <View className='detail-msg-text-bottom'>
+              <View className='detail-msg-heat'>
                 {this.state.course.heat}
               </View>
               <Image
                 src={heatPic}
-                className='course-item-heat-img'
+                className='detail-msg-heat-img'
               />
             </View>
           </View>

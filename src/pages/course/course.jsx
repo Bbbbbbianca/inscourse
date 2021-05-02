@@ -96,7 +96,7 @@ export default class Course extends Component {
             <View className='course-item-dct'>
               {course.description}
             </View>
-            <View className='course-item-bottom-part'>
+            <View className='course-item-text-bottom'>
               <View className='course-item-heat'>
                 {course.heat}
               </View>

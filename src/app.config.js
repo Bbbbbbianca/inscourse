@@ -1,7 +1,7 @@
 export default {
   pages: [
-    'pages/index/index',
     'pages/detail/detail',
+    'pages/index/index',
     'pages/course/course',
     'pages/mine/mine',
     'pages/group/group',

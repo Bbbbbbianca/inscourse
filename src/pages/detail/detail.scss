@@ -8,8 +8,71 @@
     flex-direction: column;
 }
 
-.detail-course-msg {
+.detail-msg {
+    width: 96%;
+    height: 350px;
+    display: flex;
+    flex-direction: row;
+    background-color: $tf-color-brown6;
+    margin: 2px 16px;
+    .detail-msg-img {
+        width: 30%;
+        height: 80%;
+        border-radius: 12px;
+        margin: 28px 24px;
+        box-shadow: 2px 2px 3px $tf-color-brown7;
+    }
 
+    .detail-msg-text {
+        width: 60%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        .detail-msg-text-top {
+            display: flex;
+            flex-direction: row;
+            .detail-msg-title {
+                font-size: 48px;
+                font-family: "FangSong", "Wawati SC", "YouYuan";
+                margin-top: 24px;
+                margin-left: 16px;
+                color: $tf-color-brown8; 
+            }
+
+            .detail-msg-button-join {
+                font-size: 32px;
+                font-family: "FangSong", "Wawati SC", "YouYuan";
+                background-color: $tf-color-brown5;
+                margin-top: 16px;
+                margin-right: 16px;
+            }
+        }
+
+        .detail-msg-dct {
+            height: 60%;
+            font-size: 32px;
+            font-family: "FangSong", "Wawati SC", "YouYuan";
+            margin: 16px 18px;
+            color: $tf-color-brown4; 
+
+        } 
+
+        .detail-msg-text-bottom {
+            display: flex;
+            flex-direction: row-reverse;
+            .detail-msg-heat-img {
+                width: 36px;
+                height: 36px;
+                margin-right: 8px;
+            }
+            .detail-msg-heat {
+                font-size: 24px;
+                font-family: "FangSong", "Wawati SC", "YouYuan";
+                color: $tf-color-brown8; 
+            }
+
+        }   
+    }
 }
 
 .detai-relevant {
