@@ -51,7 +51,7 @@ export default class Course extends Component {
           category: 1
         }
       ],
-    }
+    };
   }
 
   onSearchValueChange (value) {
@@ -79,6 +79,7 @@ export default class Course extends Component {
         <View
           key={course.course_id}
           className='course-item'
+          onClick={()=>{this.onViewDetail(course.course_id)}}
         >
           <Image
             src={course.image_path}
@@ -91,7 +92,7 @@ export default class Course extends Component {
             <View className='course-item-dct'>
               {course.description}
             </View>
-            <View className='course-item-heat-part'>
+            <View className='course-item-bottom-part'>
               <View className='course-item-heat'>
                 {course.heat}
               </View>
