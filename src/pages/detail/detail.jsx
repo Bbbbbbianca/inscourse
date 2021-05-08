@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Image, Button } from '@tarojs/components'
-// import Taro from '@tarojs/taro'
+import Taro from '@tarojs/taro'
+import { APP_ROUTES } from "../../base/constant"
 import './detail.scss'
 import heatPic from '../../assets/images/heat.png'
 
@@ -20,10 +21,17 @@ import heatPic from '../../assets/images/heat.png'
 // function getresources (id) {
 // }
 
+// TO DO:
+// function getcars (id) {
+// }
+
 export default class Detail extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      showRes: true,
+      showCar: false,
+      showType: 0,
     //   course_id: getCourseId(),
     //   course: getCourseDetail(course_id),
       course: {
@@ -67,6 +75,18 @@ export default class Detail extends Component {
           content: 'http://jiaodanb.com',
         }
       ],
+    // cars: getcars(course_id)
+      cars: [
+        {
+          mate_id: 1,
+        },
+        {
+          mate_id: 2,
+        },
+        {
+          mate_id: 3,
+        }
+      ],
     };
   }
   
@@ -75,33 +95,34 @@ export default class Detail extends Component {
     // TO DO
   }
 
+  toShowCar() {
+    this.setState({
+      showCar: true,
+      showRes: false
+    })
+  }
+
+  toShowRes() {
+    this.setState({
+      showCar: false,
+      showRes: true
+    })
+  }
+
+  toSearchResbyType(id) {
+    this.setState({
+      showType: id
+    })
+  }
+
+  onViewResDetail(id) {
+    console.log('view detail of resource' + id)
+    Taro.navigateTo({
+      url: APP_ROUTES.RESOURSE +'?id=' + id
+    })
+  }
 
   render () {
-    let resources = this.state.resources.map((resource)=>{ 
-      return (
-        <View
-          key={resource.course_id}
-          className='detail-resource-item'
-          onClick={()=>{this.onViewDetail(resource.resource_id)}}
-        >
-          <View className='detail-resource-item-title'>
-            {resource.resource_key}
-          </View>
-          <View className='detail-resource-item-dct'>
-            {resource.description}
-          </View>
-          <View className='detail-resource-item-bottom'>
-            <View className='detail-resource-item-heat'>
-              {resource.heat}
-            </View>
-            <Image
-              src={heatPic}
-              className='detail-resource-item-heat-img'
-            />
-          </View>
-        </View>
-      )
-    });
     return (
       <View className='detail'>
         <View className='detail-msg'>
@@ -137,24 +158,100 @@ export default class Detail extends Component {
         </View>
         <View className='detail-relevant'>
           <View className='detail-choice'>
-            <View className='detail-choice-resource'>
+            <View
+              className='detail-choice-resource'
+              onClick={()=>{this.toShowRes()}}
+            >
               资源
             </View>
-            <View className='detail-choice-car'>
+            <View
+              className='detail-choice-car'
+              onClick={()=>{this.toShowCar()}}
+            >
               课友
             </View>
           </View>
-          <View className='detail-resource'>
-            <View className='detail-resource-type'>
-
+          {
+            this.state.showRes
+            ?
+            <View className='detail-resource'>
+              <View className='detail-resource-type'>
+                <View
+                  className='detail-resource-type-item'
+                  onClick={()=>{this.toSearchResbyType(0)}}
+                >
+                  all
+                </View>
+                <View
+                  className='detail-resource-type-item' 
+                  onClick={()=>{this.toSearchResbyType(1)}}
+                >
+                  docx
+                </View>
+                <View
+                  className='detail-resource-type-item' 
+                  onClick={()=>{this.toSearchResbyType(2)}}
+                >
+                  video
+                </View>
+                <View
+                  className='detail-resource-type-item' 
+                  onClick={()=>{this.toSearchResbyType(3)}}
+                >
+                  pdf
+                </View>
+              </View>
+              <View className='detail-resource-list'>
+                { this.state.resources.map((resource)=>(
+                this.state.showType === 0 || this.state.showType === resource.content_type
+                ?
+                <View
+                  key={resource.course_id}
+                  className='detail-resource-item'
+                  onClick={()=>{this.onViewResDetail(resource.resource_id)}}
+                >
+                  <View className='detail-resource-item-title'>
+                    {resource.resource_key}
+                  </View>
+                  <View className='detail-resource-item-dct'>
+                    {resource.description}
+                  </View>
+                  <View className='detail-resource-item-bottom'>
+                    <View className='detail-resource-item-heat'>
+                      {resource.heat}
+                    </View>
+                    <Image
+                      src={heatPic}
+                      className='detail-resource-item-heat-img'
+                    />
+                  </View>
+                </View>
+                : 
+                null
+                ))}
+              </View>
             </View>
-            <View className='detail-resource-list'>
-              { resources }
+            :
+            null
+          }
+          {
+            this.state.showCar
+            ?
+            <View className='detail-car'>
+              <View className='detail-car-list'>
+                { this.state.cars.map((car)=>(
+                <View
+                  key={car.mate_id}
+                  className='detail-car-item'
+                >
+                  
+                </View>
+                ))}
+              </View>
             </View>
-          </View>
-          <View className='detail-car'>
-          
-          </View>  
+            :
+            null
+          }
         </View>
       </View>
     )

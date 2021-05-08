@@ -105,7 +105,18 @@
 
     .detail-resource {
         .detail-resource-type {
-
+            display: flex;
+            flex-direction: row;
+            .detail-resource-type-item {
+                margin-top: 8px;
+                margin-left: 24px;
+                font-size: 24px;
+                background-color: $tf-color-pink2;
+                font-family: "FangSong", "Wawati SC", "YouYuan";
+                color: $tf-color-brown4; 
+                border-color: $tf-color-pink3;
+                border-radius: 18px;
+            }
         }
         .detail-resource-list {
             display: flex;
@@ -119,7 +130,7 @@
                 border-radius: 12px;
                 background-color: $tf-color-brown6;
                 box-shadow: 16px 16px 24px $tf-color-grey3;
-                margin: 32px 0;
+                margin: 16px 0;
                 .detail-resource-item-title {
                     font-size: 36px;
                     font-family: "FangSong", "Wawati SC", "YouYuan";
@@ -156,6 +167,20 @@
     }
     
     .detail-car {
-    
+        .detail-car-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .detail-car-item {
+                width: 90%;
+                height: 170px;
+                display: flex;
+                flex-direction: column;
+                border-radius: 12px;
+                background-color: $tf-color-brown6;
+                box-shadow: 16px 16px 24px $tf-color-grey3;
+                margin: 32px 0;
+            }
+        }
     }
 }
