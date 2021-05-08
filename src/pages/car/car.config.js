@@ -1,4 +1,4 @@
 export default {
-    navigationBarTitleText: '群详情'
-  }
+  navigationBarTitleText: '群详情'
+}
   

@@ -4,8 +4,10 @@ export const APP_ROUTES = {
     COURSE: '/pages/course/course',
     DAILYTASK: '/pages/dailytask/dailytask',
     DETAIL: '/pages/detail/detail',
-    RESOURSE: '/pages/resourse/resourse',
+    RESOURCE: '/pages/resource/resource',
     MINE: '/pages/mine/mine',
     GROUP: '/pages/group/group',
-    SCHEDULE: '/pages/schedule/schedule'
+    SCHEDULE: '/pages/schedule/schedule',
+    ADDRES: '/pages/addres/addres',
+    ADDCOURSE: '/pages/addcourse/addcourse'
 }

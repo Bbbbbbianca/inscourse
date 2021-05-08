@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import { View, Image, Button } from '@tarojs/components'
 import Taro from '@tarojs/taro'
+import { AtFab } from 'taro-ui'
 import { APP_ROUTES } from "../../base/constant"
 import './detail.scss'
 import heatPic from '../../assets/images/heat.png'
-
-// TO DO:
-// function getCourseDetail (id) {
-// }
+import addPic from '../../assets/images/add.png'
 
 // TO DO:
 // function getCourseId () {
@@ -15,6 +13,10 @@ import heatPic from '../../assets/images/heat.png'
 //       return(Taro.getCurrentInstance().router.params.id)
 //     } else {
 //     }
+// }
+
+// TO DO:
+// function getCourseDetail (id) {
 // }
 
 // TO DO:
@@ -62,7 +64,7 @@ export default class Detail extends Component {
           description: '第三版的pdf版本，拿下留赞',
           author_id: 8,
           heat: 9,
-          content_type: 2,
+          content_type: 3,
           content: '复制这段话粘贴到百度网盘···',
         },
         {
@@ -118,10 +120,17 @@ export default class Detail extends Component {
   onViewResDetail(id) {
     console.log('view detail of resource' + id)
     Taro.navigateTo({
-      url: APP_ROUTES.RESOURSE +'?id=' + id
+      url: APP_ROUTES.RESOURCE +'?id=' + id
     })
   }
 
+  toAddResource() {
+    console.log('to add resource')
+    Taro.navigateTo({
+      url: APP_ROUTES.ADDRES
+    })
+  }
+  
   render () {
     return (
       <View className='detail'>
@@ -230,6 +239,13 @@ export default class Detail extends Component {
                 null
                 ))}
               </View>
+              <AtFab className='detail-resource-add'>
+                <Image
+                  src={addPic}
+                  className='detail-resource-add-img'
+                  onClick={()=>{this.toAddResource()}}
+                />
+              </AtFab>
             </View>
             :
             null
@@ -244,7 +260,7 @@ export default class Detail extends Component {
                   key={car.mate_id}
                   className='detail-car-item'
                 >
-                  
+
                 </View>
                 ))}
               </View>

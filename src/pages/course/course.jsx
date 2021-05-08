@@ -6,6 +6,7 @@ import { APP_ROUTES } from "../../base/constant"
 import './course.scss'
 import heatPic from '../../assets/images/heat.png'
 import CourseService from '../../services/course.service'
+import addPic from '../../assets/images/add.png'
 
 // TO DO:
 // function getCourses () {
@@ -77,6 +78,13 @@ export default class Course extends Component {
     })
   }
 
+  toAddCourse () {
+    console.log('to add course')
+    Taro.navigateTo({
+      url: APP_ROUTES.ADDCOURSE
+    })
+  } 
+
   render () {
     let courses = this.state.courses.map((course)=>{ 
       return (
@@ -111,14 +119,20 @@ export default class Course extends Component {
     });
     return (
       <View className='course'>
-        <AtSearchBar
-          className='course-search'
-          showActionButton
-          placeholder='输入课程名称'
-          value={this.state.searchCourse}
-          onChange={this.onSearchValueChange.bind(this)}
-          onActionClick={this.onSearchClick.bind(this)}
-        />
+        <View className='course-top'>
+          <AtSearchBar
+            className='course-search'
+            placeholder='输入课程名称'
+            value={this.state.searchCourse}
+            onChange={this.onSearchValueChange.bind(this)}
+            onActionClick={this.onSearchClick.bind(this)}
+          />
+          <Image
+            src={addPic}
+            className='course-add'
+            onClick={()=>{this.toAddCourse()}}
+          />
+        </View>
         <View
           className='course-list'
         >

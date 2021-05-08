@@ -1,14 +1,16 @@
 export default {
   pages: [
+    'pages/course/course',
     'pages/detail/detail',
     'pages/index/index',
-    'pages/course/course',
     'pages/mine/mine',
     'pages/group/group',
     'pages/car/car',
     'pages/dailytask/dailytask',
-    'pages/resourse/resourse',
-    'pages/schedule/schedule'
+    'pages/resource/resource',
+    'pages/schedule/schedule',
+    'pages/addres/addres',
+    'pages/addcourse/addcourse'
   ],
   tabBar: {
     backgroundColor: '#E6CEAC',

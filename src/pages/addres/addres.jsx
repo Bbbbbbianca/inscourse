@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { View } from '@tarojs/components'
-import './car.scss'
+import './addres.scss'
 
-export default class Car extends Component {
+export default class addRes extends Component {
 
   componentWillMount () { }
 
@@ -16,7 +16,7 @@ export default class Car extends Component {
 
   render () {
     return (
-      <View className='car'>
+      <View className='addres'>
         111
       </View>
     )
