@@ -4,7 +4,7 @@ export const APP_ROUTES = {
     COURSE: '/pages/course/course',
     DAILYTASK: '/pages/dailytask/dailytask',
     DETAIL: '/pages/detail/detail',
-    MATERIAL: '/pages/material/material',
+    RESOURSE: '/pages/resourse/resourse',
     MINE: '/pages/mine/mine',
     GROUP: '/pages/group/group',
     SCHEDULE: '/pages/schedule/schedule'

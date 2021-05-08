@@ -16,6 +16,10 @@ import heatPic from '../../assets/images/heat.png'
 //     }
 // }
 
+// TO DO:
+// function getresources (id) {
+// }
+
 export default class Detail extends Component {
   constructor(props) {
     super(props);
@@ -33,6 +37,36 @@ export default class Detail extends Component {
         level: 9,
         category: 1
       },
+    // resources: getresources(course_id)
+      resources: [
+        {
+          resource_id: 1,
+          resource_key: '一份学习笔记',
+          description: '学习整理了第二章的内容，欢迎取用～',
+          author_id: 1,
+          heat: 577,
+          content_type: 1,
+          content: '1.数学分析是学不会的 2.数学分析是听不懂的 3.数学分析是要人命的',
+        },
+        {
+          resource_id: 2,
+          resource_key: '教材资料',
+          description: '第三版的pdf版本，拿下留赞',
+          author_id: 8,
+          heat: 9,
+          content_type: 2,
+          content: '复制这段话粘贴到百度网盘···',
+        },
+        {
+          resource_id: 3,
+          resource_key: '交大网课',
+          description: '交大教授讲第四章很好的视频',
+          author_id: 11,
+          heat: 1109,
+          content_type: 2,
+          content: 'http://jiaodanb.com',
+        }
+      ],
     };
   }
   
@@ -43,6 +77,31 @@ export default class Detail extends Component {
 
 
   render () {
+    let resources = this.state.resources.map((resource)=>{ 
+      return (
+        <View
+          key={resource.course_id}
+          className='detail-resource-item'
+          onClick={()=>{this.onViewDetail(resource.resource_id)}}
+        >
+          <View className='detail-resource-item-title'>
+            {resource.resource_key}
+          </View>
+          <View className='detail-resource-item-dct'>
+            {resource.description}
+          </View>
+          <View className='detail-resource-item-bottom'>
+            <View className='detail-resource-item-heat'>
+              {resource.heat}
+            </View>
+            <Image
+              src={heatPic}
+              className='detail-resource-item-heat-img'
+            />
+          </View>
+        </View>
+      )
+    });
     return (
       <View className='detail'>
         <View className='detail-msg'>
@@ -78,10 +137,20 @@ export default class Detail extends Component {
         </View>
         <View className='detail-relevant'>
           <View className='detail-choice'>
-
+            <View className='detail-choice-resource'>
+              资源
+            </View>
+            <View className='detail-choice-car'>
+              课友
+            </View>
           </View>
-          <View className='detail-material'>
-          
+          <View className='detail-resource'>
+            <View className='detail-resource-type'>
+
+            </View>
+            <View className='detail-resource-list'>
+              { resources }
+            </View>
           </View>
           <View className='detail-car'>
           
