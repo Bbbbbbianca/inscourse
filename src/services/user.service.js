@@ -46,17 +46,12 @@ const UserService = {
 	},
 
 	changeUsername: function(newName) {
-		try {
-		  var token = Taro.getStorageSync('token')
-		} catch (e) {
-			UtilService.showHint('登录状态失效', '请重新进入小程序', 'fail');
-			return;
-		}
-	  
+    let token = UtilService.fetchToken();
+
 		Taro.request({
 		  url: UtilService.BASE_URL + '/sys/changeUsername',
 		  header: {
-			'HTTP_AUTHORIZATION': token
+			'Token': token
 		  },
 		  data: {
 			'newName': newName

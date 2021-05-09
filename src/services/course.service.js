@@ -3,24 +3,30 @@ import UtilService from './utils'
 
 const CourseService = {
 
-	fetchOpenCourses: function (courseName, category, orderBy, pageNum = 1, pageSize = 5) {
-		// const res = await Taro.request({
-		// 	url: UtilService.BASE_URL + '/sys/fetchOpenCourses',
-		// 	data: {
-		// 		'courseName': courseName,
-		// 		'category': category,
-		// 		'orderBy': orderBy,
-		// 		'pageNum': pageNum,
-		// 		'pageSize': pageSize
-		// 	},
-		// 	method: 'GET',
-		// });
+	fetchOpenCourses: async function (courseName, category, orderBy, pageNum = 1, pageSize = 5) {
+	  let token = UtilService.fetchToken();
 
-		// if (res.statusCode == 200) {
-		// 	return res.data;
-		// } else {
-		// 	return [];
-		// }
+		const res = await Taro.request({
+			url: UtilService.BASE_URL + '/course/queryOpenCourses',
+      header: {
+        'Token': token
+      },
+			data: {
+				'name': courseName,
+				'category': category,
+				'order_by': orderBy,
+				'page_num': pageNum,
+				'page_size': pageSize
+			},
+			method: 'GET',
+		});
+
+		if (res.statusCode == 200) {
+      console.log(res.data.courses);
+			return res.data.courses;
+		} else {
+			return [];
+		}
 
 		return [
 			{
