@@ -3,10 +3,10 @@ import UtilService from './utils'
 
 const CourseService = {
 
-	fetchOpenCourses: async function (courseName, category, orderBy, pageNum = 1, pageSize = 5) {
+	fetchOpenCourses: function (courseName, category, orderBy, pageNum = 1, pageSize = 5, compo) {
 	  let token = UtilService.fetchToken();
 
-		const res = await Taro.request({
+		Taro.request({
 			url: UtilService.BASE_URL + '/course/queryOpenCourses',
       header: {
         'Token': token
@@ -19,14 +19,17 @@ const CourseService = {
 				'page_size': pageSize
 			},
 			method: 'GET',
+      success: function (res) {
+        console.log(res.data)
+        UtilService.showHint('搜索成功', '', 'success')
+        compo.updateCourses(res.data.courses)
+      },
+      fail: function (res) {
+        console.log(res);
+        UtilService.showHint('修改用户名失败', '请稍后重试', 'fail');
+      }
 		});
 
-		if (res.statusCode == 200) {
-      console.log(res.data.courses);
-			return res.data.courses;
-		} else {
-			return [];
-		}
 
 		return [
 			{

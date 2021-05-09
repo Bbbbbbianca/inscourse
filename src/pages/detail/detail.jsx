@@ -5,22 +5,18 @@ import { AtFab } from 'taro-ui'
 import { APP_ROUTES } from "../../base/constant"
 import './detail.scss'
 import heatPic from '../../assets/images/heat.png'
+import UtilService from "../../services/utils";
 import addPic from '../../assets/images/add.png'
 import preferPic from '../../assets/images/prefer.png'
 import favorPic from '../../assets/images/favor.png'
 import personPic from '../../assets/images/person.png'
 
-// TO DO:
-// function getCourseId () {
-//   if (Taro.getCurrentInstance().router.params.id) {
-//       return(Taro.getCurrentInstance().router.params.id)
-//     } else {
-//     }
-// }
-
-// TO DO:
-// function getCourseDetail (id) {
-// }
+function getCourseId () {
+  let course_id = Taro.getCurrentInstance().router.params.id
+  if (course_id)
+      return course_id
+  else return 1
+}
 
 // TO DO:
 // function getresources (id) {
@@ -47,12 +43,12 @@ export default class Detail extends Component {
     //   course_id: getCourseId(),
     //   course: getCourseDetail(course_id),
       course: {
-        course_id: 1, 
-        author_id: 1, 
+        course_id: 1,
+        author_id: 1,
         status: 1,
-        image_path: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg', 
-        name: '数学分析', 
-        description: '好学好学好学真的很好学，一学就会真的不是盖的', 
+        image: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
+        name: '数学分析',
+        description: '好学好学好学真的很好学，一学就会真的不是盖的',
         heat: 234,
         level: 9,
         category: 1
@@ -154,8 +150,35 @@ export default class Detail extends Component {
         }
       ],
     };
+    this.getCourseDetail(getCourseId())
   }
-  
+
+  getCourseDetail (id) {
+    let token = UtilService.fetchToken();
+    let that = this;
+    Taro.request({
+      url: UtilService.BASE_URL + '/course/queryCertainCourse',
+      header: {
+        'Token': token
+      },
+      data: {
+        'course_id': id
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log(res.data.course)
+        that.setState({
+          course: res.data.course
+        });
+      },
+      fail: function (res) {
+        console.log(res);
+        UtilService.showHint('修改用户名失败', '请稍后重试', 'fail');
+      }
+    })
+
+  }
+
   toJoinCourse(id) {
     console.log('join' + id)
     // TO DO
@@ -179,7 +202,6 @@ export default class Detail extends Component {
     this.setState({
       showType: id
     })
-    // TO DO
   }
 
   onViewResDetail(id) {
@@ -195,7 +217,7 @@ export default class Detail extends Component {
       url: APP_ROUTES.ADDRES
     })
   }
-  
+
   toShowAddInvitationDialog() {
     console.log('add invitation dialog visible.')
     this.setState({
@@ -310,7 +332,7 @@ export default class Detail extends Component {
       <View className='detail'>
         <View className='detail-msg'>
           <Image
-            src={this.state.course.image_path}
+            src={this.state.course.image}
             className='detail-msg-img'
           />
           <View className='detail-msg-text'>
@@ -318,10 +340,10 @@ export default class Detail extends Component {
               <View className='detail-msg-title'>
                 {this.state.course.name}
               </View>
-              <Button 
+              <Button
                 onClick={()=>{this.toJoinCourse(this.state.course.course_id)}}
                 className='detail-msg-button-join'
-              > 
+              >
                 加入
               </Button>
             </View>
@@ -367,25 +389,25 @@ export default class Detail extends Component {
                   all
                 </View>
                 <View
-                  className='detail-resource-type-item' 
+                  className='detail-resource-type-item'
                   onClick={()=>{this.toSearchResbyType(1)}}
                 >
                   docx
                 </View>
                 <View
-                  className='detail-resource-type-item' 
+                  className='detail-resource-type-item'
                   onClick={()=>{this.toSearchResbyType(2)}}
                 >
                   video
                 </View>
                 <View
-                  className='detail-resource-type-item' 
+                  className='detail-resource-type-item'
                   onClick={()=>{this.toSearchResbyType(3)}}
                 >
                   pdf
                 </View>
                 <View
-                  className='detail-resource-type-item' 
+                  className='detail-resource-type-item'
                   onClick={()=>{this.toSearchResbyType(4)}}
                 >
                   <Image
@@ -394,7 +416,7 @@ export default class Detail extends Component {
                   />
                 </View>
                 <View
-                  className='detail-resource-type-item' 
+                  className='detail-resource-type-item'
                   onClick={()=>{this.toSearchResbyType(5)}}
                 >
                   <Image
@@ -435,7 +457,7 @@ export default class Detail extends Component {
                     />
                   </View>
                 </View>
-                : 
+                :
                 null
                 ))}
               </View>
@@ -458,18 +480,18 @@ export default class Detail extends Component {
             <View className='detail-car'>
               <View className='detail-car-opt'>
                 <View
-                  className='detail-car-opt-button' 
+                  className='detail-car-opt-button'
                   onClick={()=>{this.toShowAddInvitationDialog()}}
                 >
                   发起邀请
                 </View>
                 <View
-                  className='detail-car-opt-button' 
+                  className='detail-car-opt-button'
                   onClick={()=>{this.toShowAcceptInvitationDialog()}}
                 >
                   接受邀请
                 </View>
-              </View>  
+              </View>
               <View className='detail-car-list'>
                 { this.state.cars.map((car)=>(
                 <View
@@ -520,26 +542,26 @@ export default class Detail extends Component {
           <View className='detail-car-form'>
             <Text className='detail-car-form-text'>
               请输入描述：
-            </Text> 
+            </Text>
             <Textarea
               className='detail-car-form-input'
               type='text'
               onChange={(e)=>{this.onChangeDescription(e)}}
             />
             <View className='detail-car-form-button'>
-              <View 
+              <View
                 className='detail-car-form-comfirm'
                 onClick={()=>{this.toAddInvitation()}}
               >
                 确定
-              </View> 
-              <View 
+              </View>
+              <View
                 className='detail-car-form-cancel'
                 onClick={()=>{this.toCancelAddInvitation()}}
               >
                 取消
-              </View> 
-            </View>  
+              </View>
+            </View>
           </View>
           :
           null
@@ -552,25 +574,25 @@ export default class Detail extends Component {
           <View className='detail-car-form'>
             <Text className='detail-car-form-text'>
               请输入邀请码：
-            </Text> 
+            </Text>
             <Textarea
               className='detail-car-form-input'
               value={this.state.joinCode}
               onInput={(e)=>{this.onChangeJoinCode(e)}}
             />
             <View className='detail-car-form-button'>
-              <View 
+              <View
                 className='detail-car-form-comfirm'
                 onClick={()=>{this.toAcceptInvitation()}}
               >
                 确定
-              </View> 
+              </View>
               <View className='detail-car-form-cancel'
                 onClick={()=>{this.toCancelAcceptInvitation()}}
               >
                 取消
-              </View> 
-            </View>  
+              </View>
+            </View>
           </View>
           :
           null
@@ -585,18 +607,18 @@ export default class Detail extends Component {
               是否建立课友关系？
             </View>
             <View className='detail-car-tip-button'>
-              <View 
+              <View
                 className='detail-car-tip-comfirm'
                 onClick={()=>{this.toJoinMate()}}
               >
                 Yes！
-              </View> 
-              <View 
+              </View>
+              <View
                 className='detail-car-tip-cancel'
                 onClick={()=>{this.toCancelJoinMate()}}
               >
                 Wait..
-              </View> 
+              </View>
             </View>
           </View>
           :
@@ -612,18 +634,18 @@ export default class Detail extends Component {
               是否结束邀请？
             </View>
             <View className='detail-car-tip-button'>
-              <View 
+              <View
                 className='detail-car-tip-comfirm'
                 onClick={()=>{this.toEndIvt()}}
               >
                 Yes！
-              </View> 
-              <View 
+              </View>
+              <View
                 className='detail-car-tip-cancel'
                 onClick={()=>{this.toCancelEndIvt()}}
               >
                 Wait..
-              </View> 
+              </View>
             </View>
           </View>
           :
