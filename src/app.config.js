@@ -1,5 +1,6 @@
 export default {
   pages: [
+    'pages/resource/resource',
     'pages/course/course',
     'pages/detail/detail',
     'pages/index/index',
@@ -7,7 +8,6 @@ export default {
     'pages/group/group',
     'pages/car/car',
     'pages/dailytask/dailytask',
-    'pages/resource/resource',
     'pages/schedule/schedule',
     'pages/addres/addres',
     'pages/addcourse/addcourse'

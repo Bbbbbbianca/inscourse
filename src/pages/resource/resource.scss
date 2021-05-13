@@ -7,13 +7,90 @@
 }
 
 .resource-top {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    height: 150px;
+    width: 100%;
+    border-bottom: 8px solid $tf-color-brown8;
+    .resource-title {
+        position: absolute;
+        font-size: 64px;
+        font-family: "FangSong", "Wawati SC", "YouYuan";
+        color: $tf-color-brown8; 
+        bottom: 8px;
+        left: 32px;
+    }
 
+    .resource-share {
+        position: absolute;
+        width: 96px;
+        height: 96px;
+        bottom: 8px;
+        right: 32px;
+    }
 }
 
 .resource-mid {
+    position: absolute;
+    top: 210px;
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    width: 100%;
 
+    .resource-auchor {
+        font-size: 32px;
+        font-family: "FangSong", "Wawati SC", "YouYuan";
+        color: $tf-color-brown8; 
+
+    }
+
+    .resource-dct {
+        font-size: 32px;
+        font-family: "FangSong", "Wawati SC", "YouYuan";
+        color: $tf-color-brown8; 
+
+    }
 }
 
 .resource-bottom {
-    
+    position: absolute;
+    top: 520px;
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    width: 100%;
+
+    position: absolute;
+    .resource-content {
+        font-size: 32px;
+        font-family: "FangSong", "Wawati SC", "YouYuan";
+        color: $tf-color-brown8; 
+
+    }
+}
+
+.resource-star {
+    position: absolute;
+    width: 78px;
+    height: 78px;
+    right: 32px;
+    bottom: 48px;
+    .resource-star-img {
+        width: 78px;
+        height: 78px;
+    }
+}
+
+.resource-praise {
+    position: absolute;
+    width: 78px;
+    height: 78px;
+    right: 32px;
+    bottom: 128px;
+    .resource-praise-img {
+        width: 72px;
+        height: 72px;
+    }
 }
