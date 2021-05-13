@@ -11,20 +11,16 @@ import preferPic from '../../assets/images/prefer.png'
 import favorPic from '../../assets/images/favor.png'
 import personPic from '../../assets/images/person.png'
 
-function getCourseId () {
+function getCourseId() {
   let course_id = Taro.getCurrentInstance().router.params.id
   if (course_id)
-      return course_id
-  else return 1
+    return course_id
+  else {
+    Taro.navigateTo({
+      url: APP_ROUTES.COURSE
+    })
+  }
 }
-
-// TO DO:
-// function getresources (id) {
-// }
-
-// TO DO:
-// function getcars (id) {
-// }
 
 export default class Detail extends Component {
   constructor(props) {
@@ -32,6 +28,9 @@ export default class Detail extends Component {
     this.state = {
       showRes: true,
       showCar: false,
+      showType: -1,
+      is_joined: false,
+      course: {},
       showType: 0,
       maskVisible: false,
       addIvtDialogVisible: false,
@@ -55,56 +54,33 @@ export default class Detail extends Component {
       },
     // resources: getresources(course_id)
       resources: [
-        {
-          resource_id: 1,
-          resource_key: '一份学习笔记',
-          description: '学习整理了第二章的内容，欢迎取用～',
-          author_id: 1,
-          favors: 1109,
-          prefers: 111,
-          content_type: 1,
-          content: '1.数学分析是学不会的 2.数学分析是听不懂的 3.数学分析是要人命的',
-        },
-        {
-          resource_id: 2,
-          resource_key: '教材资料',
-          description: '第三版的pdf版本，拿下留赞',
-          author_id: 8,
-          favors: 1109,
-          prefers: 111,
-          content_type: 3,
-          content: '复制这段话粘贴到百度网盘···',
-        },
-        {
-          resource_id: 3,
-          resource_key: '交大网课',
-          description: '交大教授讲第四章很好的视频',
-          author_id: 11,
-          favors: 1109,
-          prefers: 111,
-          content_type: 2,
-          content: 'http://jiaodanb.com',
-        },
-        {
-          resource_id: 4,
-          resource_key: '交大网课',
-          description: '交大教授讲第四章很好的视频',
-          author_id: 11,
-          favors: 1109,
-          prefers: 111,
-          content_type: 2,
-          content: 'http://jiaodanb.com',
-        },
-        {
-          resource_id: 5,
-          resource_key: '交大网课',
-          description: '交大教授讲第四章很好的视频',
-          author_id: 11,
-          favors: 1109,
-          prefers: 111,
-          content_type: 2,
-          content: 'http://jiaodanb.com',
-        }
+        // {
+        //   resource_id: 1,
+        //   resource_key: '一份学习笔记',
+        //   description: '学习整理了第二章的内容，欢迎取用～',
+        //   author_id: 1,
+        //   heat: 577,
+        //   content_type: 1,
+        //   content: '1.数学分析是学不会的 2.数学分析是听不懂的 3.数学分析是要人命的',
+        // },
+        // {
+        //   resource_id: 2,
+        //   resource_key: '教材资料',
+        //   description: '第三版的pdf版本，拿下留赞',
+        //   author_id: 8,
+        //   heat: 9,
+        //   content_type: 2,
+        //   content: '复制这段话粘贴到百度网盘···',
+        // },
+        // {
+        //   resource_id: 3,
+        //   resource_key: '交大网课',
+        //   description: '交大教授讲第四章很好的视频',
+        //   author_id: 11,
+        //   heat: 1109,
+        //   content_type: 2,
+        //   content: 'http://jiaodanb.com',
+        // }
       ],
     // cars: getcars(course_id)
       cars: [
@@ -150,10 +126,12 @@ export default class Detail extends Component {
         }
       ],
     };
-    this.getCourseDetail(getCourseId())
+    let course_id = getCourseId();
+    console.log(this.state.icon)
+    this.getCourseDetail(course_id)
   }
 
-  getCourseDetail (id) {
+  getCourseDetail(id) {
     let token = UtilService.fetchToken();
     let that = this;
     Taro.request({
@@ -170,18 +148,80 @@ export default class Detail extends Component {
         that.setState({
           course: res.data.course
         });
+        that.setState({
+          is_joined: res.data.course.is_joined
+        })
+
+        if (res.data.course.is_joined) {
+          that.getCourseResources(that.state.course.course_id, that.state.showType)
+        }
       },
       fail: function (res) {
         console.log(res);
-        UtilService.showHint('修改用户名失败', '请稍后重试', 'fail');
+        UtilService.showHint('获取课程信息失败', '请稍后重试', 'fail');
       }
     })
-
   }
 
-  toJoinCourse(id) {
-    console.log('join' + id)
-    // TO DO
+  getCourseResources(course_id, content_type) {
+    this.setState({
+      showType: content_type
+    });
+    let token = UtilService.fetchToken();
+    let that = this;
+    Taro.request({
+      url: UtilService.BASE_URL + '/resource/queryResourceByCourse',
+      header: {
+        'Token': token
+      },
+      data: {
+        'course_id': course_id,
+        'content_type': content_type
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log(res.data.resources)
+        that.setState({
+          resources: res.data.resources
+        });
+      },
+      fail: function (res) {
+        console.log(res);
+        UtilService.showHint('获取课程信息失败', '请稍后重试', 'fail');
+      }
+    })
+  }
+
+  toJoinCourse(invitation_code) {
+    console.log('join ' + invitation_code)
+    let token = UtilService.fetchToken();
+    let that = this;
+    Taro.request({
+      url: UtilService.BASE_URL + '/course/joinCourse',
+      header: {
+        'Token': token
+      },
+      data: {
+        'invitation_code': invitation_code
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.statusCode == 200) {
+          console.log(res.data.message)
+          that.setState({
+            is_joined: true
+          });
+          UtilService.showHint(res.data.message, '', 'success')
+          that.getCourseResources(that.state.course.course_id, that.state.showType);
+        } else {
+          UtilService.showHint(res.data, '', 'none')
+        }
+      },
+      fail: function (res) {
+        console.log(res);
+        UtilService.showHint(res.message, '', 'fail');
+      }
+    })
   }
 
   toShowCar() {
@@ -198,16 +238,10 @@ export default class Detail extends Component {
     })
   }
 
-  toSearchResbyType(id) {
-    this.setState({
-      showType: id
-    })
-  }
-
   onViewResDetail(id) {
     console.log('view detail of resource' + id)
     Taro.navigateTo({
-      url: APP_ROUTES.RESOURCE +'?id=' + id
+      url: APP_ROUTES.RESOURCE + '?id=' + id
     })
   }
 
@@ -327,12 +361,12 @@ export default class Detail extends Component {
     })
   }
 
-  render () {
+  render() {
     return (
       <View className='detail'>
         <View className='detail-msg'>
           <Image
-            src={this.state.course.image}
+            src={'http://localhost:8000/api/course/getCourseIcon?course_id=' + this.state.course.course_id}
             className='detail-msg-img'
           />
           <View className='detail-msg-text'>
@@ -340,12 +374,25 @@ export default class Detail extends Component {
               <View className='detail-msg-title'>
                 {this.state.course.name}
               </View>
-              <Button
-                onClick={()=>{this.toJoinCourse(this.state.course.course_id)}}
-                className='detail-msg-button-join'
-              >
-                加入
-              </Button>
+              {
+                this.state.is_joined
+                  ?
+                  <Button
+                    className='detail-msg-button-join'
+                  >
+                    已加入
+                  </Button>
+                  :
+                  <Button
+                    onClick={() => {
+                      this.toJoinCourse(this.state.course.invitation_code)
+                    }}
+                    className='detail-msg-button-join'
+                  >
+                    加入
+                  </Button>
+              }
+
             </View>
             <View className='detail-msg-dct'>
               {this.state.course.description}
@@ -365,13 +412,17 @@ export default class Detail extends Component {
           <View className='detail-choice'>
             <View
               className='detail-choice-resource'
-              onClick={()=>{this.toShowRes()}}
+              onClick={() => {
+                this.toShowRes()
+              }}
             >
               资源
             </View>
             <View
               className='detail-choice-car'
-              onClick={()=>{this.toShowCar()}}
+              onClick={() => {
+                this.toShowCar()
+              }}
             >
               课友
             </View>
@@ -379,98 +430,99 @@ export default class Detail extends Component {
           <View>
             {
             this.state.showRes
-            ?
-            <View className='detail-resource'>
-              <View className='detail-resource-type'>
-                <View
-                  className='detail-resource-type-item'
-                  onClick={()=>{this.toSearchResbyType(0)}}
-                >
-                  all
-                </View>
-                <View
-                  className='detail-resource-type-item'
-                  onClick={()=>{this.toSearchResbyType(1)}}
-                >
-                  docx
-                </View>
-                <View
-                  className='detail-resource-type-item'
-                  onClick={()=>{this.toSearchResbyType(2)}}
-                >
-                  video
-                </View>
-                <View
-                  className='detail-resource-type-item'
-                  onClick={()=>{this.toSearchResbyType(3)}}
-                >
-                  pdf
-                </View>
-                <View
-                  className='detail-resource-type-item'
-                  onClick={()=>{this.toSearchResbyType(4)}}
-                >
-                  <Image
-                    src={favorPic}
-                    style='width: 14px; height: 14px;'
-                  />
-                </View>
-                <View
-                  className='detail-resource-type-item'
-                  onClick={()=>{this.toSearchResbyType(5)}}
-                >
-                  <Image
-                    src={personPic}
-                    style='width: 15px; height: 15px;'
-                  />
-                </View>
-              </View>
-              <View className='detail-resource-list'>
-                { this.state.resources.map((resource)=>(
-                this.state.showType === 0 || this.state.showType === resource.content_type
-                ?
-                <View
-                  key={resource.course_id}
-                  className='detail-resource-item'
-                  onClick={()=>{this.onViewResDetail(resource.resource_id)}}
-                >
-                  <View className='detail-resource-item-title'>
-                    {resource.resource_key}
+              ?
+              <View className='detail-resource'>
+                <View className='detail-resource-type'>
+                  <View
+                    className='detail-resource-type-item'
+                    onClick={() => {
+                      this.getCourseResources(this.state.course.course_id, -1)
+                    }}
+                  >
+                    all
                   </View>
-                  <View className='detail-resource-item-dct'>
-                    {resource.description}
+                  <View
+                    className='detail-resource-type-item'
+                    onClick={() => {
+                      this.getCourseResources(this.state.course.course_id, 0)
+                    }}
+                  >
+                    docx
                   </View>
-                  <View className='detail-resource-item-bottom'>
-                    <View className='detail-resource-item-heat'>
-                      {resource.prefers}
-                    </View>
-                    <Image
-                      src={preferPic}
-                      className='detail-resource-item-heat-img'
-                    />
-                    <View className='detail-resource-item-heat'>
-                      {resource.favors}
-                    </View>
+                  <View
+                    className='detail-resource-type-item'
+                    onClick={() => {
+                      this.getCourseResources(this.state.course.course_id, 1)
+                    }}
+                  >
+                    video
+                  </View>
+                  <View
+                    className='detail-resource-type-item'
+                    onClick={() => {
+                      this.getCourseResources(this.state.course.course_id, 2)
+                    }}
+                  >
+                    pdf
+                  </View>
+                  <View
+                    className='detail-resource-type-item'
+                    onClick={() => {
+                      this.toSearchResbyType(4)
+                    }}
+                  >
                     <Image
                       src={favorPic}
-                      className='detail-resource-item-heat-img'
+                      style='width: 14px; height: 14px;'
                     />
                   </View>
                 </View>
-                :
-                null
-                ))}
+                <View className='detail-resource-list'>
+                  { this.state.resources.map((resource)=>(
+                    this.state.showType === 0 || this.state.showType === resource.content_type
+                      ?
+                      <View
+                        key={resource.course_id}
+                        className='detail-resource-item'
+                        onClick={()=>{this.onViewResDetail(resource.resource_id)}}
+                      >
+                        <View className='detail-resource-item-title'>
+                          {resource.resource_key}
+                        </View>
+                        <View className='detail-resource-item-dct'>
+                          {resource.description}
+                        </View>
+                        <View className='detail-resource-item-bottom'>
+                          <View className='detail-resource-item-heat'>
+                            {resource.prefers}
+                          </View>
+                          <Image
+                            src={preferPic}
+                            className='detail-resource-item-heat-img'
+                          />
+                          <View className='detail-resource-item-heat'>
+                            {resource.favors}
+                          </View>
+                          <Image
+                            src={favorPic}
+                            className='detail-resource-item-heat-img'
+                          />
+                        </View>
+                      </View>
+                      :
+                      null
+                  ))}
+                </View>
+                <AtFab className='detail-resource-add'>
+                  <Image
+                    src={addPic}
+                    className='detail-resource-add-img'
+                    onClick={()=>{this.toAddResource()}}
+                  />
+                </AtFab>
               </View>
-              <AtFab className='detail-resource-add'>
-                <Image
-                  src={addPic}
-                  className='detail-resource-add-img'
-                  onClick={()=>{this.toAddResource()}}
-                />
-              </AtFab>
-            </View>
-            :
-            null
+              :
+              null
             }
           </View>
           <View>
@@ -656,3 +708,4 @@ export default class Detail extends Component {
     )
   }
 }
+

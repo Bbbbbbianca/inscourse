@@ -17,43 +17,9 @@ export default class Course extends Component {
     super(props);
     this.state = {
       searchCourse: '',
-      // courses: getCourses(),
-      courses: [
-        {
-          course_id: 1,
-          author_id: 1,
-          status: 1,
-          image_path: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
-          name: '数学分析',
-          description: '好学啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦',
-          heat: 234,
-          level: 9,
-          category: 1
-        },
-        {
-          course_id: 2,
-          author_id: 2,
-          status: 1,
-          image_path: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
-          name: '线性代数',
-          description: '学得很快乐',
-          heat: 834,
-          level: 7,
-          category: 1
-        },
-        {
-          course_id: 3,
-          author_id: 3,
-          status: 1,
-          image_path: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
-          name: '大学物理',
-          description: '这你不能不会吧',
-          heat: 254,
-          level: 5,
-          category: 1
-        }
-      ],
+      courses: [],
     };
+    this.onSearchClick();
   }
 
   onSearchValueChange (value) {
@@ -99,7 +65,7 @@ export default class Course extends Component {
           onClick={()=>{this.onViewDetail(course.course_id)}}
         >
           <Image
-            src={course.image_path}
+            src={'http://localhost:8000/api/course/getCourseIcon?course_id=' + course.course_id}
             className='course-item-img'
           />
           <View className='course-item-text'>
