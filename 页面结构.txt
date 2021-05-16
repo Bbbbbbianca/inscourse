@@ -1,42 +1,81 @@
-我的模块：
-我的 主页
-
-细分页面：
-1 我加入的课
-2 我发布的资源
-3 我的待办打卡
-4 创建课程
-
-表单页面：
-1 创建课程页面
-2 发布课程资源页面
-
-
-小程序进入页面 -> (sys/login) 用户通过点击 "点击进入"
+小程序进入页面(Page 1: index) -> 用户通过点击 "点击进入"
+  (interface: sys/login)
 
 一 我的
   我的模块：
-  我的 模块主页
-    （）
+  我的 模块主页(Page 2: mine)
+    （右侧上方有一个按钮用于输入邀请码接受邀请，可以用于加入公有或私有课程也可以用于接受
+      课友邀请，点击后弹出一个框输入课程邀请码，点击提交后则加入课程或接受课友邀请）
+    （我的头像，个人信息，修改个人信息按钮可以跳转个人信息表单页面修改个人信息)
+    (interface: sys/getMyInfo, course/joinCourse, mate/acceptMateInvitation)
 
-  细分页面：
-  1 我加入的课
-  2 我发布的资源
-  3 我的待办打卡   ->
-  4 创建课程       -> 指向创建课程页面
-
-  表单页面：
+  细分栏（类似课程详情界面）
+    (1) 我加入的课
+      (interface: course/queryMyJoinedCourse)
+      同时展示每个课下 我发布的资源
+        (我发布的资源中可以点击进入资源详情界面)
+        (inteface: resource/queryMyResourceByCourse)
+    (2) 我的待办打卡
+      (interface: mate/queryMyMates, assignment/queryMyAssignmentsByMate)
+      展示所有的课友关系以及每一个关系涉及的打卡计划
 
 二 课程
+  课程模块
+  课程 模块主页(Page 3: courses)
+    （搜索框可以按照课程名称搜索课程，之后支持按照大类的搜索，最右侧有一个添加按钮，点击之后出现下拉框，
+      可以新建课程、接受邀请）
+    （公开课程列表，展示 课程icon、课程名、课程简介、课程热度 ）
+    （点击列表中的一项之后跳转到该课程的详情界面）
+    (interface: course/queryOpenCourses, mate/acceptMateInvitation)
+
+  细分页面
+  1 课程详情页面(Page 4: course detail)
+    （
+      课程图标 课程名
+      课程大类 课程公开状态
+      课程邀请码，可通过按钮复制（方便分享给别人）
+      课程简介
+      课程评价 课程热度
+      可以在这里找到我创建的课，因为创建者自动加入自己的课程，作为创建者可以公开自己的课程，公开后不可逆
+      ）
+      (interface: course/queryCertainCourse, course/publish, course/joinCourse)
+      (若没有加入课程，页面仅显示上述内容，页面右侧有按钮“加入课程”【用户也可以通过邀请码加入】)
+      (若已加入课程，页面显示 细分栏：课程帖子，课友邀请(或我的课友)，我的收藏
+      (1) 课程帖子
+          (展示帖子列表，列表最好以折叠的方式展示 上传用户、资源名称、资源介绍、资源内容)
+          (每一个帖子 底部两个图标，旁边显示收藏数和点赞数，点击图标进行点赞和收藏，已经收藏和点赞了的帖子显示不同的图标)
+          (interface: resource/queryResourceByCourse)
+      (2) 课友邀请
+        {发起者、邀请描述、建立时间、邀请码（可通过按钮复制）}
+        (如果当前用户已经发出了一个课友邀请，该邀请信息展现在第一个，旁边有取消邀请的图片可以取消邀请)
+        复制邀请码之后用户可以点击我的，通过右上角表
+        该模块右上角：”课友邀请“ 下拉框——发起邀请（生成邀请码，显示在下述列表中），接受邀请（从下方列表复制邀请码并输入）
+        <<<<选中下拉框内容后，通过弹窗进行相关内容的输入>>>>
+          (interface: mate/queryCourseMateInvitations, mate/inviteMate,
+                      mate/acceptMateInvitation, mate/cancelMateInvitation)
+        接上述显示内容，显示课友邀请列表：
+          我的课友 (如果已经在该课程下有一个课友，则显示自己的课友，点击跳转课友详情页面)
+          (interface: mate/queryMyMateByCourse)
+
+      (3) 我的收藏
+        列表同课程帖子
+        (interface: resource/queryFavoredResources)
+
+   2 资源详情页面(Page 5: resource)
+   显示资源的详细信息，上传用户、资源名称、资源介绍、资源内容，目前仅支持文本格式的内容，之后考虑支持富文本内容与pdf文件预览
+    (如果是自己的发布的资源，那么可以通过点击修改按钮跳转进入资源上传/修改页面，进行修改)
+    (interface: resource/query_certain_resource, resource/resourceFav, resource/cancelResourceFav,
+                resource/resourcePrefer, resource/cancelResourcePrefer)
 
 三 课友
   课友模块
-  课友 模块主页
+  课友 模块主页(Page 6: mates)
     （我的课友列表，展示 对方的头像、对方用户名、所属课程 ）
     （点击列表中的一项之后跳转到该课友关系的详情界面）
 
   细分页面
-  1 课友详情页面
+  1 课友详情页面(Page 7: mate detail)
+    (interface: mate/unbind, assignment/queryMyAssignmentsByMate)
     （展示该课友关系的详细信息，对方头像、用户名、课程、建立时间）
     （底部添加删除课友关系按钮，点击之后弹出确认框二次确认是否删除课友关系）
     （展示该课友关系下所有的打开任务列表）
@@ -47,6 +86,12 @@
       该打卡任务状态更新为已完成）
 
 四 表单页面
-  1 创建课程页面
-  2 发布课程资源页面
-  3 新建/编辑打卡任务页面
+  1 创建课程页面(Page 8: course create)
+    (interface: course/uploadCourse)
+  2 发布/修改课程资源页面(Page 9: resource release/modify)
+    (interface: resource/releaseResource, resource/modifyResource)
+  3 新建/编辑打卡任务页面(Page 10: assignment create/modify) (如果是修改打开任务，底部添加按钮可以删除打卡任务)
+    (interface: assignment/newAssignment, assignment/modifyAssignment, assignment/deleteAssignment)
+  4 个人信息修改页面(Page 11: personal info modify)
+    (interface: sys/changeUsername)
+    (目前只支持修改用户名，之后支持头像修改、所在学校、所在大类、所在专业、个性签名等)
