@@ -39,20 +39,7 @@ export default class Detail extends Component {
       endIvtDialogVisible: false,
       addDescription: '',
       joinCode: '',
-    //   course_id: getCourseId(),
-    //   course: getCourseDetail(course_id),
-      course: {
-        course_id: 1,
-        author_id: 1,
-        status: 1,
-        image: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
-        name: '数学分析',
-        description: '好学好学好学真的很好学，一学就会真的不是盖的',
-        heat: 234,
-        level: 9,
-        category: 1
-      },
-    // resources: getresources(course_id)
+      course: {},
       resources: [
         // {
         //   resource_id: 1,
@@ -82,7 +69,6 @@ export default class Detail extends Component {
         //   content: 'http://jiaodanb.com',
         // }
       ],
-    // cars: getcars(course_id)
       cars: [
         {
           invitation_id: 1,
@@ -478,40 +464,34 @@ export default class Detail extends Component {
                   </View>
                 </View>
                 <View className='detail-resource-list'>
-                  { this.state.resources.map((resource)=>(
-                    this.state.showType === 0 || this.state.showType === resource.content_type
-                      ?
-                      <View
-                        key={resource.course_id}
-                        className='detail-resource-item'
-                        onClick={()=>{this.onViewResDetail(resource.resource_id)}}
-                      >
-                        <View className='detail-resource-item-title'>
-                          {resource.resource_key}
-                        </View>
-                        <View className='detail-resource-item-dct'>
-                          {resource.description}
-                        </View>
-                        <View className='detail-resource-item-bottom'>
-                          <View className='detail-resource-item-heat'>
-                            {resource.prefers}
-                          </View>
-                          <Image
-                            src={preferPic}
-                            className='detail-resource-item-heat-img'
-                          />
-                          <View className='detail-resource-item-heat'>
-                            {resource.favors}
-                          </View>
-                          <Image
-                            src={favorPic}
-                            className='detail-resource-item-heat-img'
-                          />
-                        </View>
+                  {this.state.resources.map((resource) => (
+                    <View
+                      key={resource.course_id}
+                      className='detail-resource-item'
+                      onClick={() => {
+                        this.onViewResDetail(resource.resource_id)
+                      }}
+                    >
+                      <View className='detail-resource-item-title'>
+                        {resource.resource_key}
                       </View>
-                      :
-                      null
+                      <View className='detail-resource-item-dct'>
+                        {resource.description}
+                      </View>
+                      <View className='detail-resource-item-bottom'>
+                        <View className='detail-resource-item-heat'>
+                          {resource.favors}
+                        </View>
+                        <Image
+                          src={heatPic}
+                          className='detail-resource-item-heat-img'
+                        />
+                      </View>
+                    </View>
                   ))}
+                </View>
+                <View className='detail-resource-end-line'>
+                   -------------------------  没有更多了 &lt;(＃＃)&gt;彡    -------------------------
                 </View>
                 <AtFab className='detail-resource-add'>
                   <Image
