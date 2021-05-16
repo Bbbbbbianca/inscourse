@@ -6,6 +6,8 @@ import { APP_ROUTES } from "../../base/constant"
 import './detail.scss'
 import heatPic from '../../assets/images/heat.png'
 import addPic from '../../assets/images/add.png'
+import preferPic from '../../assets/images/prefer.png'
+import favorPic from '../../assets/images/favor.png'
 
 // TO DO:
 // function getCourseId () {
@@ -54,7 +56,8 @@ export default class Detail extends Component {
           resource_key: '一份学习笔记',
           description: '学习整理了第二章的内容，欢迎取用～',
           author_id: 1,
-          heat: 577,
+          favors: 1109,
+          prefers: 111,
           content_type: 1,
           content: '1.数学分析是学不会的 2.数学分析是听不懂的 3.数学分析是要人命的',
         },
@@ -63,7 +66,8 @@ export default class Detail extends Component {
           resource_key: '教材资料',
           description: '第三版的pdf版本，拿下留赞',
           author_id: 8,
-          heat: 9,
+          favors: 1109,
+          prefers: 111,
           content_type: 3,
           content: '复制这段话粘贴到百度网盘···',
         },
@@ -72,7 +76,28 @@ export default class Detail extends Component {
           resource_key: '交大网课',
           description: '交大教授讲第四章很好的视频',
           author_id: 11,
-          heat: 1109,
+          favors: 1109,
+          prefers: 111,
+          content_type: 2,
+          content: 'http://jiaodanb.com',
+        },
+        {
+          resource_id: 4,
+          resource_key: '交大网课',
+          description: '交大教授讲第四章很好的视频',
+          author_id: 11,
+          favors: 1109,
+          prefers: 111,
+          content_type: 2,
+          content: 'http://jiaodanb.com',
+        },
+        {
+          resource_id: 5,
+          resource_key: '交大网课',
+          description: '交大教授讲第四章很好的视频',
+          author_id: 11,
+          favors: 1109,
+          prefers: 111,
           content_type: 2,
           content: 'http://jiaodanb.com',
         }
@@ -227,10 +252,17 @@ export default class Detail extends Component {
                   </View>
                   <View className='detail-resource-item-bottom'>
                     <View className='detail-resource-item-heat'>
-                      {resource.heat}
+                      {resource.prefers}
                     </View>
                     <Image
-                      src={heatPic}
+                      src={preferPic}
+                      className='detail-resource-item-heat-img'
+                    />
+                    <View className='detail-resource-item-heat'>
+                      {resource.favors}
+                    </View>
+                    <Image
+                      src={favorPic}
                       className='detail-resource-item-heat-img'
                     />
                   </View>
