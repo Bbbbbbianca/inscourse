@@ -36,6 +36,8 @@ export default class Detail extends Component {
       showRes: true,
       showCar: false,
       showType: 0,
+      addIvtDialogVisible: false,
+      acceptIvtDialogVisible: false,
     //   course_id: getCourseId(),
     //   course: getCourseDetail(course_id),
       course: {
@@ -156,6 +158,29 @@ export default class Detail extends Component {
     })
   }
   
+  toShowAddInvitationDialog() {
+    console.log('add invitation dialog visible.')
+    this.setState({
+      addIvtDialogVisible: true
+    })
+  }
+
+  toAddInvitation() {
+    console.log('to add invitation')
+  }
+
+  toShowAcceptInvitationDialog() {
+    console.log('accept invitation dialog visible.')
+    this.setState({
+      acceptIvtDialogVisible: true
+    })
+    
+  }
+
+  toAcceptInvitation() {
+    console.log('to accept invitation')
+  }
+
   render () {
     return (
       <View className='detail'>
@@ -234,6 +259,15 @@ export default class Detail extends Component {
                 >
                   pdf
                 </View>
+                <View
+                  className='detail-resource-type-item' 
+                  onClick={()=>{this.toSearchResbyType(4)}}
+                >
+                  <Image
+                    src={favorPic}
+                    style='width: 15px; height: 15px;'
+                  />
+                </View>
               </View>
               <View className='detail-resource-list'>
                 { this.state.resources.map((resource)=>(
@@ -286,6 +320,20 @@ export default class Detail extends Component {
             this.state.showCar
             ?
             <View className='detail-car'>
+              <View className='detail-car-opt'>
+                <View
+                  className='detail-car-opt-button' 
+                  onClick={()=>{this.toShowAddInvitationDialog()}}
+                >
+                  发起邀请
+                </View>
+                <View
+                  className='detail-car-opt-button' 
+                  onClick={()=>{this.toShowAcceptInvitationDialog()}}
+                >
+                  接受邀请
+                </View>
+              </View>  
               <View className='detail-car-list'>
                 { this.state.cars.map((car)=>(
                 <View
@@ -301,6 +349,24 @@ export default class Detail extends Component {
             null
           }
         </View>
+        {
+          this.state.addIvtDialogVisible
+          ?
+          <View className='detail-car-add'>
+
+          </View>
+          :
+          null
+        }
+        {
+          this.state.acceptIvtDialogVisible
+          ?
+          <View className='detail-car-accept'>
+
+          </View>
+          :
+          null
+        }
       </View>
     )
   }

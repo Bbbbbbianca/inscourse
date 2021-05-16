@@ -1,6 +1,5 @@
 export const APP_ROUTES = {
     INDEX: '/pages/index/index',
-    CAR: '/pages/car/car',
     COURSE: '/pages/course/course',
     DAILYTASK: '/pages/dailytask/dailytask',
     DETAIL: '/pages/detail/detail',

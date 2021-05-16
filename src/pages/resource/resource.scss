@@ -15,30 +15,18 @@
         box-shadow: 16px 16px 24px $tf-color-grey3;
 
         .resource-top {
-            position: relative;
             display: flex;
-            flex-direction: row;
-            width: 100%;
-            height: 8%;
+            flex-direction: column;
+            height: 30%;
+            border-bottom: 8px solid $tf-color-brown4;
             .resource-title {
                 margin-top: 8px;
                 margin-left: 36px;
-                width: 70%;
-                position: relative;
                 font-size: 64px;
                 font-family: "FangSong", "Wawati SC", "YouYuan";
                 color: $tf-color-brown8; 
             }
-        }
-
-        .resource-mid {
-            position: relative;
-            margin-top: 12px;
-            width: 100%;
-            height: 16%;
-            border-bottom: 8px solid $tf-color-brown7;
             .resource-author {
-                height: 20%;
                 margin-left: 32px;
                 font-size: 29px;
                 font-family: "FangSong", "Wawati SC", "YouYuan";
@@ -46,18 +34,31 @@
             }
 
             .resource-dct {
-                height: 60%;
                 margin-top: 2px;
                 margin-left: 32px;
                 font-size: 29px;
                 font-family: "FangSong", "Wawati SC", "YouYuan";
                 color: $tf-color-brown4; 
             }
+        }
 
+        .resource-mid {
+            margin-top: 12px;
+            height: 60%;
+            .resource-content {
+                margin: 16px 32px;
+                font-size: 36px;
+                font-family: "FangSong", "Wawati SC", "YouYuan";
+                color: $tf-color-brown4; 
+                word-wrap: break-word;
+            }
+        }
+
+        .resource-bottom {
+            width: 100%;
+            height: 5%;
+            margin: 32px 0;
             .resource-heat {
-                height: 20%;
-                margin-bottom: 2px;
-                margin-right: 24px;
                 display: flex;
                 flex-direction: row-reverse;
                 .resource-heat-img {
@@ -71,18 +72,6 @@
                     color: $tf-color-brown5; 
                     margin-right: 8px;
                 }
-            }
-        }
-
-        .resource-bottom {
-            position: relative;
-            width: 100%;
-            height: 76%;
-            .resource-content {
-                margin: 16px 32px;
-                font-size: 36px;
-                font-family: "FangSong", "Wawati SC", "YouYuan";
-                color: $tf-color-brown4; 
             }
         }
     }

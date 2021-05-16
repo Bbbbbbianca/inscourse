@@ -31,14 +31,14 @@ export default class Resource extends Component {
       resource: {
         resource_id: 3,
         resource_key: '交大网课',
-        description: '交大教授讲第四章很好的视频',
+        description: '较大时间和大家是否感觉撒发噶看到时代峰峻华盛顿附近算法算法大家看哈就是废话即使对方是否接受',
         author_id: 11,
         favors: 1109,
         prefers: 111,
         is_favored: false,
         is_preferred: false,
         content_type: 2,
-        content: 'http://jiaodanb.com',
+        content: 'hthghhjhjhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhaodanb.comhhdshjfsjfhsjfsjdfhksfjhkshfksckjsdhjksjkdh',
       }
     };
   }
@@ -128,14 +128,19 @@ export default class Resource extends Component {
             <View className='resource-title'>
               {this.state.resource.resource_key}
             </View>
-          </View>
-          <View className='resource-mid'>
             <View className='resource-author'>
-              {'发布者：'}{this.state.resource.author_id}
+              {'发布者：' + this.state.resource.author_id}
             </View>
             <View className='resource-dct'>
-              {'简介：'}{this.state.resource.description}
+              {'简介：' + this.state.resource.description}
             </View>
+          </View>
+          <View className='resource-mid'>
+            <View className='resource-content'>
+              {this.state.resource.content}
+            </View>
+          </View>
+          <View className='resource-bottom'>
             <View className='resource-heat'>
               <View className='resource-heat-num'>
                 {this.state.resource.prefers}
@@ -151,11 +156,6 @@ export default class Resource extends Component {
                 src={favorPic}
                 className='resource-heat-img'
               />
-            </View>
-          </View>
-          <View className='resource-bottom'>
-            <View className='resource-content'>
-              {this.state.resource.content}
             </View>
           </View>
         </View>
