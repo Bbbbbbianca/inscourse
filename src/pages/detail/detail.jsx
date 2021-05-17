@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Image, Button } from '@tarojs/components'
+import { View, Image, Button, Text, Textarea } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { AtFab } from 'taro-ui'
 import { APP_ROUTES } from "../../base/constant"
@@ -8,6 +8,7 @@ import heatPic from '../../assets/images/heat.png'
 import addPic from '../../assets/images/add.png'
 import preferPic from '../../assets/images/prefer.png'
 import favorPic from '../../assets/images/favor.png'
+import personPic from '../../assets/images/person.png'
 
 // TO DO:
 // function getCourseId () {
@@ -36,8 +37,13 @@ export default class Detail extends Component {
       showRes: true,
       showCar: false,
       showType: 0,
+      maskVisible: false,
       addIvtDialogVisible: false,
       acceptIvtDialogVisible: false,
+      joinMateDialogVisible: false,
+      endIvtDialogVisible: false,
+      addDescription: '',
+      joinCode: '',
     //   course_id: getCourseId(),
     //   course: getCourseDetail(course_id),
       course: {
@@ -107,13 +113,44 @@ export default class Detail extends Component {
     // cars: getcars(course_id)
       cars: [
         {
-          mate_id: 1,
+          invitation_id: 1,
+          requester_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
+          requester_name: 'lalal',
+          invitation_code: '',
+          requst_time: '2020/11/11',
+          description: '啦啦啦找个好朋友,打算六月份开始暑假一起学数学分析所以有人吗有人吗'
         },
         {
-          mate_id: 2,
+          invitation_id: 2,
+          requester_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
+          requester_name: 'lalal',
+          invitation_code: '',
+          requst_time: '2020/11/11',
+          description: '哈哈哈哈一起划水有人吗有人吗 有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗v有人吗有人吗有人吗有人吗v'
         },
         {
-          mate_id: 3,
+          invitation_id: 3,
+          requester_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
+          requester_name: 'lalal',
+          invitation_code: '',
+          requst_time: '2020/11/11',
+          description: '阿巴阿巴'
+        },
+        {
+          invitation_id: 4,
+          requester_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
+          requester_name: 'lalal',
+          invitation_code: '',
+          requst_time: '2020/11/11',
+          description: '阿巴阿巴'
+        },
+        {
+          invitation_id: 5,
+          requester_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
+          requester_name: 'lalal',
+          invitation_code: '',
+          requst_time: '2020/11/11',
+          description: '阿巴阿巴'
         }
       ],
     };
@@ -142,6 +179,7 @@ export default class Detail extends Component {
     this.setState({
       showType: id
     })
+    // TO DO
   }
 
   onViewResDetail(id) {
@@ -161,24 +199,110 @@ export default class Detail extends Component {
   toShowAddInvitationDialog() {
     console.log('add invitation dialog visible.')
     this.setState({
+      maskVisible: true,
       addIvtDialogVisible: true
+    })
+  }
+
+  onChangeDescription(e) {
+    console.log(e.target.value)
+    this.setState({
+      addDescription: e.target.value
     })
   }
 
   toAddInvitation() {
     console.log('to add invitation')
+    this.setState({
+      maskVisible: false,
+      addIvtDialogVisible: false
+    })
+    // TO DO
+    console.log(this.state.addDescription)
+  }
+  toCancelAddInvitation() {
+    console.log('cancel add invitation')
+    this.setState({
+      maskVisible: false,
+      addIvtDialogVisible: false
+    })
   }
 
   toShowAcceptInvitationDialog() {
     console.log('accept invitation dialog visible.')
     this.setState({
+      maskVisible: true,
       acceptIvtDialogVisible: true
     })
-    
+  }
+
+  onChangeJoinCode(e) {
+    this.setState({
+      joinCode: e.target.value
+    })
   }
 
   toAcceptInvitation() {
     console.log('to accept invitation')
+    this.setState({
+      maskVisible: false,
+      acceptIvtDialogVisible: false
+    })
+    // TO DO
+    console.log(this.state.joinCode)
+  }
+  toCancelAcceptInvitation() {
+    console.log('cancel accept invitation')
+    this.setState({
+      maskVisible: false,
+      acceptIvtDialogVisible: false
+    })
+  }
+
+  toShowTipDialog() {
+    console.log('join mate dialog visible.')
+    this.setState({
+      maskVisible: true,
+      joinMateDialogVisible: true
+    })
+    // if the invitation is owned by the user
+    // this.setState({
+    //   maskVisible: true,
+    //   cancelMateDialogVisible: true
+    // })
+    // TO DO
+  }
+
+  toJoinMate() {
+    console.log('to join mate')
+    this.setState({
+      maskVisible: false,
+      joinMateDialogVisible: false
+    })
+    // TO DO
+  }
+  toCancelJoinMate() {
+    console.log('cancel join mate')
+    this.setState({
+      maskVisible: false,
+      joinMateDialogVisible: false
+    })
+  }
+
+  toEndIvt() {
+    console.log('to end invitation')
+    this.setState({
+      maskVisible: false,
+      endIvtDialogVisible: false
+    })
+    // TO DO
+  }
+  toCancelEndIvt() {
+    console.log('cancel end invitation')
+    this.setState({
+      maskVisible: false,
+      endIvtDialogVisible: false
+    })
   }
 
   render () {
@@ -230,7 +354,8 @@ export default class Detail extends Component {
               课友
             </View>
           </View>
-          {
+          <View>
+            {
             this.state.showRes
             ?
             <View className='detail-resource'>
@@ -265,6 +390,15 @@ export default class Detail extends Component {
                 >
                   <Image
                     src={favorPic}
+                    style='width: 14px; height: 14px;'
+                  />
+                </View>
+                <View
+                  className='detail-resource-type-item' 
+                  onClick={()=>{this.toSearchResbyType(5)}}
+                >
+                  <Image
+                    src={personPic}
                     style='width: 15px; height: 15px;'
                   />
                 </View>
@@ -315,8 +449,10 @@ export default class Detail extends Component {
             </View>
             :
             null
-          }
-          {
+            }
+          </View>
+          <View>
+            {
             this.state.showCar
             ?
             <View className='detail-car'>
@@ -337,36 +473,163 @@ export default class Detail extends Component {
               <View className='detail-car-list'>
                 { this.state.cars.map((car)=>(
                 <View
-                  key={car.mate_id}
+                  key={car.invitation_id}
                   className='detail-car-item'
+                  onClick={()=>{this.toShowTipDialog()}}
                 >
-
+                  <Image
+                    src={car.requester_img}
+                    className='detail-car-img'
+                  />
+                  <View className='detail-car-text'>
+                    <View className='detail-car-dct'>
+                      {car.description}
+                    </View>
+                    <View className='detail-car-bottom'>
+                      <View className='detail-car-inviter'>
+                        {'发布者：' + car.requester_name}
+                      </View>
+                      <View className='detail-car-time'>
+                        {'发布时间：' + car.requst_time}
+                      </View>
+                    </View>
+                  </View>
                 </View>
                 ))}
               </View>
             </View>
             :
             null
-          }
+            }
+          </View>
         </View>
+        <View>
+        {
+          this.state.maskVisible
+          ?
+          <View className='detail-mask'>
+          </View>
+          :
+          null
+        }
+        </View>
+        <View>
         {
           this.state.addIvtDialogVisible
           ?
-          <View className='detail-car-add'>
-
+          <View className='detail-car-form'>
+            <Text className='detail-car-form-text'>
+              请输入描述：
+            </Text> 
+            <Textarea
+              className='detail-car-form-input'
+              type='text'
+              onChange={(e)=>{this.onChangeDescription(e)}}
+            />
+            <View className='detail-car-form-button'>
+              <View 
+                className='detail-car-form-comfirm'
+                onClick={()=>{this.toAddInvitation()}}
+              >
+                确定
+              </View> 
+              <View 
+                className='detail-car-form-cancel'
+                onClick={()=>{this.toCancelAddInvitation()}}
+              >
+                取消
+              </View> 
+            </View>  
           </View>
           :
           null
         }
+        </View>
+        <View>
         {
           this.state.acceptIvtDialogVisible
           ?
-          <View className='detail-car-accept'>
-
+          <View className='detail-car-form'>
+            <Text className='detail-car-form-text'>
+              请输入邀请码：
+            </Text> 
+            <Textarea
+              className='detail-car-form-input'
+              value={this.state.joinCode}
+              onInput={(e)=>{this.onChangeJoinCode(e)}}
+            />
+            <View className='detail-car-form-button'>
+              <View 
+                className='detail-car-form-comfirm'
+                onClick={()=>{this.toAcceptInvitation()}}
+              >
+                确定
+              </View> 
+              <View className='detail-car-form-cancel'
+                onClick={()=>{this.toCancelAcceptInvitation()}}
+              >
+                取消
+              </View> 
+            </View>  
           </View>
           :
           null
         }
+        </View>
+        <View>
+          {
+          this.state.joinMateDialogVisible
+          ?
+          <View className='detail-car-tip'>
+            <View className='detail-car-tip-text'>
+              是否建立课友关系？
+            </View>
+            <View className='detail-car-tip-button'>
+              <View 
+                className='detail-car-tip-comfirm'
+                onClick={()=>{this.toJoinMate()}}
+              >
+                Yes！
+              </View> 
+              <View 
+                className='detail-car-tip-cancel'
+                onClick={()=>{this.toCancelJoinMate()}}
+              >
+                Wait..
+              </View> 
+            </View>
+          </View>
+          :
+          null
+          }
+        </View>
+        <View>
+          {
+          this.state.endIvtDialogVisible
+          ?
+          <View className='detail-car-tip'>
+            <View className='detail-car-tip-text'>
+              是否结束邀请？
+            </View>
+            <View className='detail-car-tip-button'>
+              <View 
+                className='detail-car-tip-comfirm'
+                onClick={()=>{this.toEndIvt()}}
+              >
+                Yes！
+              </View> 
+              <View 
+                className='detail-car-tip-cancel'
+                onClick={()=>{this.toCancelEndIvt()}}
+              >
+                Wait..
+              </View> 
+            </View>
+          </View>
+          :
+          null
+          }
+        </View>
       </View>
     )
   }

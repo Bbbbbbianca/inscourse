@@ -1,35 +1,37 @@
 @import "src/assets/variables.scss";
 .detail {
     position: absolute;
+    z-index: 0;
     width: 100%;
     height: 100%;
     background-color: $tf-color-brown3;
     display: flex;
     flex-direction: column;
-    padding: 0 0 600px;
+    padding: 0 0 500px;
 }
 
 .detail-msg {
+    position: absolute;
+    z-index: 0;
     width: 96%;
-    height: 320px;
+    height: 30%;
     display: flex;
     flex-direction: row;
-    background-color: $tf-color-brown6;
-    margin: 2px 16px;
     .detail-msg-img {
-        width: 30%;
-        height: 80%;
+        width: 225px;
+        height: 300px;
         border-radius: 12px;
-        margin: 28px 24px;
+        margin: 28px 20px;
         box-shadow: 2px 2px 3px $tf-color-brown7;
     }
 
     .detail-msg-text {
-        width: 60%;
+        width: 70%;
         height: 100%;
         display: flex;
         flex-direction: column;
         .detail-msg-text-top {
+            height: 15%;
             display: flex;
             flex-direction: row;
             .detail-msg-title {
@@ -50,18 +52,17 @@
         }
 
         .detail-msg-dct {
-            height: 55%;
+            height: 35%;
             font-size: 32px;
             font-family: "FangSong", "Wawati SC", "YouYuan";
             margin: 16px 18px;
             color: $tf-color-brown4; 
-
         } 
 
         .detail-msg-text-bottom {
+            height: 5%;
             display: flex;
             flex-direction: row-reverse;
-            margin-bottom: 8px;
             .detail-msg-heat-img {
                 width: 36px;
                 height: 36px;
@@ -72,22 +73,25 @@
                 font-family: "FangSong", "Wawati SC", "YouYuan";
                 color: $tf-color-brown8; 
             }
-
         }   
     }
 }
 
 .detail-relevant {
+    margin-top: 340px;
+    position: absolute;
+    z-index: 0;
+    width: 100%;
     height: 65%;
     .detail-choice {
         width: 100%;
-        height: 60px;
+        height: 5%;
         display: flex;
         flex-direction: row;
         background-color: $tf-color-pink1;
 
         .detail-choice-resource {
-            width: 112px;
+            width: 15%;
             font-size: 36px;
             font-family: "FangSong", "Wawati SC", "YouYuan";
             color: $tf-color-brown8;
@@ -97,7 +101,7 @@
         }
 
         .detail-choice-car {
-            width: 112px;
+            width: 15%;
             font-size: 36px;
             font-family: "FangSong", "Wawati SC", "YouYuan";
             color: $tf-color-brown8;
@@ -127,7 +131,7 @@
             align-items: center;
             .detail-resource-item {
                 width: 90%;
-                height: 170px;
+                height: 35%;
                 display: flex;
                 flex-direction: column;
                 border-radius: 12px;
@@ -205,14 +209,169 @@
             align-items: center;
             .detail-car-item {
                 width: 90%;
-                height: 170px;
+                height: 30%;
                 display: flex;
-                flex-direction: column;
+                flex-direction: row;
                 border-radius: 12px;
                 background-color: $tf-color-brown6;
                 box-shadow: 16px 16px 24px $tf-color-grey3;
                 margin: 32px 0;
+                .detail-car-img {
+                    width: 20%;
+                    width: 112px;
+                    height: 112px;
+                    margin: 28px 16px;
+                    border-radius: 64px;
+                    box-shadow: 6px 6px 9px $tf-color-brown8;
+                }
+
+                .detail-car-text {
+                    width: 80%;
+                    display: flex;
+                    flex-direction: column;
+                    .detail-car-dct {
+                        height: 85%;
+                        margin: 8px 7px;
+                        font-size: 32px;
+                        font-family: "FangSong", "Wawati SC", "YouYuan";
+                        color: $tf-color-brown8; 
+                    }
+                    .detail-car-bottom {
+                        height: 15%;
+                        display: flex;
+                        flex-direction: row;
+                        .detail-car-inviter {
+                            margin-left: 192px;
+                            font-size: 20px;
+                            font-family: "FangSong", "Wawati SC", "YouYuan";
+                            color: $tf-color-brown4; 
+                        }
+                        .detail-car-time {
+                            margin-left: 12px;
+                            font-size: 20px;
+                            font-family: "FangSong", "Wawati SC", "YouYuan";
+                            color: $tf-color-brown4; 
+                        }
+                    }
+                }    
             }
+        }
+    }
+}
+
+.detail-mask {
+    position: absolute;
+    z-index: 6;
+    background-color: $tf-color-brown4;
+    opacity: 0.4;
+    height: 100%;
+    width: 100%;
+}
+
+.detail-car-form {
+    position: fixed;
+    z-index: 10;
+    background-color: $tf-color-brown6;
+    height: 40%;
+    width: 70%;
+    top: 25%;
+    left: 15%;
+    border-radius: 12px;
+    box-shadow: 4px 4px 6px $tf-color-brown8;
+    display: flex;
+    flex-direction: column;
+    .detail-car-form-text {
+        padding: 8px 12px;
+        font-size: 42px;
+        font-family: "FangSong", "Wawati SC", "YouYuan";
+        color: $tf-color-brown8; 
+        height: 10%;
+    }
+    
+    .detail-car-form-input {
+        height: 70%;
+        width: 91%;
+        border: none;
+        background-color: $tf-color-brown3;
+        border-radius: 12px;
+        margin: 8px 12px;
+        padding: 8px 12px;
+        font-size: 32px;
+        color: $tf-color-brown7; 
+        font-family: "FangSong", "Wawati SC", "YouYuan";
+    }
+    
+    .detail-car-form-button {
+        display: flex;
+        flex-direction: row;
+        height: 20%;
+        width: 100%;
+        .detail-car-form-comfirm {
+            width: 84px;
+            height: 54px;
+            margin-top: 8px;
+            margin-left: 84px;
+            background-color: $tf-color-pink2;
+            border-radius: 36px;
+            color: $tf-color-brown4; 
+            font-size: 42px;
+            font-family: "FangSong", "Wawati SC", "YouYuan";
+        }
+        .detail-car-form-cancel {
+            width: 84px;
+            height: 54px;
+            margin-top: 8px;
+            margin-left: 216px;
+            background-color: $tf-color-brown7;
+            border-radius: 36px;
+            font-size: 42px;
+            color: $tf-color-brown4; 
+            font-family: "FangSong", "Wawati SC", "YouYuan";
+        }
+    }
+}
+
+.detail-car-tip {
+    position: fixed;
+    z-index: 10;
+    background-color: $tf-color-brown6;
+    height: 25%;
+    width: 55%;
+    top: 35%;
+    left: 25%;
+    border-radius: 12px;
+    .detail-car-tip-text {
+        padding: 64px 24px;
+        font-size: 42px;
+        font-family: "FangSong", "Wawati SC", "YouYuan";
+        color: $tf-color-brown8; 
+        height: 30%;
+    }
+
+    .detail-car-tip-button {
+        display: flex;
+        flex-direction: row;
+        height: 10%;
+        .detail-car-tip-comfirm {
+            width: 72px;
+            height: 48px;
+            margin-left: 64px;
+            background-color: $tf-color-pink2;
+            border-radius: 48px;
+            color: $tf-color-brown4; 
+            font-size: 32px;
+            font-family: "FangSong", "Wawati SC", "YouYuan";
+        }
+    
+        .detail-car-tip-cancel {
+            width: 72px;
+            height: 48px;
+            margin-left: 148px;
+            background-color: $tf-color-brown7;
+            border-radius: 48px;
+            font-size: 32px;
+            color: $tf-color-brown4; 
+            font-family: "FangSong", "Wawati SC", "YouYuan";
         }
     }
 }

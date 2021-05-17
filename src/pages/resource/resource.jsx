@@ -129,10 +129,10 @@ export default class Resource extends Component {
               {this.state.resource.resource_key}
             </View>
             <View className='resource-author'>
-              {'发布者：' + this.state.resource.author_id}
+              {' 发布者：' + this.state.resource.author_id}
             </View>
             <View className='resource-dct'>
-              {'简介：' + this.state.resource.description}
+              {' 简介：' + this.state.resource.description}
             </View>
           </View>
           <View className='resource-mid'>
