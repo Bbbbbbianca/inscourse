@@ -1,5 +1,7 @@
 export default {
   pages: [
+    // 'pages/index/index',
+    'pages/addres/addres',
     'pages/detail/detail',
     'pages/course/course',
     'pages/resource/resource',
@@ -8,7 +10,7 @@ export default {
     'pages/group/group',
     'pages/dailytask/dailytask',
     'pages/schedule/schedule',
-    'pages/addres/addres',
+    // 'pages/addres/addres',
     'pages/addcourse/addcourse'
   ],
   tabBar: {
