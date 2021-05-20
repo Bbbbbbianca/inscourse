@@ -24,13 +24,13 @@ export default class addRes extends Component {
   }
 
   state = {
-    selector: ['点击选择类别', '笔记', '链接', '百度文库', '其他'],
+    selector: ['笔记', '链接', '百度文库', '其他'],
     selectorChecked: '点击选择类别'
   }
 
   onChange = e => {
     this.setState({
-      selectorChecked: this.state.selector[Number(e.detail.value) + 1]
+      selectorChecked: this.state.selector[e.detail.value]
     })
   }
 
@@ -43,10 +43,9 @@ export default class addRes extends Component {
             <Input type='text' placeholder='资源名称' maxlength='20' />
             <Input type='text' placeholder='资源介绍' maxlength='255' />
             <Input type='text' placeholder='资源类别' maxlength='20' />
-            <Picker mode='selector' range={this.state.selector.slice(1,4)} onChange={this.onChange}>
+            <Picker mode='selector' range={this.state.selector} onChange={this.onChange}>
               <View className='picker'>
-                <Text className='area'>选择类别：</Text>
-                {this.state.selectorChecked}
+                <Text className='classification'>选择类别：{this.state.selectorChecked}</Text>
               </View>
             </Picker>
             <Text className='area'>资源内容:</Text>
