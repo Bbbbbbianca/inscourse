@@ -30,8 +30,6 @@ export default class Detail extends Component {
       showCar: false,
       showType: -1,
       is_joined: false,
-      course: {},
-      showType: 0,
       maskVisible: false,
       addIvtDialogVisible: false,
       acceptIvtDialogVisible: false,
@@ -75,7 +73,7 @@ export default class Detail extends Component {
           requester_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
           requester_name: 'lalal',
           invitation_code: '',
-          requst_time: '2020/11/11',
+          request_time: '2020/11/11',
           description: '啦啦啦找个好朋友,打算六月份开始暑假一起学数学分析所以有人吗有人吗'
         },
         {
@@ -83,7 +81,7 @@ export default class Detail extends Component {
           requester_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
           requester_name: 'lalal',
           invitation_code: '',
-          requst_time: '2020/11/11',
+          request_time: '2020/11/11',
           description: '哈哈哈哈一起划水有人吗有人吗 有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗v有人吗有人吗有人吗有人吗v'
         },
         {
@@ -91,7 +89,7 @@ export default class Detail extends Component {
           requester_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
           requester_name: 'lalal',
           invitation_code: '',
-          requst_time: '2020/11/11',
+          request_time: '2020/11/11',
           description: '阿巴阿巴'
         },
         {
@@ -99,7 +97,7 @@ export default class Detail extends Component {
           requester_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
           requester_name: 'lalal',
           invitation_code: '',
-          requst_time: '2020/11/11',
+          request_time: '2020/11/11',
           description: '阿巴阿巴'
         },
         {
@@ -107,14 +105,45 @@ export default class Detail extends Component {
           requester_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
           requester_name: 'lalal',
           invitation_code: '',
-          requst_time: '2020/11/11',
+          request_time: '2020/11/11',
           description: '阿巴阿巴'
         }
-      ],
+
+        ],
     };
     let course_id = getCourseId();
     console.log(this.state.icon)
     this.getCourseDetail(course_id)
+    this.getCourseResources(course_id, this.state.showType)
+  }
+
+  getOpenInvitations(id) {
+    let token = UtilService.fetchToken();
+    let that = this;
+    Taro.request({
+      url: UtilService.BASE_URL + '/mate/queryCourseMateInvitations',
+      header: {
+        'Token': token
+      },
+      data: {
+        'course_id': id,
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log(res)
+        console.log(res.data)
+        console.log(res.data.invitations)
+        if (res.statusCode == 200) {
+          that.setState({
+            cars: res.data.invitations
+          });
+        }
+      },
+      fail: function (res) {
+        console.log(res);
+        UtilService.showHint('获取收藏列表失败', '请稍后重试', 'fail');
+      }
+    })
   }
 
   getCourseDetail(id) {
@@ -130,16 +159,18 @@ export default class Detail extends Component {
       },
       method: 'GET',
       success: function (res) {
-        console.log(res.data.course)
-        that.setState({
-          course: res.data.course
-        });
-        that.setState({
-          is_joined: res.data.course.is_joined
-        })
+        if (res.statusCode == 200) {
+          console.log(res.data.course)
+          that.setState({
+            course: res.data.course
+          });
+          that.setState({
+            is_joined: res.data.course.is_joined
+          })
 
-        if (res.data.course.is_joined) {
-          that.getCourseResources(that.state.course.course_id, that.state.showType)
+          if (res.data.course.is_joined) {
+            that.getCourseResources(that.state.course.course_id, that.state.showType)
+          }
         }
       },
       fail: function (res) {
@@ -149,10 +180,37 @@ export default class Detail extends Component {
     })
   }
 
+  getFavoredResources(course_id) {
+    let token = UtilService.fetchToken();
+    let that = this;
+    Taro.request({
+      url: UtilService.BASE_URL + '/resource/queryFavoredResources',
+      header: {
+        'Token': token
+      },
+      data: {
+        'course_id': course_id,
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log(res.data.resources)
+        if (res.statusCode == 200) {
+          that.setState({
+            resources: res.data.resources
+          });
+        }
+      },
+      fail: function (res) {
+        console.log(res);
+        UtilService.showHint('获取收藏列表失败', '请稍后重试', 'fail');
+      }
+    })
+  }
+
   getCourseResources(course_id, content_type) {
     this.setState({
       showType: content_type
-    });
+    })
     let token = UtilService.fetchToken();
     let that = this;
     Taro.request({
@@ -167,13 +225,15 @@ export default class Detail extends Component {
       method: 'GET',
       success: function (res) {
         console.log(res.data.resources)
-        that.setState({
-          resources: res.data.resources
-        });
+        if (res.statusCode == 200) {
+          that.setState({
+            resources: res.data.resources
+          });
+        }
       },
       fail: function (res) {
         console.log(res);
-        UtilService.showHint('获取课程信息失败', '请稍后重试', 'fail');
+        UtilService.showHint('获取资源列表失败', '请稍后重试', 'fail');
       }
     })
   }
@@ -215,6 +275,7 @@ export default class Detail extends Component {
       showCar: true,
       showRes: false
     })
+    this.getOpenInvitations(this.state.course.course_id)
   }
 
   toShowRes() {
@@ -255,6 +316,34 @@ export default class Detail extends Component {
 
   toAddInvitation() {
     console.log('to add invitation')
+    let token = UtilService.fetchToken();
+    let that = this;
+    Taro.request({
+      url: UtilService.BASE_URL + '/mate/inviteMate',
+      header: {
+        'Token': token
+      },
+      data: {
+        'course_id': that.state.course.course_id,
+        'description': that.state.addDescription
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.statusCode == 200) {
+          console.log(res.data.message)
+          UtilService.showHint(res.data.message + '\n' + res.date.invitation_code, '', 'none')
+          that.getOpenInvitations(that.state.course.course_id)
+        } else {
+          console.log(res)
+          UtilService.showHint(res.data.message, '', 'none')
+        }
+      },
+      fail: function (res) {
+        console.log(res);
+        UtilService.showHint('发布邀请失败', '请稍后重试', 'fail');
+      }
+    })
+
     this.setState({
       maskVisible: false,
       addIvtDialogVisible: false
@@ -454,7 +543,7 @@ export default class Detail extends Component {
                   <View
                     className='detail-resource-type-item'
                     onClick={() => {
-                      this.toSearchResbyType(4)
+                      this.getFavoredResources(this.state.course.course_id)
                     }}
                   >
                     <Image
@@ -544,7 +633,7 @@ export default class Detail extends Component {
                         {'发布者：' + car.requester_name}
                       </View>
                       <View className='detail-car-time'>
-                        {'发布时间：' + car.requst_time}
+                        {'发布时间：' + car.request_time}
                       </View>
                     </View>
                   </View>

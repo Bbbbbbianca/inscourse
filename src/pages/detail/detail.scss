@@ -17,11 +17,10 @@
     height: 30%;
     display: flex;
     flex-direction: row;
-    background-color: $tf-color-brown6;
     margin: 2px 16px;
     .detail-msg-img {
         width: 30%;
-        height: 80%;
+        height: 50%;
         border-radius: 12px;
         margin: 28px 20px;
         box-shadow: 2px 2px 3px $tf-color-brown7;
@@ -48,8 +47,9 @@
                 font-size: 32px;
                 font-family: "FangSong", "Wawati SC", "YouYuan";
                 background-color: $tf-color-brown5;
-                margin-top: 16px;
+                margin-top: 10px;
                 margin-right: 16px;
+                margin-bottom: -10px;
             }
         }
 
@@ -127,6 +127,15 @@
                 border-radius: 18px;
             }
         }
+        .detail-resource-end-line {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          font-size: 24px;
+          font-family: "FangSong", "Wawati SC", "YouYuan";
+          margin-top: 24px;
+          color: #8e7c62;
+        }
         .detail-resource-list {
             display: flex;
             flex-direction: column;
@@ -190,6 +199,7 @@
     }
 
     .detail-car {
+      //height: auto;
         .detail-car-opt {
             display: flex;
             flex-direction: row;

@@ -1,3 +1,4 @@
+import Taro from '@tarojs/taro';
 import React, { Component } from 'react'
 import { View, Image } from '@tarojs/components'
 import { AtFab } from 'taro-ui'
@@ -9,24 +10,26 @@ import preferPic from '../../assets/images/prefer.png'
 import favorPic from '../../assets/images/favor.png'
 import starSelectedPic from '../../assets/images/star_selected.png'
 import heartSelectedPic from '../../assets/images/heart_selected.png'
+import {APP_ROUTES} from "../../base/constant";
+import UtilService from "../../services/utils";
 
-// TO DO:
-// function getResourseId () {
-//   if (Taro.getCurrentInstance().router.params.id) {
-//       return(Taro.getCurrentInstance().router.params.id)
-//     } else {
-//     }
-// }
+function getResourseId () {
+  let resource_id = Taro.getCurrentInstance().router.params.id
+  if (resource_id) {
+      return resource_id
+  } else {
+    Taro.navigateTo({
+      url: APP_ROUTES.COURSE
+    })
+  }
+}
 
-// TO DO:
-// function getResourseDetail (id) {
-// }
+
 
 export default class Resource extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // resource_id: getResourceId(),
       // resource: getResourceDetail(resourse_id)
       resource: {
         resource_id: 3,
@@ -41,6 +44,34 @@ export default class Resource extends Component {
         content: 'hthghhjhjhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhaodanb.comhhdshjfsjfhsjfsjdfhksfjhkshfksckjsdhjksjkdh',
       }
     };
+    this.getResourseDetail(getResourseId())
+  }
+
+  getResourseDetail (id) {
+    let token = UtilService.fetchToken();
+    let that = this;
+    Taro.request({
+      url: UtilService.BASE_URL + '/resource/queryCertainResource',
+      header: {
+        'Token': token
+      },
+      data: {
+        'resource_id': id
+      },
+      method: 'GET',
+      success: function (res) {
+        if (res.statusCode == 200) {
+          console.log(res.data.resource)
+          that.setState({
+            resource: res.data.resource
+          });
+        }
+      },
+      fail: function (res) {
+        console.log(res);
+        UtilService.showHint('获取资源信息失败', '请稍后重试', 'fail');
+      }
+    })
   }
 
   toShareResource() {
@@ -159,7 +190,7 @@ export default class Resource extends Component {
             </View>
           </View>
         </View>
-        
+
         <AtFab className='resource-share'>
           <Image
             src={sharePic}
