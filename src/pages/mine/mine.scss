@@ -1,7 +1,368 @@
 @import "src/assets/variables.scss";
-.mine {
-    position: absolute;
-    width: 100%;
+
+//总布局
+.mine{
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $tf-color-brown3;
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 500px;
+}
+
+//个人信息部分
+.mine-msg {
+  position: absolute;
+  z-index: 0;
+  width: 96%;
+  height: 30%;
+  display: flex;
+  flex-direction: row;
+  .mine-msg-img {
+    width: 225px;
+    height: 225px;
+    border-radius: 100%;
+    margin: 28px 20px;
+    box-shadow: 2px 2px 3px $tf-color-brown7;
+  }
+
+  .mine-msg-text {
+    width: 70%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    .mine-msg-text-top {
+      height: 15%;
+      display: flex;
+      flex-direction: row;
+      .mine-msg-title {
+        font-size: 48px;
+        font-family: "FangSong", "Wawati SC", "YouYuan";
+        margin-top: 24px;
+        margin-left: 16px;
+        color: $tf-color-brown8;
+      }
+
+      .mine-msg-button-join {
+
+        font-size: 32px;
+        font-family: "FangSong", "Wawati SC", "YouYuan";
+        background-color: $tf-color-brown5;
+        margin-top: 16px;
+        margin-right: 16px;
+      }
+    }
+
+    .mine-msg-dct {
+      font-size: 32px;
+      font-family: "FangSong", "Wawati SC", "YouYuan";
+      margin-top: 15%;
+      margin-left: 5%;
+      color: $tf-color-brown4;
+    }
+
+    .mine-msg-text-bottom {
+      height: 5%;
+      display: flex;
+      flex-direction: row-reverse;
+      .mine-msg-heat-img {
+        width: 36px;
+        height: 36px;
+        margin: 0 8px;
+      }
+      .mine-msg-heat {
+        font-size: 24px;
+        font-family: "FangSong", "Wawati SC", "YouYuan";
+        color: $tf-color-brown8;
+      }
+    }
+  }
+}
+
+//细分页面部分
+.mine-relevant {
+  margin-top: 340px;
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  height: 65%;
+
+  //导航栏
+  .mine-choice {
+    width: 100%;
+    height: 5%;
+    display: flex;
+    flex-direction: row;
+    background-color: $tf-color-pink1;
+
+    .mine-choice-joined {
+      width: 50%;
+      font-size: 36px;
+      font-family: "FangSong", "Wawati SC", "YouYuan";
+      color: $tf-color-brown8;
+      margin-left: 12px;
+      padding-left: 36px;
+      border-radius: 4px;
+    }
+
+    .mine-choice-assignments {
+      width: 50%;
+      font-size: 36px;
+      font-family: "FangSong", "Wawati SC", "YouYuan";
+      color: $tf-color-brown8;
+      padding-left: 36px;
+      border-radius: 4px;
+    }
+  }
+
+  //我的课程
+  .mine-course {
+    .mine-course-type {
+      display: flex;
+      flex-direction: row;
+      .mine-course-type-item {
+        margin-top: 8px;
+        margin-left: 24px;
+        font-size: 24px;
+        background-color: $tf-color-pink1;
+        font-family: "FangSong", "Wawati SC", "YouYuan";
+        color: $tf-color-brown4;
+        border-color: $tf-color-pink3;
+        border-radius: 18px;
+      }
+    }
+    .mine-course-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .mine-joined-item {
+        width: 90%;
+        height: 30%;
+        display: flex;
+        flex-direction: row;
+        border-radius: 12px;
+        background-color: $tf-color-brown6;
+        box-shadow: 16px 16px 24px $tf-color-grey3;
+        margin: 16px 0;
+        .mine-course-img {
+          width: 20%;
+          width: 112px;
+          height: 112px;
+          margin: 28px 16px;
+          border-radius: 5px;
+          box-shadow: 6px 6px 9px $tf-color-brown8;
+        }
+        .mine-course-text {
+          width: 80%;
+          display: flex;
+          flex-direction: column;
+          .mine-course-name {
+            height: 80%;
+            margin-top: 5%;
+            margin-left: 5%;
+            font-size: 55px;
+            font-family: "FangSong", "Wawati SC", "YouYuan";
+            color: $tf-color-brown8;
+          }
+          .mine-course-heat {
+            margin-bottom: 2%;
+            margin-left: 80%;
+            height: 20%;
+            font-size: 25px;
+            font-family: "FangSong", "Wawati SC", "YouYuan";
+            color: $tf-color-brown4;
+            .mine-course-heat-img {
+              width: 36px;
+              height: 36px;
+            }
+          }
+
+
+        }
+      }
+    }
+  }
+
+  //我的打卡
+  .mine-assignments {
+
+    //完成状态导航栏
+    .mine-assignment-state {
+      display: flex;
+      flex-direction: row;
+      .mine-assignment-state-item {
+        margin-top: 2%;
+        margin-left: 8%;
+        font-size: 28px;
+        background-color: $tf-color-pink1;
+        font-family: "FangSong", "Wawati SC", "YouYuan";
+        color: $tf-color-brown4;
+        border-color: $tf-color-pink3;
+        border-radius: 18px;
+      }
+    }
+
+    //打卡列表
+    .mine-assignment-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .detail-resource-item {
+        width: 90%;
+        height: 35%;
+        display: flex;
+        flex-direction: column;
+        border-radius: 12px;
+        background-color: $tf-color-brown6;
+        box-shadow: 16px 16px 24px $tf-color-grey3;
+        margin: 16px 0;
+        .detail-resource-item-title {
+          font-size: 36px;
+          font-family: "FangSong", "Wawati SC", "YouYuan";
+          margin-top: 24px;
+          margin-left: 16px;
+          color: $tf-color-brown8;
+        }
+
+        .detail-resource-item-dct {
+          height: 60%;
+          font-size: 28px;
+          font-family: "FangSong", "Wawati SC", "YouYuan";
+          margin: 0 16px;
+          color: $tf-color-brown4;
+          text-overflow: ellipsis;
+        }
+
+        .detail-resource-item-bottom {
+          margin-right: 12px;
+          margin-bottom: 6px;
+          display: flex;
+          flex-direction: row-reverse;
+          .detail-resource-item-heat-img {
+            width: 28px;
+            height: 28px;
+            margin: 0 6px;
+          }
+          .detail-resource-item-heat {
+            font-size: 18px;
+            font-family: "FangSong", "Wawati SC", "YouYuan";
+            color: $tf-color-brown8;
+            margin: 0 6px;
+          }
+        }
+      }
+    }
+
+
+  }
+}
+
+.mine-car-form {
+  position: fixed;
+  z-index: 10;
+  background-color: $tf-color-brown6;
+  height: 40%;
+  width: 70%;
+  top: 25%;
+  left: 15%;
+  border-radius: 12px;
+  box-shadow: 4px 4px 6px $tf-color-brown8;
+  display: flex;
+  flex-direction: column;
+  .mine-car-form-text {
+    padding: 8px 12px;
+    font-size: 42px;
+    font-family: "FangSong", "Wawati SC", "YouYuan";
+    color: $tf-color-brown8;
+    height: 10%;
+  }
+
+  .mine-car-form-input {
+    height: 70%;
+    width: 91%;
+    border: none;
     background-color: $tf-color-brown3;
+    border-radius: 12px;
+    margin: 8px 12px;
+    padding: 8px 12px;
+    font-size: 32px;
+    color: $tf-color-brown7;
+    font-family: "FangSong", "Wawati SC", "YouYuan";
+  }
+
+  .mine-car-form-button {
+    display: flex;
+    flex-direction: row;
+    height: 20%;
+    width: 100%;
+    .mine-car-form-comfirm {
+      width: 84px;
+      height: 54px;
+      margin-top: 8px;
+      margin-left: 84px;
+      background-color: $tf-color-pink2;
+      border-radius: 36px;
+      color: $tf-color-brown4;
+      font-size: 42px;
+      font-family: "FangSong", "Wawati SC", "YouYuan";
+    }
+    .mine-car-form-cancel {
+      width: 84px;
+      height: 54px;
+      margin-top: 8px;
+      margin-left: 216px;
+      background-color: $tf-color-brown7;
+      border-radius: 36px;
+      font-size: 42px;
+      color: $tf-color-brown4;
+      font-family: "FangSong", "Wawati SC", "YouYuan";
+    }
+  }
+}
+
+.mine-car-tip {
+  position: fixed;
+  z-index: 10;
+  background-color: $tf-color-brown6;
+  height: 25%;
+  width: 55%;
+  top: 35%;
+  left: 23%;
+  border-radius: 12px;
+  .mine-car-tip-text {
+    padding: 64px 32px;
+    font-size: 38px;
+    font-family: "FangSong", "Wawati SC", "YouYuan";
+    color: $tf-color-brown8;
+    height: 30%;
+  }
+
+  .mine-car-tip-button {
+    display: flex;
+    flex-direction: row;
+    height: 10%;
+    .mine-car-tip-comfirm {
+      width: 72px;
+      height: 48px;
+      margin-left: 64px;
+      background-color: $tf-color-pink2;
+      border-radius: 48px;
+      color: $tf-color-brown4;
+      font-size: 32px;
+      font-family: "FangSong", "Wawati SC", "YouYuan";
+    }
+
+    .mine-car-tip-cancel {
+      width: 72px;
+      height: 48px;
+      margin-left: 148px;
+      background-color: $tf-color-brown7;
+      border-radius: 48px;
+      font-size: 32px;
+      color: $tf-color-brown4;
+      font-family: "FangSong", "Wawati SC", "YouYuan";
+    }
+  }
 }

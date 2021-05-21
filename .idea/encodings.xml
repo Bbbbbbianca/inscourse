@@ -5,5 +5,8 @@
     <file url="file://$PROJECT_DIR$/src/app.config.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/pages/addres/addres.jsx" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/pages/addres/addres.scss" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/pages/detail/detail.scss" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/pages/mine/mine.jsx" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/pages/mine/mine.scss" charset="UTF-8" />
   </component>
 </project>
