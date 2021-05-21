@@ -415,29 +415,29 @@ export default class Detail extends Component {
                 ?
                 <View
                   key={resource.course_id}
-                  className='detail-resource-item'
+                  className='mine-assignment-item'
                   onClick={()=>{this.onViewResDetail(resource.resource_id)}}
                 >
-                  <View className='detail-resource-item-title'>
+                  <View className='mine-assignment-item-title'>
                     {resource.resource_key}
                   </View>
-                  <View className='detail-resource-item-dct'>
+                  <View className='mine-assignment-item-dct'>
                     {resource.description}
                   </View>
-                  <View className='detail-resource-item-bottom'>
-                    <View className='detail-resource-item-heat'>
+                  <View className='mine-assignment-item-bottom'>
+                    <View className='mine-assignment-item-heat'>
                       {resource.prefers}
                     </View>
                     <Image
                       src={preferPic}
-                      className='detail-resource-item-heat-img'
+                      className='mine-assignment-item-heat-img'
                     />
-                    <View className='detail-resource-item-heat'>
+                    <View className='mine-assignment-item-heat'>
                       {resource.favors}
                     </View>
                     <Image
                       src={favorPic}
-                      className='detail-resource-item-heat-img'
+                      className='mine-assignment-item-heat-img'
                     />
                   </View>
                 </View>

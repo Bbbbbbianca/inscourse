@@ -178,10 +178,10 @@ export default class Mine extends Component {
                   <View className='mine-assignment-list'>
                     { this.state.assignments.map((assignment)=>(
                       this.state.assignment_state === assignment.status ?
-                        <View key={assignment.assignment_id} className='detail-resource-item' onClick={()=>{this.toAssignmentDetail(assignment.assignment_id)}}>
-                          <View className='detail-resource-item-title'>{assignment.course_name}</View>
-                          <View className='detail-resource-item-dct'>{assignment.assignment_date}</View>
-                          <View className='detail-resource-item-bottom'></View>
+                        <View key={assignment.assignment_id} className='mine-assignment-item' onClick={()=>{this.toAssignmentDetail(assignment.assignment_id)}}>
+                          <View className='mine-assignment-item-title'>{assignment.course_name}</View>
+                          <View className='mine-assignment-item-dct'>{assignment.assignment_date}</View>
+                          <View className='mine-assignment-item-bottom'></View>
                         </View>
                         : null
                     ))}
