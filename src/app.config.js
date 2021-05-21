@@ -1,7 +1,7 @@
 export default {
   pages: [
-    'pages/detail/detail',
     'pages/course/course',
+    'pages/detail/detail',
     'pages/resource/resource',
     'pages/index/index',
     'pages/mine/mine',
