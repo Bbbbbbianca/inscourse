@@ -1,15 +1,6 @@
 import React, { Component } from 'react'
-import {Button, Image, Text, Textarea, View} from '@tarojs/components'
+import {Button, Image, View} from '@tarojs/components'
 import './mine.scss'
-import favorPic from "../../assets/images/favor.png";
-import personPic from "../../assets/images/person.png";
-import preferPic from "../../assets/images/prefer.png";
-// eslint-disable-next-line import/first
-import {AtFab} from "taro-ui";
-import addPic from "../../assets/images/add.png";
-// eslint-disable-next-line import/first
-import Taro from "@tarojs/taro";
-import {APP_ROUTES} from "../../base/constant";
 import heatPic from "../../assets/images/heat.png";
 
 export default class Mine extends Component {
