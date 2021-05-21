@@ -6,7 +6,7 @@ import { APP_ROUTES } from "../../base/constant"
 import './course.scss'
 import heatPic from '../../assets/images/heat.png'
 import CourseService from '../../services/course.service'
-import addPic from '../../assets/images/add.png'
+import scanPic from '../../assets/images/scan.png'
 
 // TO DO:
 // function getCourses () {
@@ -85,6 +85,10 @@ export default class Course extends Component {
     })
   } 
 
+  toUnfoldAction() {
+    this.setState({
+    })
+  }
   render () {
     let courses = this.state.courses.map((course)=>{ 
       return (
@@ -128,9 +132,9 @@ export default class Course extends Component {
             onActionClick={this.onSearchClick.bind(this)}
           />
           <Image
-            src={addPic}
-            className='course-add'
-            onClick={()=>{this.toAddCourse()}}
+            src={scanPic}
+            className='course-scan'
+            onClick={this.toUnfoldAction(this)}
           />
         </View>
         <View
