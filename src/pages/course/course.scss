@@ -1,6 +1,7 @@
 @import "src/assets/variables.scss";
 .course {
     position: absolute;
+    z-index: 0;
     width: 100%;
     height: 100%;
     background-color: $tf-color-brown3;
@@ -13,15 +14,15 @@
     display: flex;
     flex-direction: row;
     .course-search {
-        width: 100%;
+        width: 88%;
         background-color: $tf-color-brown3;
         border: none;
     }
 
-    .course-scan {
-        width: 78px;
+    .course-action {
+        width: 72px;
         height: 72px;
-        padding: 16px;
+        padding: 12px;
     }
 }
 
@@ -89,6 +90,106 @@
                     margin-right: 24px;
                 }
             }
+        }
+    }
+}
+
+.course-mask {
+    position: absolute;
+    z-index: 6;
+    background-color: $tf-color-brown4;
+    opacity: 0.4;
+    height: 100%;
+    width: 100%;
+}
+
+.course-layout {
+    position: absolute;
+    z-index: 10;
+    background-color: $tf-color-brown6;
+    border-radius: 12px;
+    box-shadow: 2px 2px 3px $tf-color-grey3;
+    height: 5%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .course-layout-accept {
+        padding-left: 84px;
+        width: 50%;
+        color: $tf-color-brown8;
+        font-size: 42px;
+        font-family: "FangSong", "Wawati SC", "YouYuan";
+    }
+
+    .course-layout-add {
+        padding-left: 84px;
+        width: 50%;
+        color: $tf-color-brown8;
+        font-size: 42px;
+        font-family: "FangSong", "Wawati SC", "YouYuan";
+    }
+}
+
+.course-form {
+    position: fixed;
+    z-index: 10;
+    background-color: $tf-color-brown6;
+    height: 40%;
+    width: 70%;
+    top: 25%;
+    left: 15%;
+    border-radius: 12px;
+    box-shadow: 4px 4px 6px $tf-color-brown8;
+    display: flex;
+    flex-direction: column;
+    .course-form-text {
+        padding: 8px 12px;
+        font-size: 42px;
+        font-family: "FangSong", "Wawati SC", "YouYuan";
+        color: $tf-color-brown8; 
+        height: 10%;
+    }
+    
+    .course-form-input {
+        height: 70%;
+        width: 91%;
+        border: none;
+        background-color: $tf-color-brown3;
+        border-radius: 12px;
+        margin: 8px 12px;
+        padding: 8px 12px;
+        font-size: 32px;
+        color: $tf-color-brown7; 
+        font-family: "FangSong", "Wawati SC", "YouYuan";
+    }
+    
+    .course-form-button {
+        display: flex;
+        flex-direction: row;
+        height: 20%;
+        width: 100%;
+        .course-form-comfirm {
+            width: 84px;
+            height: 54px;
+            margin-top: 8px;
+            margin-left: 84px;
+            background-color: $tf-color-pink2;
+            border-radius: 36px;
+            color: $tf-color-brown4; 
+            font-size: 42px;
+            font-family: "FangSong", "Wawati SC", "YouYuan";
+        }
+        .course-form-cancel {
+            width: 84px;
+            height: 54px;
+            margin-top: 8px;
+            margin-left: 216px;
+            background-color: $tf-color-brown7;
+            border-radius: 36px;
+            font-size: 42px;
+            color: $tf-color-brown4; 
+            font-family: "FangSong", "Wawati SC", "YouYuan";
         }
     }
 }
