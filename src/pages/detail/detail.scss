@@ -229,7 +229,6 @@
                 box-shadow: 16px 16px 24px $tf-color-grey3;
                 margin: 32px 0;
                 .detail-car-img {
-                    width: 20%;
                     width: 112px;
                     height: 112px;
                     margin: 28px 16px;
@@ -238,45 +237,25 @@
                 }
 
                 .detail-car-text {
-                    width: 80%;
+                    width: 82%;
                     display: flex;
                     flex-direction: column;
                     .detail-car-dct {
-                        height: 85%;
+                        height: 88%;
                         margin: 8px 7px;
                         font-size: 32px;
                         font-family: "FangSong", "Wawati SC", "YouYuan";
                         color: $tf-color-brown8;
                     }
                     .detail-car-bottom {
-                        height: 15%;
-                        margin: 4px 0;
+                        height: 12%;
+                        margin-bottom: 2px;
+                        margin-left: 64px;
                         display: flex;
                         flex-direction: row;
-                        .detail-car-inviter-label {
-                            margin-left: 192px;
-                            font-size: 20px;
-                            font-family: "FangSong", "Wawati SC", "YouYuan";
-                            color: $tf-color-brown4;
-                        }
-                        .detail-car-inviter {
-                            margin-left: 12px;
-                            font-size: 20px;
-                            font-family: "FangSong", "Wawati SC", "YouYuan";
-                            color: $tf-color-brown4; 
-                        }
-                        .detail-car-time-label {
-                            margin-left: 12px;
-                            font-size: 20px;
-                            font-family: "FangSong", "Wawati SC", "YouYuan";
-                            color: $tf-color-brown4; 
-                        }
-                        .detail-car-time {
-                            margin-left: 12px;
-                            font-size: 20px;
-                            font-family: "FangSong", "Wawati SC", "YouYuan";
-                            color: $tf-color-brown4;
-                        }
+                        font-size: 20px;
+                        font-family: "FangSong", "Wawati SC", "YouYuan";
+                        color: $tf-color-brown4;
                     }
                 }
             }
@@ -339,7 +318,7 @@
             background-color: $tf-color-pink2;
             border-radius: 36px;
             color: $tf-color-brown4;
-            font-size: 42px;
+            font-size: 36px;
             font-family: "FangSong", "Wawati SC", "YouYuan";
         }
         .detail-car-form-cancel {
@@ -349,7 +328,7 @@
             margin-left: 216px;
             background-color: $tf-color-brown7;
             border-radius: 36px;
-            font-size: 42px;
+            font-size: 36px;
             color: $tf-color-brown4;
             font-family: "FangSong", "Wawati SC", "YouYuan";
         }
@@ -384,7 +363,7 @@
             background-color: $tf-color-pink2;
             border-radius: 48px;
             color: $tf-color-brown4;
-            font-size: 32px;
+            font-size: 28px;
             font-family: "FangSong", "Wawati SC", "YouYuan";
         }
 
@@ -394,7 +373,7 @@
             margin-left: 148px;
             background-color: $tf-color-brown7;
             border-radius: 48px;
-            font-size: 32px;
+            font-size: 28px;
             color: $tf-color-brown4;
             font-family: "FangSong", "Wawati SC", "YouYuan";
         }

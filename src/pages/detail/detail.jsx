@@ -74,7 +74,7 @@ export default class Detail extends Component {
         {
           invitation_id: 1,
           requester_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
-          requester_name: 'lalal',
+          requester_name: 'lalallllllllll',
           invitation_code: '',
           request_time: '2020/11/11',
           description: '啦啦啦找个好朋友,打算六月份开始暑假一起学数学分析所以有人吗有人吗'
@@ -315,7 +315,6 @@ export default class Detail extends Component {
     this.setState({
       addDescription: value
     })
-    console.log(this.state.addDescription)
   }
 
   toAddInvitation() {
@@ -335,7 +334,7 @@ export default class Detail extends Component {
       success: function (res) {
         if (res.statusCode == 200) {
           console.log(res.data.message)
-          UtilService.showHint(res.data.message + '\n' + res.date.invitation_code, '', 'none')
+          UtilService.showHint(res.data.message + '\n' + res.data.invitation_code, '', 'none')
           that.getOpenInvitations(that.state.course.course_id)
         } else {
           console.log(res)
@@ -347,13 +346,10 @@ export default class Detail extends Component {
         UtilService.showHint('发布邀请失败', '请稍后重试', 'fail');
       }
     })
-
     this.setState({
       maskVisible: false,
       addIvtDialogVisible: false
     })
-    // TO DO
-    console.log(this.state.addDescription)
   }
   toCancelAddInvitation() {
     console.log('cancel add invitation')
@@ -396,11 +392,12 @@ export default class Detail extends Component {
     })
   }
 
-  toShowTipDialog() {
+  toShowTipDialog(invitation_code) {
     console.log('join mate dialog visible.')
     this.setState({
       maskVisible: true,
-      joinMateDialogVisible: true
+      joinMateDialogVisible: true,
+      joinCode: invitation_code
     })
     // if the invitation is owned by the user
     // this.setState({
@@ -410,13 +407,36 @@ export default class Detail extends Component {
     // TO DO
   }
 
-  toJoinMate() {
+  toJoinMate(invitation_code) {
     console.log('to join mate')
+    let token = UtilService.fetchToken();
+    Taro.request({
+      url: UtilService.BASE_URL + '/mate/acceptMateInvitation',
+      header: {
+        'Token': token
+      },
+      data: {
+        'invitation_code': invitation_code
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.statusCode == 200) {
+          console.log(res.data.message)
+          UtilService.showHint(res.data.message, '', 'none')
+        } else {
+          console.log(res)
+          UtilService.showHint(res.data.message, '', 'none')
+        }
+      },
+      fail: function (res) {
+        console.log(res);
+        UtilService.showHint('接受邀请失败', '请稍后重试', 'fail');
+      }
+    })
     this.setState({
       maskVisible: false,
       joinMateDialogVisible: false
     })
-    // TO DO
   }
   toCancelJoinMate() {
     console.log('cancel join mate')
@@ -624,7 +644,7 @@ export default class Detail extends Component {
                 <View
                   key={car.invitation_id}
                   className='detail-car-item'
-                  onClick={()=>{this.toShowTipDialog()}}
+                  onClick={()=>{this.toShowTipDialog(car.invitation_code)}}
                 >
                   <Image
                     src={car.requester_img}
@@ -635,18 +655,7 @@ export default class Detail extends Component {
                       {car.description}
                     </View>
                     <View className='detail-car-bottom'>
-                      <View className='detail-car-inviter-label'>
-                        发布者:
-                      </View>
-                      <View className='detail-car-inviter'>
-                        {car.requester_name}
-                      </View>
-                      <View className='detail-car-time-label'>
-                        发布时间:
-                      </View>
-                      <View className='detail-car-time'>
-                        {car.requst_time}
-                      </View>
+                      {'发布者: ' + car.requester_name + '  发布时间: ' + car.request_time}
                     </View>
                   </View>
                 </View>
@@ -743,7 +752,7 @@ export default class Detail extends Component {
             <View className='detail-car-tip-button'>
               <View
                 className='detail-car-tip-comfirm'
-                onClick={()=>{this.toJoinMate()}}
+                onClick={()=>{this.toJoinMate(this.state.joinCode)}}
               >
                 Yes！
               </View>

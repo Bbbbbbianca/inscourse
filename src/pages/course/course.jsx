@@ -8,10 +8,6 @@ import heatPic from '../../assets/images/heat.png'
 import CourseService from '../../services/course.service'
 import scanPic from '../../assets/images/scan.png'
 
-// TO DO:
-// function getCourses () {
-// }
-
 export default class Course extends Component {
   constructor(props) {
     super(props);
@@ -26,11 +22,9 @@ export default class Course extends Component {
     this.setState({
       searchCourse: value
     })
-    console.log(this.state.searchCourse)
   }
 
   onSearchClick () {
-    // TO DO
 	  console.log('开始搜索');
 		CourseService.fetchOpenCourses(this.state.searchCourse, 1, 'default', 1, 5,
                   this)
@@ -105,7 +99,7 @@ export default class Course extends Component {
           <Image
             src={scanPic}
             className='course-scan'
-            onClick={this.toUnfoldAction(this)}
+            onClick={this.toUnfoldAction.bind(this)}
           />
         </View>
         <View
