@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View } from '@tarojs/components'
+import {Button, Form, Input, Picker, Text, Textarea, View} from '@tarojs/components'
 import './addcourse.scss'
 
 export default class addCourse extends Component {
@@ -14,10 +14,45 @@ export default class addCourse extends Component {
 
   componentDidHide () { }
 
+  formSubmit () {
+    console.log('form submit')
+  }
+
+  formReset () {
+    console.log('form reset')
+  }
+
+  state = {
+    selector: ['语文', '数学', '英语', '计算机','其他'], // TODO
+    selectorChecked: '点击选择类别'
+  }
+
+  onChange = e => {
+    this.setState({
+      selectorChecked: this.state.selector[e.detail.value]
+    })
+  }
+
   render () {
     return (
       <View className='addcourse'>
-        111
+        <View className='add-form'>
+          <Form onSubmit={this.formSubmit} onReset={this.formReset}>
+            {/*<Text className='title'>发布资源：</Text>*/}
+            <Input type='text' placeholder='课程名称' maxlength='20' />
+            <Input type='text' placeholder='课程简介' maxlength='255' />
+            <Input type='text' placeholder='课程类别' maxlength='20' />
+            <Picker mode='selector' range={this.state.selector} onChange={this.onChange}>
+              <View className='picker'>
+                <Text className='classification'>选择类别：{this.state.selectorChecked}</Text>
+              </View>
+            </Picker>
+            {/*<Text className='area'>资源内容:</Text>*/}
+            <Textarea autoFocus />
+            <Button size='mini' type='primary' formType='submit'>提交</Button>
+            <Button size='mini' formType='reset' >重置</Button>
+          </Form>
+        </View>
       </View>
     )
   }

@@ -38,11 +38,14 @@ export default class Detail extends Component {
       showCar: false,
       showType: 0,
       maskVisible: false,
+    // 四个弹出框显示参数
       addIvtDialogVisible: false,
       acceptIvtDialogVisible: false,
       joinMateDialogVisible: false,
       endIvtDialogVisible: false,
+    // 发起邀请的描述信息
       addDescription: '',
+    // 接受邀请的邀请码信息
       joinCode: '',
     //   course_id: getCourseId(),
     //   course: getCourseDetail(course_id),
@@ -117,7 +120,7 @@ export default class Detail extends Component {
           requester_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
           requester_name: 'lalal',
           invitation_code: '',
-          requst_time: '2020/11/11',
+          request_time: '2020/11/11',
           description: '啦啦啦找个好朋友,打算六月份开始暑假一起学数学分析所以有人吗有人吗'
         },
         {
@@ -125,7 +128,7 @@ export default class Detail extends Component {
           requester_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
           requester_name: 'lalal',
           invitation_code: '',
-          requst_time: '2020/11/11',
+          request_time: '2020/11/11',
           description: '哈哈哈哈一起划水有人吗有人吗 有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗有人吗v有人吗有人吗有人吗有人吗v'
         },
         {
@@ -133,7 +136,7 @@ export default class Detail extends Component {
           requester_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
           requester_name: 'lalal',
           invitation_code: '',
-          requst_time: '2020/11/11',
+          request_time: '2020/11/11',
           description: '阿巴阿巴'
         },
         {
@@ -141,7 +144,7 @@ export default class Detail extends Component {
           requester_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
           requester_name: 'lalal',
           invitation_code: '',
-          requst_time: '2020/11/11',
+          request_time: '2020/11/11',
           description: '阿巴阿巴'
         },
         {
@@ -149,7 +152,7 @@ export default class Detail extends Component {
           requester_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
           requester_name: 'lalal',
           invitation_code: '',
-          requst_time: '2020/11/11',
+          request_time: '2020/11/11',
           description: '阿巴阿巴'
         }
       ],
@@ -204,11 +207,12 @@ export default class Detail extends Component {
     })
   }
 
-  onChangeDescription(e) {
-    console.log(e.target.value)
+  onChangeDescription = e => {
+    let value = e.detail.value
     this.setState({
-      addDescription: e.target.value
+      addDescription: value
     })
+    console.log(this.state.addDescription)
   }
 
   toAddInvitation() {
@@ -236,10 +240,12 @@ export default class Detail extends Component {
     })
   }
 
-  onChangeJoinCode(e) {
+  onChangeJoinCode = e => {
+    let value = e.detail.value
     this.setState({
-      joinCode: e.target.value
+      joinCode: value
     })
+    console.log(this.state.joinCode)
   }
 
   toAcceptInvitation() {
@@ -486,11 +492,17 @@ export default class Detail extends Component {
                       {car.description}
                     </View>
                     <View className='detail-car-bottom'>
+                      <View className='detail-car-inviter-label'>
+                        发布者:
+                      </View>
                       <View className='detail-car-inviter'>
-                        {'发布者：' + car.requester_name}
+                        {car.requester_name}
+                      </View>
+                      <View className='detail-car-time-label'>
+                        发布时间:
                       </View>
                       <View className='detail-car-time'>
-                        {'发布时间：' + car.requst_time}
+                        {car.request_time}
                       </View>
                     </View>
                   </View>
@@ -524,7 +536,8 @@ export default class Detail extends Component {
             <Textarea
               className='detail-car-form-input'
               type='text'
-              onChange={(e)=>{this.onChangeDescription(e)}}
+              value={this.state.addDescription}
+              onInput={this.onChangeDescription}
             />
             <View className='detail-car-form-button'>
               <View 
@@ -556,7 +569,7 @@ export default class Detail extends Component {
             <Textarea
               className='detail-car-form-input'
               value={this.state.joinCode}
-              onInput={(e)=>{this.onChangeJoinCode(e)}}
+              onInput={this.onChangeJoinCode}
             />
             <View className='detail-car-form-button'>
               <View 
