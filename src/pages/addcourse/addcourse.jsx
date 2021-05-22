@@ -3,17 +3,6 @@ import {Button, Form, Input, Picker, Text, Textarea, View} from '@tarojs/compone
 import './addcourse.scss'
 
 export default class addCourse extends Component {
-
-  componentWillMount () { }
-
-  componentDidMount () { }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
   formSubmit () {
     console.log('form submit')
   }
@@ -38,16 +27,19 @@ export default class addCourse extends Component {
       <View className='addcourse'>
         <View className='add-form'>
           <Form onSubmit={this.formSubmit} onReset={this.formReset}>
-            {/*<Text className='title'>发布资源：</Text>*/}
-            <Input type='text' placeholder='课程名称' maxlength='20' />
-            <Input type='text' placeholder='课程简介' maxlength='255' />
-            <Input type='text' placeholder='课程类别' maxlength='20' />
-            <Picker mode='selector' range={this.state.selector} onChange={this.onChange}>
-              <View className='picker'>
-                <Text className='classification'>选择类别：{this.state.selectorChecked}</Text>
+            <View className='display-row'>
+              <View className='tips'>课程名称:</View>
+              <View className='input-items'> <Input type='text' maxlength='20' /></View>
+            </View>
+            <View className='display-row'>
+              <View className='tips'>课程类别:</View>
+              <View className='input-items'>
+                <Picker mode='selector' range={this.state.selector} onChange={this.onChange}>
+                  {this.state.selectorChecked}
+                </Picker>
               </View>
-            </Picker>
-            {/*<Text className='area'>资源内容:</Text>*/}
+            </View>
+            <Text className='area'>课程简介:</Text>
             <Textarea autoFocus />
             <Button size='mini' type='primary' formType='submit'>提交</Button>
             <Button size='mini' formType='reset' >重置</Button>

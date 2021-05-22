@@ -1,18 +1,16 @@
 export default {
   pages: [
-    // 'pages/index/index',
-    'pages/mine/mine',
+    'pages/addcourse/addcourse',
     'pages/addres/addres',
+    'pages/modifymineinfo/modifymineinfo',
+    'pages/mine/mine',
     'pages/detail/detail',
     'pages/course/course',
     'pages/resource/resource',
     'pages/index/index',
-    // 'pages/mine/mine',
     'pages/group/group',
     'pages/dailytask/dailytask',
     'pages/schedule/schedule',
-    // 'pages/addres/addres',
-    'pages/addcourse/addcourse'
   ],
   tabBar: {
     backgroundColor: '#E6CEAC',

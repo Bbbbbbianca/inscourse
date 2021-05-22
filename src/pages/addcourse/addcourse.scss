@@ -9,16 +9,11 @@
 .add-form {
   margin: 5%;
   padding: 5%;
-
-  //background-color: rgba(202, 198, 198, 0.37);
-
 }
 
 Input {
   border-bottom: solid 0.5px;
   border-bottom-color: rgba(61, 150, 255, 0.35);
-  margin-top: 5%;
-  margin-bottom: 5%;
 }
 
 Button {
@@ -45,10 +40,26 @@ TextArea {
 }
 
 Picker {
-  margin-bottom: 5%;
+  border-bottom: solid 0.5px;
+  border-bottom-color: rgba(61, 150, 255, 0.6);
 }
 
-.classification {
+.display-row {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5%;
+  margin-bottom: 10%;
+}
+
+.tips {
+  width: 30%;
   opacity: 80%;
   font-family: 宋体;
 }
+
+.input-items {
+  width: 70%;
+  opacity: 70%;
+}
+
+

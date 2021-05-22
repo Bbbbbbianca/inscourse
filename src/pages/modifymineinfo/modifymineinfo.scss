@@ -7,18 +7,13 @@
 }
 
 .modify-form {
-  margin: 5%;
+  margin: 10% 5% 0 5%;
   padding: 5%;
-
-  //background-color: rgba(202, 198, 198, 0.37);
-
 }
 
 Input {
   border-bottom: solid 0.5px;
   border-bottom-color: rgba(61, 150, 255, 0.35);
-  margin-top: 5%;
-  margin-bottom: 5%;
 }
 
 Button {
@@ -51,4 +46,21 @@ Picker {
 .classification {
   opacity: 80%;
   font-family: 宋体;
+}
+
+.display-row {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5%;
+  margin-bottom: 10%;
+}
+
+.tips {
+  width: 35%;
+  opacity: 80%;
+  font-family: 宋体;
+}
+
+.input-items {
+  width: 65%;
 }
