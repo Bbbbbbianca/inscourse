@@ -31,18 +31,7 @@ export default class Resource extends Component {
     super(props);
     this.state = {
       // resource: getResourceDetail(resourse_id)
-      resource: {
-        resource_id: 3,
-        resource_key: '交大网课',
-        description: '较大时间和大家是否感觉撒发噶看到时代峰峻华盛顿附近算法算法大家看哈就是废话即使对方是否接受',
-        author_id: 11,
-        favors: 1109,
-        prefers: 111,
-        is_favored: false,
-        is_preferred: false,
-        content_type: 2,
-        content: 'hthghhjhjhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhaodanb.comhhdshjfsjfhsjfsjdfhksfjhkshfksckjsdhjksjkdh',
-      }
+      resource: {}
     };
     this.getResourseDetail(getResourseId())
   }
@@ -78,39 +67,88 @@ export default class Resource extends Component {
     console.log('to share resource')
     // TO DO
   }
+
   toStarResource() {
     console.log('to star resource')
-    // TO DO
-    this.setState({
-      resource: {
-        resource_id: this.state.resource.resource_id,
-        resource_key: this.state.resource.resource_key,
-        description: this.state.resource.description,
-        author_id: this.state.resource.author_id,
-        favors: this.state.resource.favors + 1,
-        prefers: this.state.resource.prefers,
-        is_favored: true,
-        is_preferred: this.state.resource.is_preferred,
-        content_type: this.state.resource.content_type,
-        content: this.state.resource.content,
+    let token = UtilService.fetchToken();
+    let that = this;
+    Taro.request({
+      url: UtilService.BASE_URL + '/resource/resourceFav',
+      header: {
+        'Token': token
+      },
+      data: {
+        'resource_id': that.state.resource.resource_id
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.statusCode == 200) {
+          console.log(res.data.message)
+          UtilService.showHint(res.data.message, '', 'success')
+          that.setState({
+            resource: {
+              resource_id: that.state.resource.resource_id,
+              resource_key: that.state.resource.resource_key,
+              description: that.state.resource.description,
+              author_id: that.state.resource.author_id,
+              favors: that.state.resource.favors + 1,
+              prefers: that.state.resource.prefers,
+              is_favored: true,
+              is_preferred: that.state.resource.is_preferred,
+              content_type: that.state.resource.content_type,
+              content: that.state.resource.content,
+            }
+          })
+        } else {
+          console.log(res)
+          UtilService.showHint(res.data.message, '', 'none')
+        }
+      },
+      fail: function (res) {
+        console.log(res);
+        UtilService.showHint('收藏资源失败', '请稍后重试', 'fail');
       }
     })
   }
   toCancelStarResource() {
     console.log('to cancel star resource')
-    // TO DO
-    this.setState({
-      resource: {
-        resource_id: this.state.resource.resource_id,
-        resource_key: this.state.resource.resource_key,
-        description: this.state.resource.description,
-        author_id: this.state.resource.author_id,
-        favors: this.state.resource.favors - 1,
-        prefers: this.state.resource.prefers,
-        is_favored: false,
-        is_preferred: this.state.resource.is_preferred,
-        content_type: this.state.resource.content_type,
-        content: this.state.resource.content,
+    let token = UtilService.fetchToken();
+    let that = this;
+    Taro.request({
+      url: UtilService.BASE_URL + '/resource/cancelResourceFav',
+      header: {
+        'Token': token
+      },
+      data: {
+        'resource_id': that.state.resource.resource_id
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.statusCode == 200) {
+          console.log(res.data.message)
+          UtilService.showHint(res.data.message, '', 'success')
+          that.setState({
+            resource: {
+              resource_id: that.state.resource.resource_id,
+              resource_key: that.state.resource.resource_key,
+              description: that.state.resource.description,
+              author_id: that.state.resource.author_id,
+              favors: that.state.resource.favors - 1,
+              prefers: that.state.resource.prefers,
+              is_favored: false,
+              is_preferred: that.state.resource.is_preferred,
+              content_type: that.state.resource.content_type,
+              content: that.state.resource.content,
+            }
+          })
+        } else {
+          console.log(res)
+          UtilService.showHint(res.data.message, '', 'none')
+        }
+      },
+      fail: function (res) {
+        console.log(res);
+        UtilService.showHint('取消收藏资源失败', '请稍后重试', 'fail');
       }
     })
   }
