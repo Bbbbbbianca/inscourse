@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import {Button, Image, View} from '@tarojs/components'
 import './mine.scss'
 import heatPic from "../../assets/images/heat.png";
+import Taro from "@tarojs/taro";
+import UtilService from "../../services/utils";
 
 export default class Mine extends Component {
 
@@ -74,6 +76,60 @@ export default class Mine extends Component {
       ],
       assignment_state: 0
     };
+  }
+
+  componentDidShow() {
+    this.getMyInfo();
+    this.getJoinedCourses();
+  }
+
+  getMyInfo() {
+    let token = UtilService.fetchToken()
+    let that = this;
+    Taro.request({
+      url: UtilService.BASE_URL + '/sys/getMyInfo',
+      header: {
+        'Token': token
+      },
+      method: 'GET',
+      success: function (res) {
+        if (res.statusCode == 200) {
+          that.setState({
+            user: res.data.user
+          })
+        } else {
+          UtilService.showHint(res.data, '', 'none')
+        }
+      },
+      fail: function (res) {
+        UtilService.showHint('获取用户信息失败', '', 'none');
+      }
+    })
+  }
+
+  getJoinedCourses() {
+    let token = UtilService.fetchToken()
+    let that = this;
+    Taro.request({
+      url: UtilService.BASE_URL + '/course/queryMyJoinedCourse',
+      header: {
+        'Token': token
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log(res);
+        if (res.statusCode == 200) {
+          that.setState({
+            courses: res.data.courses
+          })
+        } else {
+          UtilService.showHint(res.data, '', 'none')
+        }
+      },
+      fail: function (res) {
+        UtilService.showHint('获取加入课程失败', '', 'none');
+      }
+    })
   }
 
   modifyInfo(id) {
@@ -149,7 +205,7 @@ export default class Mine extends Component {
                   <View className='mine-course-list'>
                     { this.state.courses.map((course)=>(
                         <View key={course.course_id} className='mine-joined-item' onClick={()=>{this.onViewDetail(course.course_id)}}>
-                          <Image src={course.course_img} className='mine-course-img'/>
+                          <Image src={'http://localhost:8000/api/course/getCourseIcon?course_id=' + course.course_id} className='mine-course-img'/>
                           <View className='mine-course-text'>
                             <View className='mine-course-name'>{course.name}</View>
                             <View className='mine-course-heat'>

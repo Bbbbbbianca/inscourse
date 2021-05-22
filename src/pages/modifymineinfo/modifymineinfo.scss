@@ -1,19 +1,19 @@
 @import "src/assets/variables.scss";
-.addres {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: $tf-color-brown3;
+.modifymineinfo {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: $tf-color-brown3;
 }
 
-.add-form {
-  margin: 5%;
+.modify-form {
+  margin: 10% 5% 0 5%;
   padding: 5%;
 }
 
 Input {
   border-bottom: solid 0.5px;
-  border-bottom-color: rgba(61, 150, 255, 0.6);
+  border-bottom-color: rgba(61, 150, 255, 0.35);
 }
 
 Button {
@@ -40,8 +40,12 @@ TextArea {
 }
 
 Picker {
-  border-bottom: solid 0.5px;
-  border-bottom-color: rgba(61, 150, 255, 0.6);
+  margin-bottom: 5%;
+}
+
+.classification {
+  opacity: 80%;
+  font-family: 宋体;
 }
 
 .display-row {
@@ -52,12 +56,11 @@ Picker {
 }
 
 .tips {
-  width: 30%;
+  width: 35%;
   opacity: 80%;
   font-family: 宋体;
 }
 
 .input-items {
-  width: 70%;
-  opacity: 70%;
+  width: 65%;
 }
