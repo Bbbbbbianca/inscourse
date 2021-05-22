@@ -1,3 +1,4 @@
 export default {
-    navigationBarTitleText: '添加资料'
+  navigationBarTitleText: '添加资料'
+
 }

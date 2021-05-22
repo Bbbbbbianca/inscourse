@@ -5,3 +5,50 @@
     height: 100%;
     background-color: $tf-color-brown3;
 }
+
+.add-form {
+  margin: 5%;
+  padding: 5%;
+
+  //background-color: rgba(202, 198, 198, 0.37);
+
+}
+
+Input {
+  border-bottom: solid 0.5px;
+  border-bottom-color: rgba(61, 150, 255, 0.35);
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+Button {
+  margin: 5% 5% 5% 15%;
+}
+
+TextArea {
+  margin-top: 2%;
+  background: rgba(255, 255, 255, 0.81);
+  width:95%;
+  height:400px;
+  padding:1%
+}
+
+.title {
+  align-content: center;
+  font-family: "幼圆";
+}
+
+.area {
+  opacity: 50%;
+  margin-top: 5%;
+  margin-bottom: 2%;
+}
+
+Picker {
+  margin-bottom: 5%;
+}
+
+.classification {
+  opacity: 80%;
+  font-family: 宋体;
+}
