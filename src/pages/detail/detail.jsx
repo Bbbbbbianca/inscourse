@@ -260,7 +260,7 @@ export default class Detail extends Component {
           that.setState({
             is_joined: true
           });
-          UtilService.showHint(res.data.message, '', 'success')
+          UtilService.showHint(res.data.message, '', 'success', 1200)
           that.getCourseResources(that.state.course.course_id, that.state.showType);
         } else {
           UtilService.showHint(res.data, '', 'none')
