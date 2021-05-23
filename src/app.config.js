@@ -1,11 +1,11 @@
 export default {
   pages: [
+    'pages/course/course',
     'pages/addcourse/addcourse',
     'pages/addres/addres',
     'pages/modifymineinfo/modifymineinfo',
     'pages/mine/mine',
     'pages/detail/detail',
-    'pages/course/course',
     'pages/resource/resource',
     'pages/index/index',
     'pages/group/group',
