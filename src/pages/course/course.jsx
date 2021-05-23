@@ -1,24 +1,31 @@
 import React, { Component } from 'react'
-import { View, Image } from '@tarojs/components'
+import { View, Image, Text, Textarea } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { AtSearchBar } from 'taro-ui'
 import { APP_ROUTES } from "../../base/constant"
 import './course.scss'
 import heatPic from '../../assets/images/heat.png'
 import CourseService from '../../services/course.service'
-import addPic from '../../assets/images/add.png'
+import actionPic from '../../assets/images/action.png'
+
+// TO DO:
+// function getCourses () {
+// }
 
 export default class Course extends Component {
   constructor(props) {
     super(props);
     this.state = {
       searchCourse: '',
+      unfoldActionVisible: false,
+      acceptIvtDialogVisible: false,
+      joinCode: '',
       courses: [],
     };
     this.onSearchClick();
   }
 
-  onSearchValueChange (value) {
+  onSearchValueChange(value) {
     this.setState({
       searchCourse: value
     })
@@ -36,24 +43,65 @@ export default class Course extends Component {
     });
   }
 
-  onViewDetail (id) {
+  onViewDetail(id) {
     console.log('view detail of activity' + id)
     Taro.navigateTo({
       url: APP_ROUTES.DETAIL +'?id=' + id
     })
   }
 
-  toAddCourse () {
+  toAddCoursePage() {
     console.log('to add course')
     Taro.navigateTo({
       url: APP_ROUTES.ADDCOURSE
     })
   }
 
-  toUnfoldAction() {
+  toAcceptIvtDialog() {
+    console.log('to accept course')
     this.setState({
+      unfoldActionVisible: false,
+      acceptIvtDialogVisible: true,
+      joinCode: ''
     })
   }
+
+  tounfoldActionVisible() {
+    this.setState({
+      unfoldActionVisible: true
+    })
+  }
+
+  handleActionClose() {
+    this.setState({
+      unfoldActionVisible: false
+    })
+  }
+
+  onChangeJoinCode = e => {
+    let value = e.detail.value
+    this.setState({
+      joinCode: value
+    })
+    console.log(this.state.joinCode)
+  }
+
+  toAcceptInvitation() {
+    console.log('to accept invitation')
+    this.setState({
+      acceptIvtDialogVisible: false
+    })
+    // TO DO
+    console.log(this.state.joinCode)
+  }
+
+  toCancelAcceptInvitation() {
+    console.log('cancel accept invitation')
+    this.setState({
+      acceptIvtDialogVisible: false
+    })
+  }
+
   render () {
     let courses = this.state.courses.map((course)=>{
       return (
@@ -97,15 +145,74 @@ export default class Course extends Component {
             onActionClick={this.onSearchClick.bind(this)}
           />
           <Image
-            src={addPic}
-            className='course-add'
-            onClick={()=>{this.toAddCourse()}}
+            src={actionPic}
+            className='course-action'
+            onClick={this.tounfoldActionVisible.bind(this)}
           />
         </View>
         <View
           className='course-list'
         >
           { courses }
+        </View>
+        <View>
+        {
+          this.state.unfoldActionVisible
+          ?
+          <View onClick={this.handleActionClose.bind(this)}>
+            <View className='course-mask' />
+            <View className='course-layout'>
+              <View
+                className='course-layout-accept'
+                onClick={this.toAcceptIvtDialog.bind(this)}
+              >
+                输入邀请码
+              </View>
+              <View
+                className='course-layout-add'
+                onClick={this.toAddCoursePage.bind(this)}
+              >
+                添加课程
+              </View>
+            </View>
+          </View>
+          :
+          null
+        }
+        </View>
+        <View>
+        {
+          this.state.acceptIvtDialogVisible
+          ?
+          <View>
+          <View className='course-mask' />
+          <View className='course-form'>
+            <Text className='course-form-text'>
+              请输入邀请码：
+            </Text>
+            <Textarea
+              className='course-form-input'
+              value={this.state.joinCode}
+              onInput={this.onChangeJoinCode}
+            />
+            <View className='course-form-button'>
+              <View
+                className='course-form-comfirm'
+                onClick={()=>{this.toAcceptInvitation()}}
+              >
+                确定
+              </View>
+              <View className='course-form-cancel'
+                onClick={()=>{this.toCancelAcceptInvitation()}}
+              >
+                取消
+              </View>
+            </View>
+          </View>
+          </View>
+          :
+          null
+        }
         </View>
       </View>
     )

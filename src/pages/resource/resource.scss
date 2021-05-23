@@ -5,7 +5,7 @@
     height: 100%;
     background-color: $tf-color-brown3;
     background-size: contain;
-    padding: 16px 0 820px;
+    padding: 16px 0 650px;
     .resource-card {
         width: 90%;
         height: 82%;
@@ -25,21 +25,20 @@
                 margin-top: 16px;
                 font-size: 56px;
                 font-family: "FangSong", "Wawati SC", "YouYuan";
-                color: $tf-color-brown8;
+                color: $tf-color-brown8; 
             }
             .resource-author {
                 margin-left: 32px;
                 font-size: 29px;
                 font-family: "FangSong", "Wawati SC", "YouYuan";
-                color: $tf-color-brown4;
+                color: $tf-color-brown4; 
             }
-
             .resource-dct {
                 margin-top: 2px;
                 margin-left: 32px;
                 font-size: 29px;
                 font-family: "FangSong", "Wawati SC", "YouYuan";
-                color: $tf-color-brown4;
+                color: $tf-color-brown4; 
             }
         }
 
@@ -50,7 +49,7 @@
                 margin: 16px 32px;
                 font-size: 36px;
                 font-family: "FangSong", "Wawati SC", "YouYuan";
-                color: $tf-color-brown5;
+                color: $tf-color-brown5; 
                 word-wrap: break-word;
             }
         }
@@ -70,7 +69,7 @@
                 .resource-heat-num {
                     font-size: 24px;
                     font-family: "FangSong", "Wawati SC", "YouYuan";
-                    color: $tf-color-brown5;
+                    color: $tf-color-brown5; 
                     margin-right: 8px;
                 }
             }

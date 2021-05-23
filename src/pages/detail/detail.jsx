@@ -74,7 +74,7 @@ export default class Detail extends Component {
         {
           invitation_id: 1,
           requester_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
-          requester_name: 'lalallllllllll',
+          requester_name: 'lala',
           invitation_code: '',
           request_time: '2020/11/11',
           description: '啦啦啦找个好朋友,打算六月份开始暑假一起学数学分析所以有人吗有人吗'
