@@ -4,6 +4,7 @@ import './mine.scss'
 import heatPic from "../../assets/images/heat.png";
 import Taro from "@tarojs/taro";
 import UtilService from "../../services/utils";
+import {APP_ROUTES} from "../../base/constant";
 
 export default class Mine extends Component {
 
@@ -152,6 +153,9 @@ export default class Mine extends Component {
 
   onViewDetail(id) {
     console.log(id)
+    Taro.navigateTo({
+      url: APP_ROUTES.DETAIL +'?id=' + id
+    })
   }
 
   toShowAssignmentByState(state) {

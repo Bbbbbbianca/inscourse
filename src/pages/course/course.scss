@@ -19,7 +19,7 @@
         border: none;
     }
 
-    .course-action {
+    .course-add {
         width: 72px;
         height: 72px;
         padding: 12px;
@@ -60,15 +60,15 @@
                 font-family: "FangSong", "Wawati SC", "YouYuan";
                 margin-top: 18px;
                 margin-left: 12px;
-                color: $tf-color-brown8; 
+                color: $tf-color-brown8;
             }
-    
+
             .course-item-dct {
                 height: 100%;
                 font-size: 28px;
                 font-family: "FangSong", "Wawati SC", "YouYuan";
                 margin: 0 16px;
-                color: $tf-color-brown4; 
+                color: $tf-color-brown4;
             }
 
             .course-item-text-bottom {
@@ -86,7 +86,7 @@
                 .course-item-heat {
                     font-size: 20px;
                     font-family: "FangSong", "Wawati SC", "YouYuan";
-                    color: $tf-color-brown8; 
+                    color: $tf-color-brown8;
                     margin-right: 24px;
                 }
             }
@@ -147,10 +147,10 @@
         padding: 8px 12px;
         font-size: 42px;
         font-family: "FangSong", "Wawati SC", "YouYuan";
-        color: $tf-color-brown8; 
+        color: $tf-color-brown8;
         height: 10%;
     }
-    
+
     .course-form-input {
         height: 70%;
         width: 91%;
@@ -160,10 +160,10 @@
         margin: 8px 12px;
         padding: 8px 12px;
         font-size: 32px;
-        color: $tf-color-brown7; 
+        color: $tf-color-brown7;
         font-family: "FangSong", "Wawati SC", "YouYuan";
     }
-    
+
     .course-form-button {
         display: flex;
         flex-direction: row;
@@ -176,7 +176,7 @@
             margin-left: 84px;
             background-color: $tf-color-pink2;
             border-radius: 36px;
-            color: $tf-color-brown4; 
+            color: $tf-color-brown4;
             font-size: 42px;
             font-family: "FangSong", "Wawati SC", "YouYuan";
         }
@@ -188,7 +188,7 @@
             background-color: $tf-color-brown7;
             border-radius: 36px;
             font-size: 42px;
-            color: $tf-color-brown4; 
+            color: $tf-color-brown4;
             font-family: "FangSong", "Wawati SC", "YouYuan";
         }
     }

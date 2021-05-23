@@ -6,7 +6,7 @@ import { APP_ROUTES } from "../../base/constant"
 import './course.scss'
 import heatPic from '../../assets/images/heat.png'
 import CourseService from '../../services/course.service'
-import scanPic from '../../assets/images/scan.png'
+import addPic from '../../assets/images/add.png'
 
 export default class Course extends Component {
   constructor(props) {
@@ -97,9 +97,9 @@ export default class Course extends Component {
             onActionClick={this.onSearchClick.bind(this)}
           />
           <Image
-            src={scanPic}
-            className='course-scan'
-            onClick={this.toUnfoldAction.bind(this)}
+            src={addPic}
+            className='course-add'
+            onClick={()=>{this.toAddCourse()}}
           />
         </View>
         <View
