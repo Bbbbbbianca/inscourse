@@ -4,8 +4,8 @@ import './modifymineinfo.scss'
 
 export default class Mine extends Component {
 
-  formSubmit () {
-    console.log('form submit')
+  formSubmit=e=>{
+    console.log(e.detail.value)
   }
 
   formReset () {
@@ -19,15 +19,15 @@ export default class Mine extends Component {
           <Form onSubmit={this.formSubmit} onReset={this.formReset}>
             <View className='display-row'>
               <View className='tips'>用户名：</View>
-              <View className='input-items'> <Input type='text'  maxlength='20' /></View>
+              <View className='input-items'> <Input type='text' name='username' maxlength='20' /></View>
             </View>
             <View className='display-row'>
               <View className='tips'>邮箱：</View>
-              <View className='input-items'> <Input type='text'  maxlength='255' /></View>
+              <View className='input-items'> <Input type='text' name='email' maxlength='255' /></View>
             </View>
             <View className='display-row'>
               <View className='tips'>学校/公司：</View>
-              <View className='input-items'> <Input type='text'  maxlength='20' /></View>
+              <View className='input-items'> <Input type='text' name='workplace' maxlength='20' /></View>
             </View>
             <Button size='mini' type='primary' formType='submit'>修改</Button>
             <Button size='mini' formType='reset' >重置</Button>
