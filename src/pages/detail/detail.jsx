@@ -298,7 +298,7 @@ export default class Detail extends Component {
   toAddResource() {
     console.log('to add resource')
     Taro.navigateTo({
-      url: APP_ROUTES.ADDRES
+      url: APP_ROUTES.ADDRES +'?id=' + this.state.course.course_id
     })
   }
 

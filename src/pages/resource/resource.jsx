@@ -24,8 +24,6 @@ function getResourseId () {
   }
 }
 
-
-
 export default class Resource extends Component {
   constructor(props) {
     super(props);
@@ -90,7 +88,7 @@ export default class Resource extends Component {
               resource_id: that.state.resource.resource_id,
               resource_key: that.state.resource.resource_key,
               description: that.state.resource.description,
-              author_id: that.state.resource.author_id,
+              author_name: that.state.resource.author_name,
               favors: that.state.resource.favors + 1,
               prefers: that.state.resource.prefers,
               is_favored: true,
@@ -132,7 +130,7 @@ export default class Resource extends Component {
               resource_id: that.state.resource.resource_id,
               resource_key: that.state.resource.resource_key,
               description: that.state.resource.description,
-              author_id: that.state.resource.author_id,
+              author_name: that.state.resource.author_name,
               favors: that.state.resource.favors - 1,
               prefers: that.state.resource.prefers,
               is_favored: false,
@@ -160,7 +158,7 @@ export default class Resource extends Component {
         resource_id: this.state.resource.resource_id,
         resource_key: this.state.resource.resource_key,
         description: this.state.resource.description,
-        author_id: this.state.resource.author_id,
+        author_name: this.state.resource.author_name,
         favors: this.state.resource.favors,
         prefers: this.state.resource.prefers + 1,
         is_favored: this.state.resource.is_favored,
@@ -178,7 +176,7 @@ export default class Resource extends Component {
         resource_id: this.state.resource.resource_id,
         resource_key: this.state.resource.resource_key,
         description: this.state.resource.description,
-        author_id: this.state.resource.author_id,
+        author_name: this.state.resource.author_name,
         favors: this.state.resource.favors,
         prefers: this.state.resource.prefers - 1,
         is_favored: this.state.resource.is_favored,
@@ -198,7 +196,7 @@ export default class Resource extends Component {
               {this.state.resource.resource_key}
             </View>
             <View className='resource-author'>
-              {' 发布者：' + this.state.resource.author_id}
+              {' 发布者：' + this.state.resource.author_name}
             </View>
             <View className='resource-dct'>
               {' 简介：' + this.state.resource.description}
