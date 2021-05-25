@@ -18,11 +18,11 @@ function inscourseLogin(wxUsername, avatarUrl) {
           console.log(res.data);
           // save the user info in local storage
           try {
-            Taro.setStorageSync({
+            Taro.setStorage({
               key: "user",
               data: res.data.user,
             });
-            Taro.setStorageSync({
+            Taro.setStorage({
               key: "token",
               data: res.data.token,
             });

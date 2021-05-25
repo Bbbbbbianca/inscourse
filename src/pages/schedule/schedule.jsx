@@ -10,11 +10,84 @@ import checkfixedPic from '../../assets/images/check_fixed.png'
 import deletePic from '../../assets/images/delete.png'
 import editPic from '../../assets/images/edit.png'
 import affirmPic from '../../assets/images/affirm.png'
+import Taro from "@tarojs/taro";
+import {APP_ROUTES} from "../../base/constant";
+import UtilService from "../../services/utils";
+
+function getCourseId() {
+  let course_id = Taro.getCurrentInstance().router.params.id
+  if (course_id)
+    return course_id
+  else {
+    Taro.navigateTo({
+      url: APP_ROUTES.COURSE
+    })
+  }
+}
 
 export default class Mine extends Component {
+
+  queryMateByCourse(course_id) {
+    let token = UtilService.fetchToken();
+    let that = this;
+    Taro.request({
+      url: UtilService.BASE_URL + '/mate/queryMyMateByCourse',
+      header: {
+        'Token': token
+      },
+      data: {
+        'course_id': course_id,
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log(res)
+        if (res.statusCode == 200) {
+          console.log(res.data)
+          that.setState({
+            mate: res.data.mate
+          });
+          that.queryAssignmentsByMate(res.data.mate.mate_id);
+        }
+      },
+      fail: function (res) {
+        console.log(res);
+        UtilService.showHint('获取课友信息失败', '请稍后重试', 'fail');
+      }
+    })
+  }
+
+  queryAssignmentsByMate(mate_id) {
+    let token = UtilService.fetchToken();
+    let that = this;
+    Taro.request({
+      url: UtilService.BASE_URL + '/assignment/queryMyAssignmentsByMate',
+      header: {
+        'Token': token
+      },
+      data: {
+        'mate_id': mate_id,
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log(res)
+        if (res.statusCode == 200) {
+          console.log(res.data)
+          that.setState({
+            assigns: res.data.assignments
+          });
+        }
+      },
+      fail: function (res) {
+        console.log(res);
+        UtilService.showHint('获取打卡任务列表失败', '请稍后重试', 'fail');
+      }
+    })
+  }
+
   constructor(props) {
     super(props);
     this.state = {
+      mate: {},
       addTaskDialogVisible: false,
       checkTaskTipVisible: false,
       deleteButtonVisible: false,
@@ -50,6 +123,7 @@ export default class Mine extends Component {
         }
       ]
     };
+    this.queryMateByCourse(getCourseId());
   }
 
   toShowCheckTaskTip(id) {
