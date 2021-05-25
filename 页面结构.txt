@@ -17,7 +17,7 @@
         (inteface: resource/queryMyResourceByCourse)
     (2) 我的待办打卡
       (interface: mate/queryMyMates, assignment/queryMyAssignmentsByMate)
-      展示所有的课友关系以及每一个关系涉及的打卡计划
+      git
 
 二 课程
   课程模块

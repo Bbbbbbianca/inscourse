@@ -9,7 +9,8 @@ export default {
     'pages/dailytask/dailytask',
     'pages/schedule/schedule',
     'pages/addres/addres',
-    'pages/addcourse/addcourse'
+    'pages/addcourse/addcourse',
+    'pages/modifymineinfo/modifymineinfo'
   ],
   tabBar: {
     backgroundColor: '#E6CEAC',

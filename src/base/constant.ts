@@ -8,5 +8,6 @@ export const APP_ROUTES = {
     GROUP: '/pages/group/group',
     SCHEDULE: '/pages/schedule/schedule',
     ADDRES: '/pages/addres/addres',
-    ADDCOURSE: '/pages/addcourse/addcourse'
+    ADDCOURSE: '/pages/addcourse/addcourse',
+    MODIFYINFO: '/pages/modifymineinfo/modifymineinfo'
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Taro from '@tarojs/taro';
 import { View, Image, Button } from '@tarojs/components'
 import './index.scss'
 import welcomePic from '../../assets/images/welcome.png'
@@ -8,7 +9,7 @@ export default class Index extends Component {
 
   toHome() {
 	  console.log('进入主页面');
-	  UserService.wxLogin();
+    UserService.wxLogin();
   }
 
   render () {
@@ -21,7 +22,7 @@ export default class Index extends Component {
           />
         </View>
         <View className='index-button-part'>
-          <Button 
+          <Button
             className='index-button'
             onClick={this.toHome}
           >
