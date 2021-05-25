@@ -602,7 +602,7 @@ export default class Detail extends Component {
                 className='detail-car-tip-comfirm'
                 onClick={()=>{this.toJoinMate()}}
               >
-                Yes！
+                Yes!
               </View> 
               <View 
                 className='detail-car-tip-cancel'

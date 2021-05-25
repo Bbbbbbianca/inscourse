@@ -1,13 +1,13 @@
 export default {
   pages: [
+    'pages/schedule/schedule',
+    'pages/course/course',
+    'pages/index/index',
     'pages/group/group',
     'pages/resource/resource',
-    'pages/course/course',
     'pages/detail/detail',
-    'pages/index/index',
     'pages/mine/mine',
     'pages/dailytask/dailytask',
-    'pages/schedule/schedule',
     'pages/addres/addres',
     'pages/addcourse/addcourse'
   ],
