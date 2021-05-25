@@ -33,6 +33,7 @@ export default class Course extends Component {
 
   onSearchClick () {
 	  console.log('开始搜索');
+    console.log('token in storage at course page: ' + Taro.getStorageSync('token'))
 		CourseService.fetchOpenCourses(this.state.searchCourse, 1, 'default', 1, 5,
                   this)
   }
