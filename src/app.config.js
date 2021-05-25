@@ -1,9 +1,9 @@
 export default {
   pages: [
+    'pages/group/group',
     'pages/schedule/schedule',
     'pages/course/course',
     'pages/index/index',
-    'pages/group/group',
     'pages/resource/resource',
     'pages/detail/detail',
     'pages/mine/mine',
