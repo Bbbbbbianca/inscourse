@@ -21,27 +21,6 @@ export default class Mine extends Component {
         email: '23768945612@qq.com'
       },
       courses: [],
-      // assignments: [
-      //   {
-      //     assignment_id: 1,
-      //     course_name: '电竞教学',
-      //     status: 0,
-      //     assignment_date: '2021-6-1',
-      //   },
-      //   {
-      //     assignment_id: 2,
-      //     course_name: '飞雷神教学',
-      //     status: 0,
-      //     assignment_date: '2021-6-1',
-      //   },
-      //   {
-      //     assignment_id: 2,
-      //     course_name: '李白教学',
-      //     status: 1,
-      //     assignment_date: '2021-6-1',
-      //   }
-      // ],
-      // assignment_state: 0
     };
   }
 

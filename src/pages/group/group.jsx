@@ -3,45 +3,41 @@ import { View, Image } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { APP_ROUTES } from "../../base/constant"
 import './group.scss'
+import UtilService from "../../services/utils";
 
 export default class Group extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mates: [
-        {
-          mate_id: 1,
-          course: '数学分析',
-          mate_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
-          mate: 'abababab',
-          finished: 1,
-          notfinished: 2,
-          content: '读第一章',
-          date: '2021-5-31'
-        },
-        {
-          mate_id: 2,
-          course: '数学分析',
-          mate_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
-          mate: '路人甲',
-          finished: 1,
-          notfinished: 2,
-          content: '读第一章',
-          date: '2021-5-31'
-        },
-        {
-          mate_id: 3,
-          course: '数学分析',
-          mate_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
-          mate: '路人甲',
-          finished: 1,
-          notfinished: 2,
-          content: '读第一章',
-          date: '2021-5-31'
-        }
-      ],
+      mates: [],
     };
+    this.getMyMates()
   }
+
+  getMyMates() {
+    let token = UtilService.fetchToken();
+    let that = this;
+    Taro.request({
+      url: UtilService.BASE_URL + '/mate/queryMyMates',
+      header: {
+        'Token': token
+      },
+      method: 'GET',
+      success: function (res) {
+        if (res.statusCode === 200) {
+          that.setState({
+            mates: res.data.mates
+          });
+        }
+      },
+      fail: function (res) {
+        console.log(res);
+        UtilService.showHint('获取课友列表失败', '请稍后重试', 'fail');
+      }
+    })
+
+  }
+
 
   toShowMatedetail(id) {
     console.log('view detail of mate' + id)
@@ -76,9 +72,9 @@ export default class Group extends Component {
                 <View className='group-text-progress'>
                   {'已打卡任务' + mate.finished + '项，未打卡任务' + mate.notfinished + '项'}
                 </View>
-                <View className='group-text-tip'>
-                  {'记得在' + mate.date + '前完成打卡任务：' + mate.content}
-                </View>
+                {/*<View className='group-text-tip'>*/}
+                {/*  {'最近' + mate.date + '前完成打卡任务：' + mate.content}*/}
+                {/*</View>*/}
               </View>
             </View>
           ))}

@@ -26,6 +26,8 @@ function inscourseLogin(wxUsername, avatarUrl) {
               key: "token",
               data: res.data.token,
             });
+            console.log('token in res: ' + res.data.token)
+            console.log('token in storage: ' + Taro.getStorageSync('token'))
             UtilService.showHint('登陆成功', '', 'success');
             Taro.switchTab({
               url: APP_ROUTES.COURSE
