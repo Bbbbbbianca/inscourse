@@ -37,7 +37,7 @@
     }
 
     .group-text {
-      width: 85%;
+      width: 75%;
       display: flex;
       flex-direction: column;
       .group-text-course {
@@ -57,5 +57,33 @@
         color: $tf-color-pink3;
       }
     }
+
+    .group-delete {
+      width: 10%;
+      .group-delete-img {
+        height: 36px;
+        width: 36px;
+      }
+    }
   }
+}
+
+.edit-button {
+  float: right;
+  background-color: rgba(165, 161, 154, 0.6);
+  color: $tf-color-brown8;
+  border-radius: 45px;
+  font-size: 40px;
+  font-family: "FangSong", "Wawati SC", "YouYuan";
+  margin: 4%;
+}
+
+.cancel-button {
+  float: right;
+  background-color: rgba(165, 8, 26, 0.6);
+  color: $tf-color-brown8;
+  border-radius: 45px;
+  font-size: 40px;
+  font-family: "FangSong", "Wawati SC", "YouYuan";
+  margin: 4%;
 }

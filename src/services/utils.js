@@ -1,7 +1,7 @@
 import Taro from '@tarojs/taro'
 
 const UtilService = {
-	BASE_URL: "http://116.63.39.40:8000/api",
+	BASE_URL: "http://localhost:8000/api",
 
 	/**
 	 *
