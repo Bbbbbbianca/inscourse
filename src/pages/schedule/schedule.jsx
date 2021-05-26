@@ -94,7 +94,7 @@ export default class Mine extends Component {
       checkTaskId: -1,
       deleteTaskId: -1,
       addTaskContent: '',
-      addTaskTime: '',
+      addTaskDate: '',
       mate_user_avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
       mine_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
       assigns: [
@@ -133,15 +133,39 @@ export default class Mine extends Component {
   }
 
   toCheckTask(id) {
-    console.log('to check task' + id)
-    // TO DO
+    console.log('to check task ' + id)
+    let token = UtilService.fetchToken();
+    let that = this;
+    Taro.request({
+      url: UtilService.BASE_URL + '/assignment/checkAssignment',
+      header: {
+        'Token': token
+      },
+      data: {
+        'assignment_id': id
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.statusCode == 200) {
+          console.log(res.data)
+          UtilService.showHint(res.data.message, '', 'success');
+          that.queryAssignmentsByMate(that.state.mate.mate_id);
+        } else {
+          console.log(res)
+          UtilService.showHint(res.data.message, '', 'none');
+        }
+      },
+      fail: function (res) {
+        console.log(res);
+        UtilService.showHint('打卡失败', '请稍后重试', 'none');
+      }
+    })
     this.setState({
       checkTaskTipVisible: false,
     })
   }
   toCancelCheckTask() {
     console.log('to cancel check task')
-    // TO DO
     this.setState({
       checkTaskTipVisible: false,
     })
@@ -156,11 +180,39 @@ export default class Mine extends Component {
 
   toAddTask() {
     console.log('to add task')
-    // TO DO
+    let token = UtilService.fetchToken();
+    let that = this;
+    Taro.request({
+      url: UtilService.BASE_URL + '/assignment/newAssignment',
+      header: {
+        'Token': token
+      },
+      data: {
+        'mate_id': that.state.mate.mate_id,
+        'content': that.state.addTaskContent,
+        'assignment_date': that.state.addTaskDate
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.statusCode == 200) {
+          console.log(res.data)
+          UtilService.showHint(res.data.message, '', 'success');
+          that.queryAssignmentsByMate(that.state.mate.mate_id);
+        } else {
+          console.log(res)
+          UtilService.showHint(res.data.message, '', 'none');
+        }
+      },
+      fail: function (res) {
+        console.log(res);
+        UtilService.showHint('新增打卡失败', '请稍后重试', 'none');
+      }
+    })
     this.setState({
       addTaskDialogVisible: false,
     })
   }
+
   toCancelAddTask() {
     console.log('to cancel add task')
     this.setState({
@@ -176,10 +228,10 @@ export default class Mine extends Component {
     console.log(this.state.addTaskContent)
   }
 
-  onChangeAddTaskTime = e => {
+  onChangeAddTaskDate = e => {
     let value = e.detail.value
     this.setState({
-      addTaskTime: value
+      addTaskDate: value
     })
     console.log(this.state.addTaskContent)
   }
@@ -209,7 +261,32 @@ export default class Mine extends Component {
 
   toDeleteTask(id) {
     console.log('to delete task' + id)
-    // TO DO
+    let token = UtilService.fetchToken();
+    let that = this;
+    Taro.request({
+      url: UtilService.BASE_URL + '/assignment/deleteAssignment',
+      header: {
+        'Token': token
+      },
+      data: {
+        'assignment_id': id
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.statusCode == 200) {
+          console.log(res.data)
+          UtilService.showHint(res.data.message, '', 'success');
+          that.queryAssignmentsByMate(that.state.mate.mate_id);
+        } else {
+          console.log(res)
+          UtilService.showHint(res.data.message, '', 'none');
+        }
+      },
+      fail: function (res) {
+        console.log(res);
+        UtilService.showHint('删除打卡失败', '请稍后重试', 'none');
+      }
+    })
     this.setState({
       deleteDialogVisible: false
     })
@@ -247,18 +324,19 @@ export default class Mine extends Component {
               key={assign.assignment_id}
               className='schedule-assign-item'
             >
-              <View className='schedule-assign-item-mate'>
+              <View className='schedule-assign-item-mine'>
                 {
-                  assign.mate_status
+                  assign.my_status
                     ?
                     <Image
-                      src={checkfixedPic}
-                      className='schedule-assign-item-mate-img'
+                      src={checkPic}
+                      className='schedule-assign-item-mine-img'
                     />
                     :
                     <Image
-                      src={framefixedPic}
-                      className='schedule-assign-item-mate-img'
+                      src={framePic}
+                      className='schedule-assign-item-mine-img'
+                      onClick={()=>{this.toShowCheckTaskTip(assign.assignment_id)}}
                     />
                 }
               </View>
@@ -283,19 +361,18 @@ export default class Mine extends Component {
                   {assign.content}
                 </View>
               </View>
-              <View className='schedule-assign-item-mine'>
+              <View className='schedule-assign-item-mate'>
                 {
-                  assign.my_status
+                  assign.mate_status
                     ?
                     <Image
-                      src={checkPic}
-                      className='schedule-assign-item-mine-img'
+                      src={checkfixedPic}
+                      className='schedule-assign-item-mate-img'
                     />
                     :
                     <Image
-                      src={framePic}
-                      className='schedule-assign-item-mine-img'
-                      onClick={()=>{this.toShowCheckTaskTip(assign.assignment_id)}}
+                      src={framefixedPic}
+                      className='schedule-assign-item-mate-img'
                     />
                 }
               </View>
@@ -398,8 +475,8 @@ export default class Mine extends Component {
                   </Text>
                   <Input
                     className='schedule-add-dialog-time'
-                    value={this.state.addTaskTime}
-                    onInput={this.onChangeAddTaskTime}
+                    value={this.state.addTaskDate}
+                    onInput={this.onChangeAddTaskDate}
                   />
                   <Text className='schedule-add-dialog-text'>
                     请输入打卡任务：
