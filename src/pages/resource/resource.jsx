@@ -152,37 +152,85 @@ export default class Resource extends Component {
   }
   toPraiseResource() {
     console.log('to praise resource')
-    // TO DO
-    this.setState({
-      resource: {
-        resource_id: this.state.resource.resource_id,
-        resource_key: this.state.resource.resource_key,
-        description: this.state.resource.description,
-        author_name: this.state.resource.author_name,
-        favors: this.state.resource.favors,
-        prefers: this.state.resource.prefers + 1,
-        is_favored: this.state.resource.is_favored,
-        is_preferred: true,
-        content_type: this.state.resource.content_type,
-        content: this.state.resource.content,
+    let token = UtilService.fetchToken();
+    let that = this;
+    Taro.request({
+      url: UtilService.BASE_URL + '/resource/resourcePrefer',
+      header: {
+        'Token': token
+      },
+      data: {
+        'resource_id': that.state.resource.resource_id
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.statusCode == 200) {
+          console.log(res.data.message)
+          UtilService.showHint(res.data.message, '', 'success')
+          that.setState({
+            resource: {
+              resource_id: that.state.resource.resource_id,
+              resource_key: that.state.resource.resource_key,
+              description: that.state.resource.description,
+              author_name: that.state.resource.author_name,
+              favors: that.state.resource.favors,
+              prefers: that.state.resource.prefers + 1,
+              is_favored: that.state.resource.is_favored,
+              is_preferred: true,
+              content_type: that.state.resource.content_type,
+              content: that.state.resource.content,
+            }
+          })
+        } else {
+          console.log(res)
+          UtilService.showHint(res.data.message, '', 'none')
+        }
+      },
+      fail: function (res) {
+        console.log(res);
+        UtilService.showHint('点赞资源失败', '请稍后重试', 'fail');
       }
     })
   }
   toCancelPraiseResource() {
     console.log('to cancel praise resource')
-    // TO DO
-    this.setState({
-      resource: {
-        resource_id: this.state.resource.resource_id,
-        resource_key: this.state.resource.resource_key,
-        description: this.state.resource.description,
-        author_name: this.state.resource.author_name,
-        favors: this.state.resource.favors,
-        prefers: this.state.resource.prefers - 1,
-        is_favored: this.state.resource.is_favored,
-        is_preferred: false,
-        content_type: this.state.resource.content_type,
-        content: this.state.resource.content,
+    let token = UtilService.fetchToken();
+    let that = this;
+    Taro.request({
+      url: UtilService.BASE_URL + '/resource/cancelResourcePrefer',
+      header: {
+        'Token': token
+      },
+      data: {
+        'resource_id': that.state.resource.resource_id
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.statusCode == 200) {
+          console.log(res.data.message)
+          UtilService.showHint(res.data.message, '', 'success')
+          that.setState({
+            resource: {
+              resource_id: that.state.resource.resource_id,
+              resource_key: that.state.resource.resource_key,
+              description: that.state.resource.description,
+              author_name: that.state.resource.author_name,
+              favors: that.state.resource.favors,
+              prefers: that.state.resource.prefers - 1,
+              is_favored: that.state.resource.is_favored,
+              is_preferred: false,
+              content_type: that.state.resource.content_type,
+              content: that.state.resource.content,
+            }
+          })
+        } else {
+          console.log(res)
+          UtilService.showHint(res.data.message, '', 'none')
+        }
+      },
+      fail: function (res) {
+        console.log(res);
+        UtilService.showHint('取消点赞资源失败', '请稍后重试', 'fail');
       }
     })
   }

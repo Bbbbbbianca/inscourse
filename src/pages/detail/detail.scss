@@ -250,9 +250,12 @@
                     }
                     .detail-car-bottom {
                         height: 15%;
-                        margin: 4px 0;
+                        margin: 8px 0;
                         display: flex;
                         flex-direction: row;
+                        font-size: 22px;
+                        font-family: "FangSong", "Wawati SC", "YouYuan";
+                        color: $tf-color-brown4;
                         .detail-car-inviter-label {
                             margin-left: 192px;
                             font-size: 20px;

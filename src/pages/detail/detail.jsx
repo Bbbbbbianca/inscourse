@@ -399,12 +399,6 @@ export default class Detail extends Component {
       joinMateDialogVisible: true,
       joinCode: invitation_code
     })
-    // if the invitation is owned by the user
-    // this.setState({
-    //   maskVisible: true,
-    //   cancelMateDialogVisible: true
-    // })
-    // TO DO
   }
 
   toJoinMate(invitation_code) {
@@ -647,7 +641,7 @@ export default class Detail extends Component {
                   onClick={()=>{this.toShowTipDialog(car.invitation_code)}}
                 >
                   <Image
-                    src={car.requester_img}
+                    src={UtilService.BASE_URL + '/sys/getUserAvatar?user_id=' + car.requester_id}
                     className='detail-car-img'
                   />
                   <View className='detail-car-text'>
