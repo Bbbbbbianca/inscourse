@@ -304,7 +304,7 @@ export default class Mine extends Component {
         <View className='schedule-title'>
           <View className='schedule-title-mate'>
             <Image
-              src={'http://localhost:8000/api/sys/getUserAvatar?user_id=' + this.state.mate.my_user_id}
+              src={UtilService.BASE_URL + '/sys/getUserAvatar?user_id=' + this.state.mate.mate_user_id}
               className='schedule-title-mate-img'
             />
           </View>
@@ -313,7 +313,7 @@ export default class Mine extends Component {
           </View>
           <View className='schedule-title-mine'>
             <Image
-              src={'http://localhost:8000/api/sys/getUserAvatar?user_id=' + this.state.mate.mate_user_id}
+              src={UtilService.BASE_URL + '/sys/getUserAvatar?user_id=' + this.state.mate.my_user_id}
               className='schedule-title-mine-img'
             />
           </View>
@@ -324,19 +324,18 @@ export default class Mine extends Component {
               key={assign.assignment_id}
               className='schedule-assign-item'
             >
-              <View className='schedule-assign-item-mine'>
+              <View className='schedule-assign-item-mate'>
                 {
-                  assign.my_status
+                  assign.mate_status
                     ?
                     <Image
-                      src={checkPic}
-                      className='schedule-assign-item-mine-img'
+                      src={checkfixedPic}
+                      className='schedule-assign-item-mate-img'
                     />
                     :
                     <Image
-                      src={framePic}
-                      className='schedule-assign-item-mine-img'
-                      onClick={()=>{this.toShowCheckTaskTip(assign.assignment_id)}}
+                      src={framefixedPic}
+                      className='schedule-assign-item-mate-img'
                     />
                 }
               </View>
@@ -361,18 +360,19 @@ export default class Mine extends Component {
                   {assign.content}
                 </View>
               </View>
-              <View className='schedule-assign-item-mate'>
+              <View className='schedule-assign-item-mine'>
                 {
-                  assign.mate_status
+                  assign.my_status
                     ?
                     <Image
-                      src={checkfixedPic}
-                      className='schedule-assign-item-mate-img'
+                      src={checkPic}
+                      className='schedule-assign-item-mine-img'
                     />
                     :
                     <Image
-                      src={framefixedPic}
-                      className='schedule-assign-item-mate-img'
+                      src={framePic}
+                      className='schedule-assign-item-mine-img'
+                      onClick={()=>{this.toShowCheckTaskTip(assign.assignment_id)}}
                     />
                 }
               </View>

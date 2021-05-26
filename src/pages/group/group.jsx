@@ -62,7 +62,7 @@ export default class Group extends Component {
             >
               <View className='group-mate'>
                 <Image
-                  src={'http://localhost:8000/api/sys/getUserAvatar?user_id=' + mate.mate_user_id}
+                  src={UtilService.BASE_URL + '/sys/getUserAvatar?user_id=' + mate.mate_user_id}
                   className='group-mate-img'
                 />
                 <View className='group-mate-name'>

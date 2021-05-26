@@ -123,7 +123,7 @@ export default class Mine extends Component {
 
         {/*个人信息*/}
         <View className='mine-msg'>
-          <Image src={this.state.user.image_path} className='mine-msg-img' />
+          <Image src={UtilService.BASE_URL + '/sys/getUserAvatar?user_id=' + this.state.user.user_id} className='mine-msg-img' />
           <View className='mine-msg-text'>
             <View className='mine-msg-text-top'>
               <View className='mine-msg-title'>
@@ -158,7 +158,7 @@ export default class Mine extends Component {
                   <View className='mine-course-list'>
                     { this.state.courses.map((course)=>(
                         <View key={course.course_id} className='mine-joined-item' onClick={()=>{this.onViewDetail(course.course_id)}}>
-                          <Image src={'http://localhost:8000/api/course/getCourseIcon?course_id=' + course.course_id} className='mine-course-img'/>
+                          <Image src={UtilService.BASE_URL + '/course/getCourseIcon?course_id=' + course.course_id} className='mine-course-img'/>
                           <View className='mine-course-text'>
                             <View className='mine-course-name'>{course.name}</View>
                             <View className='mine-course-heat'>

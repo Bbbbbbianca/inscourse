@@ -7,6 +7,7 @@ import './course.scss'
 import heatPic from '../../assets/images/heat.png'
 import CourseService from '../../services/course.service'
 import actionPic from '../../assets/images/action.png'
+import UtilService from "../../services/utils";
 
 // TO DO:
 // function getCourses () {
@@ -112,7 +113,7 @@ export default class Course extends Component {
           onClick={()=>{this.onViewDetail(course.course_id)}}
         >
           <Image
-            src={'http://localhost:8000/api/course/getCourseIcon?course_id=' + course.course_id}
+            src={UtilService.BASE_URL + '/course/getCourseIcon?course_id=' + course.course_id}
             className='course-item-img'
           />
           <View className='course-item-text'>

@@ -467,7 +467,7 @@ export default class Detail extends Component {
       <View className='detail'>
         <View className='detail-msg'>
           <Image
-            src={'http://localhost:8000/api/course/getCourseIcon?course_id=' + this.state.course.course_id}
+            src={UtilService.BASE_URL + '/course/getCourseIcon?course_id=' + this.state.course.course_id}
             className='detail-msg-img'
           />
           <View className='detail-msg-text'>
