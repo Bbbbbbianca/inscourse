@@ -33,8 +33,8 @@ export default class Course extends Component {
   }
 
   onSearchClick () {
-	  console.log('开始搜索');
-    console.log('token in storage at course page: ' + Taro.getStorageSync('token'))
+	  // console.log('开始搜索');
+    // console.log('token in storage at course page: ' + Taro.getStorageSync('token'))
 		CourseService.fetchOpenCourses(this.state.searchCourse, 1, 'default', 1, 5,
                   this)
   }
@@ -46,21 +46,21 @@ export default class Course extends Component {
   }
 
   onViewDetail(id) {
-    console.log('view detail of activity' + id)
+    // console.log('view detail of activity' + id)
     Taro.navigateTo({
       url: APP_ROUTES.DETAIL +'?id=' + id
     })
   }
 
   toAddCoursePage() {
-    console.log('to add course')
+    // console.log('to add course')
     Taro.navigateTo({
       url: APP_ROUTES.ADDCOURSE
     })
   }
 
   toAcceptIvtDialog() {
-    console.log('to accept course')
+    // console.log('to accept course')
     this.setState({
       unfoldActionVisible: false,
       acceptIvtDialogVisible: true,
@@ -85,20 +85,20 @@ export default class Course extends Component {
     this.setState({
       joinCode: value
     })
-    console.log(this.state.joinCode)
+    // console.log(this.state.joinCode)
   }
 
   toAcceptInvitation() {
-    console.log('to accept invitation')
+    // console.log('to accept invitation')
     this.setState({
       acceptIvtDialogVisible: false
     })
     // TO DO
-    console.log(this.state.joinCode)
+    // console.log(this.state.joinCode)
   }
 
   toCancelAcceptInvitation() {
-    console.log('cancel accept invitation')
+    // console.log('cancel accept invitation')
     this.setState({
       acceptIvtDialogVisible: false
     })

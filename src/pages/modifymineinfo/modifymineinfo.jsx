@@ -32,7 +32,7 @@ export default class Mine extends Component {
   }
 
   formSubmit=e=>{
-    console.log(e.detail.value)
+    // console.log(e.detail.value)
     let request = e.detail.value;
     let token = UtilService.fetchToken();
     Taro.request({
@@ -53,14 +53,14 @@ export default class Mine extends Component {
         }
       },
       fail: function (res) {
-        console.log(res);
+        // console.log(res);
         UtilService.showHint('修改个人信息失败', '请稍后再试', 'none');
       }
     })
   }
 
   formReset () {
-    console.log('form reset')
+    // console.log('form reset')
   }
 
   render () {

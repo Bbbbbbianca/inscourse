@@ -28,7 +28,7 @@ export default class addRes extends Component {
   }
 
   formSubmit = e => {
-    console.log(e.detail.value)
+    // console.log(e.detail.value)
     let request = e.detail.value;
     let token = UtilService.fetchToken();
     let course_id = getCourseId();
@@ -56,14 +56,14 @@ export default class addRes extends Component {
         }
       },
       fail: function (res) {
-        console.log(res);
+        // console.log(res);
         UtilService.showHint('发布资源失败', '请稍后再试', 'none');
       }
     })
   }
 
   formReset () {
-    console.log('bbb')
+    // console.log('bbb')
   }
 
   onChange = e => {

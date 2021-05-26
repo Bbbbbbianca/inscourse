@@ -5,7 +5,7 @@ import { APP_ROUTES } from "../base/constant"
 function inscourseLogin(wxUsername, avatarUrl) {
   Taro.login({
     success: function (res) {
-      console.log(res.code);
+      // console.log(res.code);
       Taro.request({
         url: UtilService.BASE_URL + '/sys/login',
         data: {
@@ -15,7 +15,7 @@ function inscourseLogin(wxUsername, avatarUrl) {
         },
         method: 'POST',
         success: function (res) {
-          console.log(res.data);
+          // console.log(res.data);
           // save the user info in local storage
           try {
             Taro.setStorage({
@@ -26,24 +26,24 @@ function inscourseLogin(wxUsername, avatarUrl) {
               key: "token",
               data: res.data.token,
             });
-            console.log('token in res: ' + res.data.token)
-            console.log('token in storage: ' + Taro.getStorageSync('token'))
+            // console.log('token in res: ' + res.data.token)
+            // console.log('token in storage: ' + Taro.getStorageSync('token'))
             UtilService.showHint('登陆成功', '', 'success');
             Taro.switchTab({
               url: APP_ROUTES.COURSE
             })
           } catch (e) {
-            console.log(e);
+            // console.log(e);
             return false;
           }
         },
         fail: function (res) {
-          console.log(res.message);
+          // console.log(res.message);
         }
       })
     },
     fail: function (res) {
-      console.log(res.message);
+      // console.log(res.message);
     }
   });
 }
@@ -55,13 +55,13 @@ const UserService = {
       lang: 'zh_CN',
       desc: "获取你的昵称、头像、地区及性别",
       success: response => {
-        console.log(response);
+        // console.log(response);
         let wxUsername = response.userInfo.nickName;
         let avatarUrl = response.userInfo.avatarUrl;
         inscourseLogin(wxUsername, avatarUrl);
       },
       fail: () => {
-        console.error("您拒绝了请求");
+        // console.error("您拒绝了请求");
         return;
       }}
     );
@@ -82,11 +82,11 @@ const UserService = {
 		  },
 		  method: 'POST',
 		  success: function (res) {
-			console.log(res.data)
+			// console.log(res.data)
 			UtilService.showHint(res.data.message, '', 'success')
 		  },
 		  fail: function (res) {
-			console.log(res);
+			// console.log(res);
 			UtilService.showHint('修改用户名失败', '请稍后重试', 'fail');
 		  }
 		})

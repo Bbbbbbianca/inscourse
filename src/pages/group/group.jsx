@@ -35,7 +35,7 @@ export default class Group extends Component {
         }
       },
       fail: function (res) {
-        console.log(res);
+        // console.log(res);
         UtilService.showHint('获取课友列表失败', '请稍后重试', 'fail');
       }
     })
@@ -44,7 +44,7 @@ export default class Group extends Component {
 
 
   toShowMatedetail(id) {
-    console.log('view detail of mate' + id)
+    // console.log('view detail of mate' + id)
     Taro.navigateTo({
       url: APP_ROUTES.SCHEDULE +'?id=' + id
     })

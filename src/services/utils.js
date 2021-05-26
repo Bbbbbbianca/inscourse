@@ -10,7 +10,7 @@ const UtilService = {
 	 * @param {string} type
 	 */
 	 showHint: function (title, content, type, duration=1500) {
-		 console.log('title: [' + title + '] content: [' + content + '] type: [' + type + ']');
+		 // console.log('title: [' + title + '] content: [' + content + '] type: [' + type + ']');
 		 Taro.showToast({
 			 title: title,
 			 icon: type,

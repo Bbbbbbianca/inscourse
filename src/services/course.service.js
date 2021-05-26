@@ -20,7 +20,7 @@ const CourseService = {
 			},
 			method: 'GET',
       success: function (res) {
-        console.log(res)
+        // console.log(res)
         if (res.statusCode == 200) {
           UtilService.showHint('搜索成功', '', 'success')
           compo.updateCourses(res.data.courses)
@@ -29,7 +29,7 @@ const CourseService = {
         }
       },
       fail: function (res) {
-        console.log(res);
+        // console.log(res);
         UtilService.showHint('修改用户名失败', '请稍后重试', 'fail');
       }
 		});
@@ -55,11 +55,11 @@ const CourseService = {
 		  },
 		  method: 'POST',
 		  success: function (res) {
-			console.log(res.data)
+			// console.log(res.data)
         UtilService.showHint(res.data.message, '', 'success')
 		  },
 		  fail: function (res) {
-			console.log(res);
+			// console.log(res);
         UtilService.showHint(res.message, '', 'none');
 		  }
 		})

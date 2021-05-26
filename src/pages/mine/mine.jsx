@@ -13,13 +13,7 @@ export default class Mine extends Component {
     this.state = {
       showJoined: true,
       showAssignments: false,
-      user: {
-        user_id: 1,
-        image_path: 'https://www.jb51.net/images/logo.gif',
-        username: '云离沧流',
-        workspace: '复旦大学',
-        email: '23768945612@qq.com'
-      },
+      user: {},
       courses: [],
     };
   }
@@ -63,7 +57,7 @@ export default class Mine extends Component {
       },
       method: 'GET',
       success: function (res) {
-        console.log(res);
+        // console.log(res);
         if (res.statusCode == 200) {
           that.setState({
             courses: res.data.courses
@@ -79,7 +73,7 @@ export default class Mine extends Component {
   }
 
   modifyInfo(id) {
-    console.log(id)
+    // console.log(id)
     Taro.navigateTo({
       url: APP_ROUTES.MODIFYINFO + '?workspace=' + this.state.user.workspace + '&email=' + this.state.user.email
             + '&username=' + this.state.user.username
@@ -101,7 +95,7 @@ export default class Mine extends Component {
   }
 
   onViewDetail(id) {
-    console.log(id)
+    // console.log(id)
     Taro.navigateTo({
       url: APP_ROUTES.DETAIL +'?id=' + id
     })
@@ -114,7 +108,7 @@ export default class Mine extends Component {
   }
 
   toAssignmentDetail(id) {
-    console.log(id)
+    // console.log(id)
   }
 
   render () {

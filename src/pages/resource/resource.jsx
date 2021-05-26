@@ -48,26 +48,26 @@ export default class Resource extends Component {
       method: 'GET',
       success: function (res) {
         if (res.statusCode == 200) {
-          console.log(res.data.resource)
+          // console.log(res.data.resource)
           that.setState({
             resource: res.data.resource
           });
         }
       },
       fail: function (res) {
-        console.log(res);
+        // console.log(res);
         UtilService.showHint('获取资源信息失败', '请稍后重试', 'fail');
       }
     })
   }
 
   toShareResource() {
-    console.log('to share resource')
+    // console.log('to share resource')
     // TO DO
   }
 
   toStarResource() {
-    console.log('to star resource')
+    // console.log('to star resource')
     let token = UtilService.fetchToken();
     let that = this;
     Taro.request({
@@ -81,7 +81,7 @@ export default class Resource extends Component {
       method: 'POST',
       success: function (res) {
         if (res.statusCode == 200) {
-          console.log(res.data.message)
+          // console.log(res.data.message)
           UtilService.showHint(res.data.message, '', 'success')
           that.setState({
             resource: {
@@ -98,18 +98,18 @@ export default class Resource extends Component {
             }
           })
         } else {
-          console.log(res)
+          // console.log(res)
           UtilService.showHint(res.data.message, '', 'none')
         }
       },
       fail: function (res) {
-        console.log(res);
+        // console.log(res);
         UtilService.showHint('收藏资源失败', '请稍后重试', 'fail');
       }
     })
   }
   toCancelStarResource() {
-    console.log('to cancel star resource')
+    // console.log('to cancel star resource')
     let token = UtilService.fetchToken();
     let that = this;
     Taro.request({
@@ -123,7 +123,7 @@ export default class Resource extends Component {
       method: 'POST',
       success: function (res) {
         if (res.statusCode == 200) {
-          console.log(res.data.message)
+          // console.log(res.data.message)
           UtilService.showHint(res.data.message, '', 'success')
           that.setState({
             resource: {
@@ -140,18 +140,18 @@ export default class Resource extends Component {
             }
           })
         } else {
-          console.log(res)
+          // console.log(res)
           UtilService.showHint(res.data.message, '', 'none')
         }
       },
       fail: function (res) {
-        console.log(res);
+        // console.log(res);
         UtilService.showHint('取消收藏资源失败', '请稍后重试', 'fail');
       }
     })
   }
   toPraiseResource() {
-    console.log('to praise resource')
+    // console.log('to praise resource')
     let token = UtilService.fetchToken();
     let that = this;
     Taro.request({
@@ -165,7 +165,7 @@ export default class Resource extends Component {
       method: 'POST',
       success: function (res) {
         if (res.statusCode == 200) {
-          console.log(res.data.message)
+          // console.log(res.data.message)
           UtilService.showHint(res.data.message, '', 'success')
           that.setState({
             resource: {
@@ -182,18 +182,18 @@ export default class Resource extends Component {
             }
           })
         } else {
-          console.log(res)
+          // console.log(res)
           UtilService.showHint(res.data.message, '', 'none')
         }
       },
       fail: function (res) {
-        console.log(res);
+        // console.log(res);
         UtilService.showHint('点赞资源失败', '请稍后重试', 'fail');
       }
     })
   }
   toCancelPraiseResource() {
-    console.log('to cancel praise resource')
+    // console.log('to cancel praise resource')
     let token = UtilService.fetchToken();
     let that = this;
     Taro.request({
@@ -207,7 +207,7 @@ export default class Resource extends Component {
       method: 'POST',
       success: function (res) {
         if (res.statusCode == 200) {
-          console.log(res.data.message)
+          // console.log(res.data.message)
           UtilService.showHint(res.data.message, '', 'success')
           that.setState({
             resource: {
@@ -224,12 +224,12 @@ export default class Resource extends Component {
             }
           })
         } else {
-          console.log(res)
+          // console.log(res)
           UtilService.showHint(res.data.message, '', 'none')
         }
       },
       fail: function (res) {
-        console.log(res);
+        // console.log(res);
         UtilService.showHint('取消点赞资源失败', '请稍后重试', 'fail');
       }
     })

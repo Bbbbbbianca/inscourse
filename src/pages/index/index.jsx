@@ -8,7 +8,7 @@ import UserService from '../../services/user.service'
 export default class Index extends Component {
 
   toHome() {
-	  console.log('进入主页面');
+	  // console.log('进入主页面');
     UserService.wxLogin();
   }
 

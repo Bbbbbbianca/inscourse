@@ -41,7 +41,7 @@ export default class Mine extends Component {
       method: 'GET',
       success: function (res) {
         if (res.statusCode == 200) {
-          console.log(res.data)
+          // console.log(res.data)
           that.setState({
             mate: res.data.mate
           });
@@ -49,7 +49,7 @@ export default class Mine extends Component {
         }
       },
       fail: function (res) {
-        console.log(res);
+        // console.log(res);
         UtilService.showHint('获取课友信息失败', '请稍后重试', 'fail');
       }
     })
@@ -69,14 +69,14 @@ export default class Mine extends Component {
       method: 'GET',
       success: function (res) {
         if (res.statusCode == 200) {
-          console.log(res.data)
+          // console.log(res.data)
           that.setState({
             assigns: res.data.assignments
           });
         }
       },
       fail: function (res) {
-        console.log(res);
+        // console.log(res);
         UtilService.showHint('获取打卡任务列表失败', '请稍后重试', 'fail');
       }
     })
@@ -95,37 +95,13 @@ export default class Mine extends Component {
       deleteTaskId: -1,
       addTaskContent: '',
       addTaskDate: '',
-      mate_user_avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
-      mine_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
-      assigns: [
-        {
-          assignment_id: 1,
-          content: '学完第一章史蒂夫哈佛哈就是开发商减肥哈咖啡史蒂夫集卡还是饭卡是否会看见啊算法和反倒是不符合时代步伐回家时发布时间的背腹受敌就会爆发的健身房',
-          mate_status: 0,
-          my_status: 1,
-          assignment_date: '2020-11-11'
-        },
-        {
-          assignment_id: 2,
-          content: '学完第一章',
-          mate_status: 1,
-          my_status: 0,
-          assignment_date: '2020-11-11'
-        },
-        {
-          assignment_id: 3,
-          content: '学完第一章',
-          mate_status: 1,
-          my_status: 1,
-          assignment_date: '2020-11-11'
-        }
-      ]
+      assigns: []
     };
     this.queryMateByCourse(getCourseId());
   }
 
   toShowCheckTaskTip(id) {
-    console.log('to show check task tip')
+    // console.log('to show check task tip')
     this.setState({
       checkTaskTipVisible: true,
       checkTaskId: id,
@@ -133,7 +109,7 @@ export default class Mine extends Component {
   }
 
   toCheckTask(id) {
-    console.log('to check task ' + id)
+    // console.log('to check task ' + id)
     let token = UtilService.fetchToken();
     let that = this;
     Taro.request({
@@ -147,16 +123,16 @@ export default class Mine extends Component {
       method: 'POST',
       success: function (res) {
         if (res.statusCode == 200) {
-          console.log(res.data)
+          // console.log(res.data)
           UtilService.showHint(res.data.message, '', 'success');
           that.queryAssignmentsByMate(that.state.mate.mate_id);
         } else {
-          console.log(res)
+          // console.log(res)
           UtilService.showHint(res.data.message, '', 'none');
         }
       },
       fail: function (res) {
-        console.log(res);
+        // console.log(res);
         UtilService.showHint('打卡失败', '请稍后重试', 'none');
       }
     })
@@ -165,21 +141,21 @@ export default class Mine extends Component {
     })
   }
   toCancelCheckTask() {
-    console.log('to cancel check task')
+    // console.log('to cancel check task')
     this.setState({
       checkTaskTipVisible: false,
     })
   }
 
   toShowAddTaskDialog() {
-    console.log('to show add task dialog')
+    // console.log('to show add task dialog')
     this.setState({
       addTaskDialogVisible: true,
     })
   }
 
   toAddTask() {
-    console.log('to add task')
+    // console.log('to add task')
     let token = UtilService.fetchToken();
     let that = this;
     Taro.request({
@@ -195,16 +171,16 @@ export default class Mine extends Component {
       method: 'POST',
       success: function (res) {
         if (res.statusCode == 200) {
-          console.log(res.data)
+          // console.log(res.data)
           UtilService.showHint(res.data.message, '', 'success');
           that.queryAssignmentsByMate(that.state.mate.mate_id);
         } else {
-          console.log(res)
+          // console.log(res)
           UtilService.showHint(res.data.message, '', 'none');
         }
       },
       fail: function (res) {
-        console.log(res);
+        // console.log(res);
         UtilService.showHint('新增打卡失败', '请稍后重试', 'none');
       }
     })
@@ -214,7 +190,7 @@ export default class Mine extends Component {
   }
 
   toCancelAddTask() {
-    console.log('to cancel add task')
+    // console.log('to cancel add task')
     this.setState({
       addTaskDialogVisible: false,
     })
@@ -225,7 +201,7 @@ export default class Mine extends Component {
     this.setState({
       addTaskContent: value
     })
-    console.log(this.state.addTaskContent)
+    // console.log(this.state.addTaskContent)
   }
 
   onChangeAddTaskDate = e => {
@@ -233,18 +209,18 @@ export default class Mine extends Component {
     this.setState({
       addTaskDate: value
     })
-    console.log(this.state.addTaskContent)
+    // console.log(this.state.addTaskContent)
   }
 
   toShowDeleteButton() {
-    console.log('to show delete button')
+    // console.log('to show delete button')
     this.setState({
       deleteButtonVisible: true,
       showEditImg: false,
     })
   }
   toHideDeleteButton() {
-    console.log('to hide delete button')
+    // console.log('to hide delete button')
     this.setState({
       deleteButtonVisible: false,
       showEditImg: true,
@@ -252,7 +228,7 @@ export default class Mine extends Component {
   }
 
   toShowDeleteDialog(id) {
-    console.log('to show delete dialog')
+    // console.log('to show delete dialog')
     this.setState({
       deleteDialogVisible: true,
       deleteTaskId: id,
@@ -260,7 +236,7 @@ export default class Mine extends Component {
   }
 
   toDeleteTask(id) {
-    console.log('to delete task' + id)
+    // console.log('to delete task' + id)
     let token = UtilService.fetchToken();
     let that = this;
     Taro.request({
@@ -274,16 +250,16 @@ export default class Mine extends Component {
       method: 'POST',
       success: function (res) {
         if (res.statusCode == 200) {
-          console.log(res.data)
+          // console.log(res.data)
           UtilService.showHint(res.data.message, '', 'success');
           that.queryAssignmentsByMate(that.state.mate.mate_id);
         } else {
-          console.log(res)
+          // console.log(res)
           UtilService.showHint(res.data.message, '', 'none');
         }
       },
       fail: function (res) {
-        console.log(res);
+        // console.log(res);
         UtilService.showHint('删除打卡失败', '请稍后重试', 'none');
       }
     })
@@ -292,7 +268,7 @@ export default class Mine extends Component {
     })
   }
   toCancelDeleteTask() {
-    console.log('to cancel delete task')
+    // console.log('to cancel delete task')
     this.setState({
       deleteDialogVisible: false
     })

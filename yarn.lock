@@ -3510,14 +3510,14 @@
   "resolved" "https://registry.npm.taobao.org/connect-history-api-fallback/download/connect-history-api-fallback-1.6.0.tgz"
   "version" "1.6.0"
 
-"console-browserify@^1.1.0":
+"// console-browserify@^1.1.0":
   "integrity" "sha1-ZwY871fOts9Jk6KrOlWECujEkzY="
-  "resolved" "https://registry.npm.taobao.org/console-browserify/download/console-browserify-1.2.0.tgz"
+  "resolved" "https://registry.npm.taobao.org/// console-browserify/download/// console-browserify-1.2.0.tgz"
   "version" "1.2.0"
 
-"console-control-strings@^1.0.0", "console-control-strings@~1.1.0":
+"// console-control-strings@^1.0.0", "// console-control-strings@~1.1.0":
   "integrity" "sha1-PXz0Rk22RG6mRL9LOVB/mFEAjo4="
-  "resolved" "https://registry.npm.taobao.org/console-control-strings/download/console-control-strings-1.1.0.tgz"
+  "resolved" "https://registry.npm.taobao.org/// console-control-strings/download/// console-control-strings-1.1.0.tgz"
   "version" "1.1.0"
 
 "constants-browserify@^1.0.0":
@@ -5585,7 +5585,7 @@
   "version" "2.7.4"
   dependencies:
     "aproba" "^1.0.3"
-    "console-control-strings" "^1.0.0"
+    "// console-control-strings" "^1.0.0"
     "has-unicode" "^2.0.0"
     "object-assign" "^4.1.0"
     "signal-exit" "^3.0.0"
@@ -8078,7 +8078,7 @@
     "assert" "^1.1.1"
     "browserify-zlib" "^0.2.0"
     "buffer" "^4.3.0"
-    "console-browserify" "^1.1.0"
+    "// console-browserify" "^1.1.0"
     "constants-browserify" "^1.0.0"
     "crypto-browserify" "^3.11.0"
     "domain-browser" "^1.1.1"
@@ -8211,7 +8211,7 @@
   "version" "4.1.2"
   dependencies:
     "are-we-there-yet" "~1.1.2"
-    "console-control-strings" "~1.1.0"
+    "// console-control-strings" "~1.1.0"
     "gauge" "~2.7.3"
     "set-blocking" "~2.0.0"
 
