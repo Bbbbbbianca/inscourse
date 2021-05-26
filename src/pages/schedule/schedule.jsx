@@ -40,7 +40,6 @@ export default class Mine extends Component {
       },
       method: 'GET',
       success: function (res) {
-        console.log(res)
         if (res.statusCode == 200) {
           console.log(res.data)
           that.setState({
@@ -69,7 +68,6 @@ export default class Mine extends Component {
       },
       method: 'GET',
       success: function (res) {
-        console.log(res)
         if (res.statusCode == 200) {
           console.log(res.data)
           that.setState({
@@ -97,7 +95,7 @@ export default class Mine extends Component {
       deleteTaskId: -1,
       addTaskContent: '',
       addTaskTime: '',
-      mate_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
+      mate_user_avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
       mine_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605983591981&di=b075a1308a8228ac2e016f0b04c44e63&imgtype=0&src=http%3A%2F%2Fp6.itc.cn%2Fmpbp%2Fpro%2F20200927%2Ffc5dd7d801304fdb83b9f37c07ae97ae.jpeg',
       assigns: [
         {
@@ -229,7 +227,7 @@ export default class Mine extends Component {
         <View className='schedule-title'>
           <View className='schedule-title-mate'>
             <Image
-              src={this.state.mate_img}
+              src={'http://localhost:8000/api/sys/getUserAvatar?user_id=' + this.state.mate.my_user_id}
               className='schedule-title-mate-img'
             />
           </View>
@@ -238,7 +236,7 @@ export default class Mine extends Component {
           </View>
           <View className='schedule-title-mine'>
             <Image
-              src={this.state.mine_img}
+              src={'http://localhost:8000/api/sys/getUserAvatar?user_id=' + this.state.mate.mate_user_id}
               className='schedule-title-mine-img'
             />
           </View>

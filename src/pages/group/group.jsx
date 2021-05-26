@@ -14,6 +14,10 @@ export default class Group extends Component {
     this.getMyMates()
   }
 
+  componentDidShow() {
+    this.getMyMates()
+  }
+
   getMyMates() {
     let token = UtilService.fetchToken();
     let that = this;
@@ -54,11 +58,11 @@ export default class Group extends Component {
             <View
               key={mate.mate_id}
               className='group-item'
-              onClick={()=>{this.toShowMatedetail(mate.mate_id)}}
+              onClick={()=>{this.toShowMatedetail(mate.course_id)}}
             >
               <View className='group-mate'>
                 <Image
-                  src={mate.mate_img}
+                  src={'http://localhost:8000/api/sys/getUserAvatar?user_id=' + mate.mate_user_id}
                   className='group-mate-img'
                 />
                 <View className='group-mate-name'>
@@ -70,7 +74,7 @@ export default class Group extends Component {
                   {mate.course}
                 </View>
                 <View className='group-text-progress'>
-                  {'已打卡任务' + mate.finished + '项，未打卡任务' + mate.notfinished + '项'}
+                  {'已打卡任务' + mate.finished + '项，未打卡任务' + mate.not_finished + '项'}
                 </View>
                 {/*<View className='group-text-tip'>*/}
                 {/*  {'最近' + mate.date + '前完成打卡任务：' + mate.content}*/}
