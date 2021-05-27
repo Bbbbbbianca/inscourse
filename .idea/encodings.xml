@@ -11,5 +11,6 @@
     <file url="file://$PROJECT_DIR$/src/pages/group/group.scss" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/pages/mine/mine.jsx" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/pages/mine/mine.scss" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/pages/schedule/schedule.scss" charset="UTF-8" />
   </component>
 </project>

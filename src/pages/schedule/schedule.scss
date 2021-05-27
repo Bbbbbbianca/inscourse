@@ -220,6 +220,20 @@
     color: $tf-color-brown7;
     font-family: "FangSong", "Wawati SC", "YouYuan";
   }
+
+  .schedule-date-chooser {
+    height: 10%;
+    width: 91%;
+    border: none;
+    background-color: $tf-color-brown3;
+    border-radius: 12px;
+    margin: 8px 12px;
+    padding: 8px 12px;
+    font-size: 24px;
+    color: $tf-color-brown7;
+    font-family: "FangSong", "Wawati SC", "YouYuan";
+  }
+
   .schedule-add-dialog-task {
     height: 70%;
     width: 91%;

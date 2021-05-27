@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Image, Text, Textarea, Input } from '@tarojs/components'
+import {View, Image, Text, Textarea, Input, Picker} from '@tarojs/components'
 import { AtFab } from 'taro-ui'
 import './schedule.scss'
 import addPic from '../../assets/images/add.png'
@@ -95,7 +95,8 @@ export default class Mine extends Component {
       deleteTaskId: -1,
       addTaskContent: '',
       addTaskDate: '',
-      assigns: []
+      assigns: [],
+      futureDates: this.generateFutureDates()
     };
     this.queryMateByCourse(getCourseId());
   }
@@ -171,28 +172,40 @@ export default class Mine extends Component {
       method: 'POST',
       success: function (res) {
         if (res.statusCode == 200) {
-          // console.log(res.data)
           UtilService.showHint(res.data.message, '', 'success');
           that.queryAssignmentsByMate(that.state.mate.mate_id);
         } else {
-          // console.log(res)
           UtilService.showHint(res.data.message, '', 'none');
         }
       },
       fail: function (res) {
-        // console.log(res);
         UtilService.showHint('新增打卡失败', '请稍后重试', 'none');
       }
-    })
+    });
     this.setState({
       addTaskDialogVisible: false,
+      addTaskContent: '',
+      addTaskDate: '',
     })
   }
 
+  generateFutureDates() {
+    let date = new Date();
+    let dateList = [];
+    for (let i =0;i<30;i++){
+      if (i>0){
+        date.setDate(date.getDate()+1);
+      }
+      dateList.push(date.toLocaleDateString().replaceAll('/','-'));
+    }
+    return dateList;
+  }
+
   toCancelAddTask() {
-    // console.log('to cancel add task')
     this.setState({
       addTaskDialogVisible: false,
+      addTaskContent: '',
+      addTaskDate: ''
     })
   }
 
@@ -201,7 +214,6 @@ export default class Mine extends Component {
     this.setState({
       addTaskContent: value
     })
-    // console.log(this.state.addTaskContent)
   }
 
   onChangeAddTaskDate = e => {
@@ -209,18 +221,15 @@ export default class Mine extends Component {
     this.setState({
       addTaskDate: value
     })
-    // console.log(this.state.addTaskContent)
   }
 
   toShowDeleteButton() {
-    // console.log('to show delete button')
     this.setState({
       deleteButtonVisible: true,
       showEditImg: false,
     })
   }
   toHideDeleteButton() {
-    // console.log('to hide delete button')
     this.setState({
       deleteButtonVisible: false,
       showEditImg: true,
@@ -228,7 +237,6 @@ export default class Mine extends Component {
   }
 
   toShowDeleteDialog(id) {
-    // console.log('to show delete dialog')
     this.setState({
       deleteDialogVisible: true,
       deleteTaskId: id,
@@ -236,7 +244,6 @@ export default class Mine extends Component {
   }
 
   toDeleteTask(id) {
-    // console.log('to delete task' + id)
     let token = UtilService.fetchToken();
     let that = this;
     Taro.request({
@@ -249,30 +256,32 @@ export default class Mine extends Component {
       },
       method: 'POST',
       success: function (res) {
-        if (res.statusCode == 200) {
-          // console.log(res.data)
+        if (res.statusCode === 200) {
           UtilService.showHint(res.data.message, '', 'success');
           that.queryAssignmentsByMate(that.state.mate.mate_id);
         } else {
-          // console.log(res)
           UtilService.showHint(res.data.message, '', 'none');
         }
       },
       fail: function (res) {
-        // console.log(res);
         UtilService.showHint('删除打卡失败', '请稍后重试', 'none');
       }
-    })
+    });
     this.setState({
       deleteDialogVisible: false
     })
   }
   toCancelDeleteTask() {
-    // console.log('to cancel delete task')
     this.setState({
       deleteDialogVisible: false
     })
   }
+
+  onChangeDate = e => {
+    this.setState({
+      addTaskDate: this.state.futureDates[e.detail.value]
+    })
+  };
 
   render () {
     return (
@@ -449,11 +458,16 @@ export default class Mine extends Component {
                   <Text className='schedule-add-dialog-text'>
                     请输入打卡时间：
                   </Text>
-                  <Input
-                    className='schedule-add-dialog-time'
-                    value={this.state.addTaskDate}
-                    onInput={this.onChangeAddTaskDate}
-                  />
+
+                  <Picker mode='selector' range={this.state.futureDates}  className='schedule-date-chooser' onChange={this.onChangeDate}>
+                    <View>{this.state.addTaskDate ? this.state.addTaskDate : "请选择 >"}</View>
+                  </Picker>
+
+                  {/*<Input*/}
+                  {/*  className='schedule-add-dialog-time'*/}
+                  {/*  value={this.state.addTaskDate}*/}
+                  {/*  onInput={this.onChangeAddTaskDate}*/}
+                  {/*/>*/}
                   <Text className='schedule-add-dialog-text'>
                     请输入打卡任务：
                   </Text>

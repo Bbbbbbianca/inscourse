@@ -96,7 +96,7 @@ export default class addRes extends Component {
 
 
             <Text className='area'>资源内容:</Text>
-            <Textarea name='content' autoFocus />
+            <Textarea name='content'/>
             <Button size='mini' type='primary' formType='submit'>提交</Button>
             <Button size='mini' formType='reset' >重置</Button>
           </Form>
