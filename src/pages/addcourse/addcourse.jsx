@@ -41,7 +41,7 @@ export default class addCourse extends Component {
   state = {
     // (0->计算机, 1->数学, 2->法律, 3->医学, 4->其他)
     selector: ['计算机', '数学', '法律', '医学','其他'], // TODO
-    selectorChecked: '点击选择类别'
+    selectorChecked: '点击选择类别 >'
   }
 
   onChange = e => {
@@ -72,7 +72,7 @@ export default class addCourse extends Component {
               </View>
             </View>
             <Text className='area'>课程简介:</Text>
-            <Textarea name='description' autoFocus />
+            <Textarea name='description'/>
             <Button size='mini' type='primary' formType='submit'>提交</Button>
             <Button size='mini' formType='reset' >重置</Button>
           </Form>

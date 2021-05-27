@@ -13,7 +13,7 @@
 
 Input {
   border-bottom: solid 0.5px;
-  border-bottom-color: rgba(61, 150, 255, 0.35);
+  border-bottom-color: $tf-color-brown8;
 }
 
 Button {
@@ -28,13 +28,7 @@ TextArea {
   padding:1%
 }
 
-.title {
-  align-content: center;
-  font-family: "幼圆";
-}
-
 .area {
-  opacity: 50%;
   margin-top: 5%;
   margin-bottom: 2%;
 }
@@ -44,7 +38,6 @@ Picker {
 }
 
 .classification {
-  opacity: 80%;
   font-family: 宋体;
 }
 
@@ -57,7 +50,6 @@ Picker {
 
 .tips {
   width: 35%;
-  opacity: 80%;
   font-family: 宋体;
 }
 

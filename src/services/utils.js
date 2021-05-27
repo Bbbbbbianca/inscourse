@@ -1,6 +1,7 @@
 import Taro from '@tarojs/taro'
 
 const UtilService = {
+  // BASE_URL: "http://localhost:8000/api",
 	BASE_URL: "http://116.63.39.40:8000/api",
 
 	/**
@@ -10,7 +11,6 @@ const UtilService = {
 	 * @param {string} type
 	 */
 	 showHint: function (title, content, type, duration=1500) {
-		 // console.log('title: [' + title + '] content: [' + content + '] type: [' + type + ']');
 		 Taro.showToast({
 			 title: title,
 			 icon: type,

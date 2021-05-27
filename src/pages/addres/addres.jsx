@@ -8,7 +8,7 @@ import {APP_ROUTES} from "../../base/constant";
 function getCourseId() {
   let course_id = Taro.getCurrentInstance().router.params.id
   if (course_id)
-    return course_id
+    return course_id;
   else {
     Taro.navigateTo({
       url: APP_ROUTES.COURSE
@@ -19,7 +19,7 @@ function getCourseId() {
 export default class addRes extends Component {
   state = {
     selector: ['笔记', '视频', 'pdf', '其他'],
-    selectorChecked: ' 点击选择类别',
+    selectorChecked: ' 点击选择类别 >',
     addForm: {
       name: '',
       description: '',
@@ -28,7 +28,6 @@ export default class addRes extends Component {
   }
 
   formSubmit = e => {
-    // console.log(e.detail.value)
     let request = e.detail.value;
     let token = UtilService.fetchToken();
     let course_id = getCourseId();
@@ -46,24 +45,24 @@ export default class addRes extends Component {
       },
       method: 'POST',
       success: function (res) {
-        if (res.statusCode == 200) {
+        if (res.statusCode === 200) {
+          console.log('bb'+res);
           UtilService.showHint(res.data.message, '', 'success', 1200)
           Taro.switchTab({
             url: APP_ROUTES.DETAIL + '?id=' + course_id
           })
         } else {
-          UtilService.showHint(res.data, '', 'none')
+          console.log(res);
+          UtilService.showHint(res.data.message, '', 'none')
         }
       },
       fail: function (res) {
-        // console.log(res);
         UtilService.showHint('发布资源失败', '请稍后再试', 'none');
       }
     })
   }
 
   formReset () {
-    // console.log('bbb')
   }
 
   onChange = e => {
