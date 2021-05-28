@@ -7,87 +7,70 @@
     background-color: $tf-color-brown3;
     display: flex;
     flex-direction: column;
-    padding: 0 0 500px;
 }
 
 .detail-msg {
     position: absolute;
     z-index: 0;
-    width: 96%;
-    height: 30%;
+    width: 100%;
+    height: 28%;
     display: flex;
     flex-direction: row;
     margin: 2px 16px;
     .detail-msg-img {
-        width: 30%; // 225px
-        height: 50%; // 300px
+        width: 210px;
+        height: 280px;
         border-radius: 12px;
-        margin: 28px 20px;
+        margin: 28px 12px;
         box-shadow: 2px 2px 3px $tf-color-brown7;
     }
 
     .detail-msg-text {
-        width: 70%;
+        width: 72%;
         height: 100%;
         display: flex;
+        margin: 0 8px;
         flex-direction: column;
         .detail-msg-text-top {
             height: 15%;
             display: flex;
             flex-direction: row;
             .detail-msg-title {
-                font-size: 48px;
+                width: 75%;
+                font-size: 45px;
                 font-family: "FangSong", "Wawati SC", "YouYuan";
-                margin-top: 24px;
-                margin-left: 16px;
                 color: $tf-color-brown8;
             }
 
             .detail-msg-button-join {
+                width: 20%;
+                margin-top: 8px;
                 font-size: 32px;
                 font-family: "FangSong", "Wawati SC", "YouYuan";
                 background-color: $tf-color-brown5;
-                margin-top: 10px;
-                margin-right: 16px;
-                margin-bottom: -10px;
+                border-radius: 96px;
             }
         }
 
         .detail-msg-dct {
-            height: 35%;
+            height: 85%;
+            margin: 4px 0;
             font-size: 32px;
             font-family: "FangSong", "Wawati SC", "YouYuan";
-            margin: 16px 18px;
             color: $tf-color-brown4;
-        }
-
-        .detail-msg-text-bottom {
-            height: 5%;
-            display: flex;
-            flex-direction: row-reverse;
-            .detail-msg-heat-img {
-                width: 36px;
-                height: 36px;
-                margin: 0 8px;
-            }
-            .detail-msg-heat {
-                font-size: 24px;
-                font-family: "FangSong", "Wawati SC", "YouYuan";
-                color: $tf-color-brown8;
-            }
         }
     }
 }
 
 .detail-relevant {
-    margin-top: 340px;
     position: absolute;
     z-index: 0;
+    margin-top: 48%;
     width: 100%;
-    height: 65%;
+    height: 66%;
     .detail-choice {
         width: 100%;
-        height: 5%;
+        height: 6%;
         display: flex;
         flex-direction: row;
         background-color: $tf-color-pink1;
@@ -110,9 +93,29 @@
             padding-left: 36px;
             border-radius: 4px;
         }
+
+        .detail-heat {
+            margin-top: 8px;
+            margin-left: 336px;
+            display: flex;
+            flex-direction: row-reverse;
+            .detail-heat-img {
+                width: 36px;
+                height: 36px;
+                margin: 0 8px;
+            }
+            .detail-heat-num {
+                font-size: 24px;
+                font-family: "FangSong", "Wawati SC", "YouYuan";
+                color: $tf-color-brown8;
+            }
+        }
     }
 
     .detail-resource {
+        width: 100%;
+        height: 60%;
+        background-color: $tf-color-brown3;
         .detail-resource-type {
             display: flex;
             flex-direction: row;
@@ -199,7 +202,9 @@
     }
 
     .detail-car {
-      //height: auto;
+        width: 100%;
+        height: 60%;
+        background-color: $tf-color-brown3;
         .detail-car-opt {
             display: flex;
             flex-direction: row;
@@ -214,7 +219,15 @@
                 border-radius: 18px;
             }
         }
-
+        .detail-car-end-line {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 24px;
+            font-family: "FangSong", "Wawati SC", "YouYuan";
+            margin-top: 24px;
+            color: #8e7c62;
+          }
         .detail-car-list {
             display: flex;
             flex-direction: column;

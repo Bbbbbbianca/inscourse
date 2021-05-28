@@ -202,6 +202,10 @@ export default class Detail extends Component {
       }
     })
   }
+  toQuitCourse(invitation_code) {
+    console.log('to quit course' + invitation_code)
+    // TO DO
+  }
 
   toShowCar() {
     this.setState({
@@ -402,34 +406,28 @@ export default class Detail extends Component {
               {
                 this.state.is_joined
                   ?
-                  <Button
+                  <View
+                    onClick={() => {
+                      this.toQuitCourse(this.state.course.invitation_code)
+                    }}
                     className='detail-msg-button-join'
                   >
                     已加入
-                  </Button>
+                  </View>
                   :
-                  <Button
+                  <View
                     onClick={() => {
                       this.toJoinCourse(this.state.course.invitation_code)
                     }}
                     className='detail-msg-button-join'
                   >
                     加入
-                  </Button>
+                  </View>
               }
 
             </View>
             <View className='detail-msg-dct'>
               {this.state.course.description}
-            </View>
-            <View className='detail-msg-text-bottom'>
-              <View className='detail-msg-heat'>
-                {this.state.course.heat}
-              </View>
-              <Image
-                src={heatPic}
-                className='detail-msg-heat-img'
-              />
             </View>
           </View>
         </View>
@@ -450,6 +448,15 @@ export default class Detail extends Component {
               }}
             >
               课友
+            </View>
+            <View className='detail-heat'>
+              <View className='detail-heat-num'>
+                {this.state.course.heat}
+              </View>
+              <Image
+                src={heatPic}
+                className='detail-heat-img'
+              />
             </View>
           </View>
           <View>
@@ -530,7 +537,7 @@ export default class Detail extends Component {
                   ))}
                 </View>
                 <View className='detail-resource-end-line'>
-                   -------------------------  没有更多了 &lt;(＃＃)&gt;彡    -------------------------
+                  ----------  没有更多了 &lt;(＃＃)&gt;彡  ----------
                 </View>
                 <AtFab className='detail-resource-add'>
                   <Image
@@ -584,6 +591,9 @@ export default class Detail extends Component {
                   </View>
                 </View>
                 ))}
+              </View>
+              <View className='detail-car-end-line'>
+                  ----------  没有更多了 &lt;(＃＃)&gt;彡  ----------
               </View>
             </View>
             :

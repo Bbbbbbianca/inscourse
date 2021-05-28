@@ -1,12 +1,12 @@
 @import "src/assets/variables.scss";
 .resource {
-    position: relative;
+    position: absolute;
     width: 100%;
     height: 100%;
     background-color: $tf-color-brown3;
-    background-size: contain;
-    padding: 16px 0 650px;
+    padding: 0;
     .resource-card {
+        position: relative;
         width: 90%;
         height: 82%;
         margin: 32px 42px;
@@ -15,6 +15,7 @@
         box-shadow: 16px 16px 24px $tf-color-grey3;
 
         .resource-top {
+            position: relative;
             display: flex;
             flex-direction: column;
             height: 30%;
@@ -43,6 +44,7 @@
         }
 
         .resource-mid {
+            position: relative;
             margin-top: 12px;
             height: 60%;
             .resource-content {
@@ -55,6 +57,7 @@
         }
 
         .resource-bottom {
+            position: relative;
             width: 100%;
             height: 5%;
             margin: 32px 0;

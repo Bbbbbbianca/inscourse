@@ -3,8 +3,9 @@ import './app.scss'
 
 class App extends Component {
 
-  componentDidMount () {}
-
+  componentDidMount () {
+    document.body.style.backgroundColor = '#f8f4ed';
+  }
   componentDidShow () {}
 
   componentDidHide () {}
