@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: '修改我的信息'
+  navigationBarTitleText: '编辑信息'
 }

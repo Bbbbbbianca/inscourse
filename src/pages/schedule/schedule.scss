@@ -14,7 +14,6 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-  background-color: $tf-color-brown2;
   .schedule-title-mate {
     width: 15%;
     padding: 16px 12px;
@@ -52,6 +51,7 @@
   z-index: 0;
   width: 100%;
   margin-top: 18%;
+  background-color: $tf-color-brown3;
   display: flex;
   flex-direction: column;
   .schedule-assign-item {
@@ -128,7 +128,7 @@
   height: 78px;
   right: 136px;
   bottom: 32px;
-  background-color: $tf-color-brown2;
+  background-color: $tf-color-brown4;
   .schedule-edit-img {
     width: 72px;
     height: 72px;

@@ -162,6 +162,9 @@ export default class Mine extends Component {
                         </View>
                     ))}
                   </View>
+                  <View className='mine-course-end-line'>
+                    ----------  没有更多了 &lt;(＃＃)&gt;彡  ----------
+                  </View>
                 </View>
                 : null}
           </View>

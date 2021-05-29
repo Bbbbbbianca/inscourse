@@ -1,89 +1,183 @@
 @import "src/assets/variables.scss";
 .group {
   position: absolute;
+  z-index: 0;
   width: 100%;
   height: 100%;
   background-color: $tf-color-brown3;
-}
-
-.group-list {
-  .group-item {
+  .group-list {
+    position: absolute;
+    z-index: 0;
     width: 100%;
-    height: 28%;
+    margin-top: 116px;
+    background-color: $tf-color-brown3;
+    .group-item {
+      width: 100%;
+      height: 24%;
+      display: flex;
+      flex-direction: row;
+      border-radius: 12px;
+      background-color: $tf-color-brown6;
+      box-shadow: 2px 2px 3px $tf-color-grey3;
+      margin: 8px 0;
+      .group-mate {
+        width: 15%;
+        display: flex;
+        flex-direction: column;
+        padding: 8px 24px;
+        align-items: center;
+        .group-mate-img {
+          width: 112px;
+          height: 112px;
+          border-radius: 64px;
+          box-shadow: 2px 2px 3px $tf-color-brown8;
+        }
+        .group-mate-name {
+          font-size: 24px;
+          font-family: "FangSong", "Wawati SC", "YouYuan";
+          color: $tf-color-brown8;
+        }
+  
+      }
+  
+      .group-text {
+        width: 75%;
+        display: flex;
+        flex-direction: column;
+        .group-text-course {
+          font-size: 36px;
+          font-family: "FangSong", "Wawati SC", "YouYuan";
+          color: $tf-color-brown8;
+          margin: 5% 0 2% 0;
+        }
+        .group-text-progress {
+          font-size: 24px;
+          font-family: "FangSong", "Wawati SC", "YouYuan";
+          color: $tf-color-brown7;
+        }
+        .group-text-tip {
+          font-size: 28px;
+          font-family: "FangSong", "Wawati SC", "YouYuan";
+          color: $tf-color-pink3;
+        }
+      }
+  
+      .group-delete {
+        width: 10%;
+        .group-delete-img {
+          height: 36px;
+          width: 36px;
+        }
+      }
+    }
+  }
+  .group-top {
+    position: absolute;
+    z-index: 0;
+    width: 100%;
     display: flex;
     flex-direction: row;
-    border-radius: 12px;
-    background-color: $tf-color-brown6;
-    box-shadow: 2px 2px 3px $tf-color-grey3;
-    margin: 8px 0;
-    .group-mate {
-      width: 15%;
-      display: flex;
-      flex-direction: column;
-      padding: 8px 24px;
-      align-items: center;
-      .group-mate-img {
-        width: 112px;
-        height: 112px;
-        border-radius: 64px;
-        box-shadow: 2px 2px 3px $tf-color-brown8;
-      }
-      .group-mate-name {
-        font-size: 24px;
-        font-family: "FangSong", "Wawati SC", "YouYuan";
-        color: $tf-color-brown8;
-      }
-
+    .group-top-tip {
+      font-size: 32px;
+      font-family: "FangSong", "Wawati SC", "YouYuan";
+      margin: 4%;
+      color: $tf-color-brown4;
     }
-
-    .group-text {
-      width: 75%;
-      display: flex;
-      flex-direction: column;
-      .group-text-course {
-        font-size: 36px;
-        font-family: "FangSong", "Wawati SC", "YouYuan";
-        color: $tf-color-brown8;
-        margin: 5% 0 2% 0;
-      }
-      .group-text-progress {
-        font-size: 24px;
-        font-family: "FangSong", "Wawati SC", "YouYuan";
-        color: $tf-color-brown7;
-      }
-      .group-text-tip {
-        font-size: 28px;
-        font-family: "FangSong", "Wawati SC", "YouYuan";
-        color: $tf-color-pink3;
-      }
+  
+    .edit-button {
+      float: right;
+      background-color: rgba(165, 161, 154, 0.6);
+      color: $tf-color-brown8;
+      border-radius: 45px;
+      font-size: 40px;
+      font-family: "FangSong", "Wawati SC", "YouYuan";
+      margin: 4%;
     }
+    
+    .cancel-button {
+      float: right;
+      background-color: rgba(165, 8, 26, 0.6);
+      color: $tf-color-brown8;
+      border-radius: 45px;
+      font-size: 40px;
+      font-family: "FangSong", "Wawati SC", "YouYuan";
+      margin: 4%;
+    }
+  }
 
-    .group-delete {
-      width: 10%;
-      .group-delete-img {
-        height: 36px;
-        width: 36px;
-      }
+  .group-null {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .group-null-img {
+      margin-top: 200px;
+      margin-left: 50px;
+      height: 400px;
+      width: 400px;
+    }
+    .group-null-text {
+      font-size: 42px;
+      font-family: "FangSong", "Wawati SC", "YouYuan";
+      margin: 4%;
+      color: $tf-color-grey3;
     }
   }
 }
 
-.edit-button {
-  float: right;
-  background-color: rgba(165, 161, 154, 0.6);
-  color: $tf-color-brown8;
-  border-radius: 45px;
-  font-size: 40px;
-  font-family: "FangSong", "Wawati SC", "YouYuan";
-  margin: 4%;
+
+.group-mask {
+  position: absolute;
+  z-index: 6;
+  background-color: $tf-color-brown4;
+  opacity: 0.4;
+  height: 100%;
+  width: 100%;
 }
 
-.cancel-button {
-  float: right;
-  background-color: rgba(165, 8, 26, 0.6);
-  color: $tf-color-brown8;
-  border-radius: 45px;
-  font-size: 40px;
-  font-family: "FangSong", "Wawati SC", "YouYuan";
-  margin: 4%;
+.group-tip {
+  position: fixed;
+  z-index: 10;
+  background-color: $tf-color-brown6;
+  height: 25%;
+  width: 55%;
+  top: 35%;
+  left: 23%;
+  border-radius: 12px;
+  .group-tip-text {
+      padding: 64px 32px;
+      font-size: 38px;
+      font-family: "FangSong", "Wawati SC", "YouYuan";
+      color: $tf-color-brown8;
+      height: 30%;
+  }
+
+  .group-tip-button {
+      display: flex;
+      flex-direction: row;
+      height: 10%;
+      .group-tip-comfirm {
+          width: 72px;
+          height: 48px;
+          margin-left: 64px;
+          background-color: $tf-color-pink2;
+          border-radius: 48px;
+          color: $tf-color-brown4;
+          font-size: 32px;
+          font-family: "FangSong", "Wawati SC", "YouYuan";
+      }
+
+      .group-tip-cancel {
+          width: 72px;
+          height: 48px;
+          margin-left: 148px;
+          background-color: $tf-color-brown7;
+          border-radius: 48px;
+          font-size: 32px;
+          color: $tf-color-brown4;
+          font-family: "FangSong", "Wawati SC", "YouYuan";
+      }
+  }
 }

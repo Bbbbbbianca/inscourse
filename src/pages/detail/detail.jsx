@@ -7,9 +7,7 @@ import './detail.scss'
 import heatPic from '../../assets/images/heat.png'
 import UtilService from "../../services/utils";
 import addPic from '../../assets/images/add.png'
-import preferPic from '../../assets/images/prefer.png'
 import favorPic from '../../assets/images/favor.png'
-import personPic from '../../assets/images/person.png'
 
 function getCourseId() {
   let course_id = Taro.getCurrentInstance().router.params.id
@@ -30,12 +28,16 @@ export default class Detail extends Component {
       showCar: false,
       showType: -1,
       is_joined: false,
+      is_owner: false,
+      is_public: false,
       maskVisible: false,
     // 四个弹出框显示参数
       addIvtDialogVisible: false,
       acceptIvtDialogVisible: false,
       joinMateDialogVisible: false,
       endIvtDialogVisible: false,
+      pubCourseDialogVisible: false,
+      delCourseDialogVisible: false,
     // 发起邀请的描述信息
       addDescription: '',
     // 接受邀请的邀请码信息
@@ -170,7 +172,7 @@ export default class Detail extends Component {
       }
     })
   }
-
+  // 加入和退出课程
   toJoinCourse(invitation_code) {
     // console.log('join ' + invitation_code)
     let token = UtilService.fetchToken();
@@ -206,6 +208,50 @@ export default class Detail extends Component {
     console.log('to quit course' + invitation_code)
     // TO DO
   }
+  // 公开课程
+  toShowPubCourseDialog(invitation_code) {
+    this.setState({
+      maskVisible: true,
+      pubCourseDialogVisible: true,
+      joinCode: invitation_code
+    })
+  }
+  toPublicCourse(invitation_code) {
+    console.log('to public course' + invitation_code)
+    // TO DO
+    this.setState({
+      maskVisible: false,
+      pubCourseDialogVisible: false
+    })
+  }
+  toCancelPublicCourse(){
+    this.setState({
+      maskVisible: false,
+      pubCourseDialogVisible: false
+    })
+  }
+  // 删除课程
+  toShowDelCourseDialog(invitation_code) {
+    this.setState({
+      maskVisible: true,
+      delCourseDialogVisible: true,
+      joinCode: invitation_code
+    })
+  }
+  toDeleteCourse(invitation_code) {
+    console.log('to delete course' + invitation_code)
+    // TO DO
+    this.setState({
+      maskVisible: false,
+      delCourseDialogVisible: false
+    })
+  }
+  toCancelDeleteCourse() {
+    this.setState({
+      maskVisible: false,
+      delCourseDialogVisible: false
+    })
+  }
 
   toShowCar() {
     this.setState({
@@ -235,7 +281,7 @@ export default class Detail extends Component {
       url: APP_ROUTES.ADDRES +'?id=' + this.state.course.course_id
     })
   }
-
+  // 新建邀请
   toShowAddInvitationDialog() {
     // console.log('add invitation dialog visible.')
     this.setState({
@@ -243,14 +289,12 @@ export default class Detail extends Component {
       addIvtDialogVisible: true
     })
   }
-
   onChangeDescription = e => {
     let value = e.detail.value
     this.setState({
       addDescription: value
     })
   }
-
   toAddInvitation() {
     // console.log('to add invitation')
     let token = UtilService.fetchToken();
@@ -293,6 +337,7 @@ export default class Detail extends Component {
     })
   }
 
+  // 输入邀请码接受邀请
   toShowAcceptInvitationDialog() {
     // console.log('accept invitation dialog visible.')
     this.setState({
@@ -300,7 +345,6 @@ export default class Detail extends Component {
       acceptIvtDialogVisible: true
     })
   }
-
   onChangeJoinCode = e => {
     let value = e.detail.value
     this.setState({
@@ -308,7 +352,6 @@ export default class Detail extends Component {
     })
     // console.log(this.state.joinCode)
   }
-
   toAcceptInvitation() {
     // console.log('to accept invitation')
     this.setState({
@@ -326,7 +369,8 @@ export default class Detail extends Component {
     })
   }
 
-  toShowTipDialog(invitation_code) {
+  // 点击卡片接受邀请
+  toShowJoinMateDialog(invitation_code) {
     // console.log('join mate dialog visible.')
     this.setState({
       maskVisible: true,
@@ -334,7 +378,6 @@ export default class Detail extends Component {
       joinCode: invitation_code
     })
   }
-
   toJoinMate(invitation_code) {
     // console.log('to join mate')
     let token = UtilService.fetchToken();
@@ -374,6 +417,7 @@ export default class Detail extends Component {
     })
   }
 
+  // 结束邀请
   toEndIvt() {
     // console.log('to end invitation')
     this.setState({
@@ -404,7 +448,38 @@ export default class Detail extends Component {
                 {this.state.course.name}
               </View>
               {
-                this.state.is_joined
+                this.state.is_owner
+                ?
+                <View className='detail-msg-opt'>
+                  <View>
+                  {
+                  this.state.is_public
+                  ?
+                  null
+                  :
+                  <View
+                    onClick={() => {
+                      this.toShowPubCourseDialog(this.state.course.invitation_code)
+                    }}
+                    className='detail-msg-button-public'
+                  >
+                    公开
+                  </View>
+                  }
+                  </View>
+                  <View
+                    onClick={() => {
+                      this.toShowDelCourseDialog(this.state.course.invitation_code)
+                    }}
+                    className='detail-msg-button-delete'
+                  >
+                    删除
+                  </View>
+                </View>
+                :
+                <View>
+                  {
+                  this.state.is_joined
                   ?
                   <View
                     onClick={() => {
@@ -423,6 +498,8 @@ export default class Detail extends Component {
                   >
                     加入
                   </View>
+                  }
+                </View>
               }
 
             </View>
@@ -575,7 +652,7 @@ export default class Detail extends Component {
                 <View
                   key={car.invitation_id}
                   className='detail-car-item'
-                  onClick={()=>{this.toShowTipDialog(car.invitation_code)}}
+                  onClick={()=>{this.toShowJoinMateDialog(car.invitation_code)}}
                 >
                   <Image
                     src={UtilService.BASE_URL + '/sys/getUserAvatar?user_id=' + car.requester_id}
@@ -679,19 +756,19 @@ export default class Detail extends Component {
           {
           this.state.joinMateDialogVisible
           ?
-          <View className='detail-car-tip'>
-            <View className='detail-car-tip-text'>
+          <View className='detail-tip'>
+            <View className='detail-tip-text'>
               是否建立课友关系？
             </View>
-            <View className='detail-car-tip-button'>
+            <View className='detail-tip-button'>
               <View
-                className='detail-car-tip-comfirm'
+                className='detail-tip-comfirm'
                 onClick={()=>{this.toJoinMate(this.state.joinCode)}}
               >
                 Yes！
               </View>
               <View
-                className='detail-car-tip-cancel'
+                className='detail-tip-cancel'
                 onClick={()=>{this.toCancelJoinMate()}}
               >
                 Wait..
@@ -706,20 +783,74 @@ export default class Detail extends Component {
           {
           this.state.endIvtDialogVisible
           ?
-          <View className='detail-car-tip'>
-            <View className='detail-car-tip-text'>
+          <View className='detail-tip'>
+            <View className='detail-tip-text'>
               是否结束邀请？
             </View>
-            <View className='detail-car-tip-button'>
+            <View className='detail-tip-button'>
               <View
-                className='detail-car-tip-comfirm'
+                className='detail-tip-comfirm'
                 onClick={()=>{this.toEndIvt()}}
               >
                 Yes！
               </View>
               <View
-                className='detail-car-tip-cancel'
+                className='detail-tip-cancel'
                 onClick={()=>{this.toCancelEndIvt()}}
+              >
+                Wait..
+              </View>
+            </View>
+          </View>
+          :
+          null
+          }
+        </View>
+        <View>
+          {
+          this.state.pubCourseDialogVisible
+          ?
+          <View className='detail-tip'>
+            <View className='detail-tip-text'>
+              是否公开课程？
+            </View>
+            <View className='detail-tip-button'>
+              <View
+                className='detail-tip-comfirm'
+                onClick={()=>{this.toPublicCourse()}}
+              >
+                Yes！
+              </View>
+              <View
+                className='detail-tip-cancel'
+                onClick={()=>{this.toCancelPublicCourse()}}
+              >
+                Wait..
+              </View>
+            </View>
+          </View>
+          :
+          null
+          }
+        </View>
+        <View>
+          {
+          this.state.delCourseDialogVisible
+          ?
+          <View className='detail-tip'>
+            <View className='detail-tip-text'>
+              是否删除课程？
+            </View>
+            <View className='detail-tip-button'>
+              <View
+                className='detail-tip-comfirm'
+                onClick={()=>{this.toDeleteCourse()}}
+              >
+                Yes！
+              </View>
+              <View
+                className='detail-tip-cancel'
+                onClick={()=>{this.toCancelDeleteCourse()}}
               >
                 Wait..
               </View>
