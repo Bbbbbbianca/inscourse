@@ -109,13 +109,14 @@ export default class Mine extends Component {
       showJoinedCourse: false
     })
   }
-  // 查看课程
-  onViewmine(id) {
+
+  onViewDetail(id) {
     // console.log(id)
     Taro.navigateTo({
-      url: APP_ROUTES.mine +'?id=' + id
+      url: APP_ROUTES.DETAIL +'?id=' + id
     })
   }
+
   // 显示邀请的相关操作
   showOptionOnIvt(id, code) {
     this.setState({
@@ -202,7 +203,7 @@ export default class Mine extends Component {
                 <View className='mine-course'>
                   <View className='mine-course-list'>
                     { this.state.courses.map((course)=>(
-                        <View key={course.course_id} className='mine-course-item' onClick={()=>{this.onViewmine(course.course_id)}}>
+                        <View key={course.course_id} className='mine-course-item' onClick={()=>{this.onViewDetail(course.course_id)}}>
                           <Image src={UtilService.BASE_URL + '/course/getCourseIcon?course_id=' + course.course_id} className='mine-course-img' />
                           <View className='mine-course-text'>
                             <View className='mine-course-name'>{course.name}</View>
