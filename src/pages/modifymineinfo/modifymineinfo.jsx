@@ -24,13 +24,11 @@ function getParameters() {
 }
 
 export default class Mine extends Component {
-
   state = {
     username: getParameters().username,
     workspace: getParameters().workspace,
     email: getParameters().email
   }
-
   formSubmit=e=>{
     // console.log(e.detail.value)
     let request = e.detail.value;
@@ -58,7 +56,6 @@ export default class Mine extends Component {
       }
     })
   }
-
   formReset () {
     // console.log('form reset')
   }
@@ -68,25 +65,25 @@ export default class Mine extends Component {
       <View className='modifymineinfo'>
         <View className='modify-form'>
           <Form onSubmit={this.formSubmit} onReset={this.formReset}>
-            <View className='display-row'>
-              <View className='tips'>用户名：</View>
-              <View className='input-items'>
+            <View className='modify-form-row'>
+              <View className='modify-form-tips'>用户名：</View>
+              <View className='modify-form-input-items'>
                 <Input type='text' name='username' maxlength='20' value={this.state.username} />
               </View>
             </View>
-            <View className='display-row'>
-              <View className='tips'>邮箱：</View>
-              <View className='input-items'>
+            <View className='modify-form-row'>
+              <View className='modify-form-tips'>邮箱：</View>
+              <View className='modify-form-input-items'>
                 <Input type='text' name='email' maxlength='255' value={this.state.email} />
               </View>
             </View>
-            <View className='display-row'>
-              <View className='tips'>学校/公司：</View>
-              <View className='input-items'>
+            <View className='modify-form-row'>
+              <View className='modify-form-tips'>学校/公司：</View>
+              <View className='modify-form-input-items'>
                 <Input type='text' name='workspace' maxlength='20' value={this.state.workspace} />
               </View>
             </View>
-            <Button size='mini' type='primary' formType='submit'>修改</Button>
+            <Button size='mini' formType='submit'>修改</Button>
             <Button size='mini' formType='reset' >重置</Button>
           </Form>
         </View>

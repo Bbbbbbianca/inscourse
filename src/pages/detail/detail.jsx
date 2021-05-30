@@ -8,6 +8,7 @@ import heatPic from '../../assets/images/heat.png'
 import UtilService from "../../services/utils";
 import addPic from '../../assets/images/add.png'
 import favorPic from '../../assets/images/favor.png'
+import sharePic from '../../assets/images/share.png'
 
 function getCourseId() {
   let course_id = Taro.getCurrentInstance().router.params.id
@@ -38,6 +39,7 @@ export default class Detail extends Component {
       endIvtDialogVisible: false,
       pubCourseDialogVisible: false,
       delCourseDialogVisible: false,
+      ivtCodeDialogVisible: false,
     // 发起邀请的描述信息
       addDescription: '',
     // 接受邀请的邀请码信息
@@ -80,7 +82,6 @@ export default class Detail extends Component {
       }
     })
   }
-
   getCourseDetail(id) {
     let token = UtilService.fetchToken();
     let that = this;
@@ -114,7 +115,6 @@ export default class Detail extends Component {
       }
     })
   }
-
   getFavoredResources(course_id) {
     let token = UtilService.fetchToken();
     let that = this;
@@ -141,7 +141,6 @@ export default class Detail extends Component {
       }
     })
   }
-
   getCourseResources(course_id, content_type) {
     this.setState({
       showType: content_type
@@ -252,7 +251,7 @@ export default class Detail extends Component {
       delCourseDialogVisible: false
     })
   }
-
+  //获取资源、课友信息 
   toShowCar() {
     this.setState({
       showCar: true,
@@ -260,21 +259,19 @@ export default class Detail extends Component {
     })
     this.getOpenInvitations(this.state.course.course_id)
   }
-
   toShowRes() {
     this.setState({
       showCar: false,
       showRes: true
     })
   }
-
   onViewResDetail(id) {
     // console.log('view detail of resource' + id)
     Taro.navigateTo({
       url: APP_ROUTES.RESOURCE + '?id=' + id
     })
   }
-
+  // 添加资源
   toAddResource() {
     // console.log('to add resource')
     Taro.navigateTo({
@@ -336,7 +333,6 @@ export default class Detail extends Component {
       addIvtDialogVisible: false
     })
   }
-
   // 输入邀请码接受邀请
   toShowAcceptInvitationDialog() {
     // console.log('accept invitation dialog visible.')
@@ -368,7 +364,6 @@ export default class Detail extends Component {
       acceptIvtDialogVisible: false
     })
   }
-
   // 点击卡片接受邀请
   toShowJoinMateDialog(invitation_code) {
     // console.log('join mate dialog visible.')
@@ -416,21 +411,29 @@ export default class Detail extends Component {
       joinMateDialogVisible: false
     })
   }
-
-  // 结束邀请
-  toEndIvt() {
-    // console.log('to end invitation')
+  // 查询课程邀请码
+  toShareCourse() {
     this.setState({
-      maskVisible: false,
-      endIvtDialogVisible: false
+      maskVisible: true,
+      ivtCodeDialogVisible: true,
     })
-    // TO DO
   }
-  toCancelEndIvt() {
-    // console.log('cancel end invitation')
+  toCopyCode(code) {
+    wx.setClipboardData({
+      data: code,
+      success: function (res) {
+        console.log("复制成功:", res)
+      },
+    })
     this.setState({
       maskVisible: false,
-      endIvtDialogVisible: false
+      ivtCodeDialogVisible: false,
+    })
+  }
+  toExitShareDialog() {
+    this.setState({
+      maskVisible: false,
+      ivtCodeDialogVisible: false,
     })
   }
 
@@ -678,6 +681,13 @@ export default class Detail extends Component {
             }
           </View>
         </View>
+        <AtFab className='detail-share'>
+          <Image
+            src={sharePic}
+            className='detail-share-img'
+            onClick={()=>{this.toShareCourse()}}
+          />
+        </AtFab>
         <View>
         {
           this.state.maskVisible
@@ -853,6 +863,36 @@ export default class Detail extends Component {
                 onClick={()=>{this.toCancelDeleteCourse()}}
               >
                 Wait..
+              </View>
+            </View>
+          </View>
+          :
+          null
+          }
+        </View>
+        <View>
+          {
+          this.state.ivtCodeDialogVisible
+          ?
+          <View className='detail-code'>
+            <View className='detail-code-title'>
+              复制邀请码给你的小伙伴吧！
+            </View>
+            <Text className='detail-code-text' selectable='true'>
+              {this.state.course.invitation_code}
+            </Text>
+            <View className='detail-code-button'>
+              <View
+                className='detail-code-copy'
+                onClick={()=>{this.toCopyCode(this.state.course.invitation_code)}}
+              >
+                Copy
+              </View>
+              <View
+                className='detail-code-exit'
+                onClick={()=>{this.toExitShareDialog()}}
+              >
+                Exit
               </View>
             </View>
           </View>

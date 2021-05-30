@@ -48,7 +48,7 @@ export default class addRes extends Component {
       success: function (res) {
         if (res.statusCode == 200) {
           UtilService.showHint(res.data.message, '', 'success', 1200)
-          Taro.switchTab({
+          Taro.navigateBack({
             url: APP_ROUTES.DETAIL + '?id=' + course_id
           })
         } else {
@@ -79,11 +79,11 @@ export default class addRes extends Component {
           <Form onSubmit={this.formSubmit} onReset={this.formReset}>
             <View className='display-row'>
               <View className='tips'>资源名称:</View>
-              <View className='input-items'> <Input type='text' name='resource_key' maxlength='20' /></View>
+              <View className='input-items'> <Input type='text' name='resource_key' maxlength='8' /></View>
             </View>
             <View className='display-row'>
               <View className='tips'>资源介绍:</View>
-              <View className='input-items'> <Input type='text' name='description' maxlength='255' /></View>
+              <View className='input-items'> <Input type='text' name='description' maxlength='20' /></View>
             </View>
             <View className='display-row'>
               <View className='tips'>资源类别:</View>
@@ -93,11 +93,9 @@ export default class addRes extends Component {
                 </Picker>
               </View>
             </View>
-
-
             <Text className='area'>资源内容:</Text>
-            <Textarea name='content'/>
-            <Button size='mini' type='primary' formType='submit'>提交</Button>
+            <Textarea name='content' />
+            <Button size='mini' formType='submit'>提交</Button>
             <Button size='mini' formType='reset' >重置</Button>
           </Form>
         </View>

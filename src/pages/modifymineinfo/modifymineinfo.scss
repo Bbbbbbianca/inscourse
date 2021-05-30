@@ -10,57 +10,42 @@
   margin: 10% 5% 0 5%;
   padding: 5%;
 }
-
-Input {
-  border-bottom: solid 0.5px;
-  border-bottom-color: rgba(61, 150, 255, 0.35);
-}
-
-Button {
-  margin: 5% 5% 5% 15%;
-}
-
-TextArea {
-  margin-top: 2%;
-  background: rgba(255, 255, 255, 0.81);
-  width:95%;
-  height:400px;
-  padding:1%
-}
-
-.title {
-  align-content: center;
-  font-family: "幼圆";
-}
-
-.area {
-  opacity: 50%;
-  margin-top: 5%;
-  margin-bottom: 2%;
-}
-
-Picker {
-  margin-bottom: 5%;
-}
-
-.classification {
-  opacity: 80%;
-  font-family: 宋体;
-}
-
-.display-row {
+.modify-form-row {
+  width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-content: center;
   margin-top: 5%;
   margin-bottom: 10%;
+  .modify-form-tips {
+    opacity: 80%;
+    font-size: 42px;
+    font-family: "FangSong", "Wawati SC", "YouYuan";
+    color: $tf-color-brown8;
+  }
+  
+  .modify-form-input-items {
+    width: 90%;
+    margin-left: 10%;
+    border: none;
+    background-color: $tf-color-brown6;
+    border-radius: 12px;
+    margin: 8px 12px;
+    padding: 8px 12px;
+    font-size: 32px;
+    color: $tf-color-brown7;
+    font-family: "FangSong", "Wawati SC", "YouYuan";
+  }
+}
+Input {
+  border: none;
+}
+Button {
+  margin: 5% 5% 5% 15%;
+  background-color: $tf-color-brown6;
+  border-radius: 96px;
+  font-family: "FangSong", "Wawati SC", "YouYuan";
+  color: $tf-color-brown8;
 }
 
-.tips {
-  width: 35%;
-  opacity: 80%;
-  font-family: 宋体;
-}
 
-.input-items {
-  width: 65%;
-}

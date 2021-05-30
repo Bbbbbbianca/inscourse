@@ -7,57 +7,68 @@
 }
 
 .add-form {
-  margin: 5%;
-  padding: 5%;
+  margin: 4%;
+  padding: 4%;
+  background-color: $tf-color-brown3;
 }
-
+.display-row {
+  width: 100%;
+  margin-top: 4%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  .tips {
+    opacity: 80%;
+    font-size: 42px;
+    font-family: "FangSong", "Wawati SC", "YouYuan";
+    color: $tf-color-brown8;
+  }
+  .input-items {
+    width: 90%;
+    margin-left: 10%;
+    border: none;
+    background-color: $tf-color-brown6;
+    border-radius: 12px;
+    margin: 8px 12px;
+    padding: 8px 12px;
+    font-size: 32px;
+    color: $tf-color-brown7;
+    font-family: "FangSong", "Wawati SC", "YouYuan";
+  }
+}
 Input {
-  border-bottom: solid 0.5px;
-  border-bottom-color: rgba(61, 150, 255, 0.6);
+  border: none;
 }
-
 Button {
   margin: 5% 5% 5% 15%;
+  background-color: $tf-color-brown6;
+  border-radius: 96px;
+  font-family: "FangSong", "Wawati SC", "YouYuan";
+  color: $tf-color-brown8;
 }
-
 TextArea {
   margin-top: 2%;
-  background: rgba(255, 255, 255, 0.81);
-  width:95%;
-  height:400px;
-  padding:1%
+  background-color: $tf-color-brown6;
+  border-radius: 48px;
+  color: $tf-color-brown7;
+  font-family: "FangSong", "Wawati SC", "YouYuan";
+  width: 95%;
+  height: 400px;
+  padding: 1%;
 }
-
+Picker {
+  border: none;
+  font-family: "FangSong", "Wawati SC", "YouYuan";
+  color: $tf-color-brown8;
+}
 .title {
   align-content: center;
-  font-family: "幼圆";
+  font-family: "FangSong", "Wawati SC", "YouYuan";
 }
-
 .area {
-  opacity: 50%;
-  margin-top: 5%;
-  margin-bottom: 2%;
-}
-
-Picker {
-  border-bottom: solid 0.5px;
-  border-bottom-color: rgba(61, 150, 255, 0.6);
-}
-
-.display-row {
-  display: flex;
-  flex-direction: row;
-  margin-top: 5%;
-  margin-bottom: 10%;
-}
-
-.tips {
-  width: 30%;
+  margin-top: 10%;
   opacity: 80%;
-  font-family: 宋体;
-}
-
-.input-items {
-  width: 70%;
-  opacity: 70%;
+  font-size: 32px;
+  font-family: "FangSong", "Wawati SC", "YouYuan";
+  color: $tf-color-brown8;
 }

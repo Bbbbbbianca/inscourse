@@ -57,7 +57,7 @@ export default class addCourse extends Component {
           <Form onSubmit={this.formSubmit} onReset={this.formReset}>
             <View className='display-row'>
               <View className='tips'>课程名称:</View>
-              <View className='input-items'> <Input type='text' name='name' maxlength='20' /></View>
+              <View className='input-items'> <Input type='text' name='name' maxlength='8' /></View>
             </View>
             <View className='display-row'>
               <View className='tips'>课程简称:</View>
@@ -72,8 +72,8 @@ export default class addCourse extends Component {
               </View>
             </View>
             <Text className='area'>课程简介:</Text>
-            <Textarea name='description' autoFocus />
-            <Button size='mini' type='primary' formType='submit'>提交</Button>
+            <Textarea name='description' maxlength='110'  autoFocus />
+            <Button size='mini' formType='submit'>提交</Button>
             <Button size='mini' formType='reset' >重置</Button>
           </Form>
         </View>

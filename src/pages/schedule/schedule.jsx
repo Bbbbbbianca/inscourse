@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import {View, Image, Text, Textarea, Input, Picker} from '@tarojs/components'
+import {View, Image, Text, Textarea, Picker} from '@tarojs/components'
+import Taro from '@tarojs/taro'
 import { AtFab } from 'taro-ui'
 import './schedule.scss'
 import addPic from '../../assets/images/add.png'
@@ -10,7 +11,8 @@ import checkfixedPic from '../../assets/images/check_fixed.png'
 import deletePic from '../../assets/images/delete.png'
 import editPic from '../../assets/images/edit.png'
 import affirmPic from '../../assets/images/affirm.png'
-import Taro from "@tarojs/taro";
+import hidePic from '../../assets/images/hide.png'
+import displayPic from '../../assets/images/display.png'
 import {APP_ROUTES} from "../../base/constant";
 import UtilService from "../../services/utils";
 
@@ -25,8 +27,7 @@ function getCourseId() {
   }
 }
 
-export default class Mine extends Component {
-
+export default class Schedule extends Component {
   queryMateByCourse(course_id) {
     let token = UtilService.fetchToken();
     let that = this;
@@ -91,8 +92,10 @@ export default class Mine extends Component {
       deleteButtonVisible: false,
       deleteDialogVisible: false,
       showEditImg: true,
+      showHideImg: true,
       checkTaskId: -1,
       deleteTaskId: -1,
+      is_hide: false,
       addTaskContent: '',
       addTaskDate: '',
       assigns: [],
@@ -100,7 +103,7 @@ export default class Mine extends Component {
     };
     this.queryMateByCourse(getCourseId());
   }
-
+  // 任务打卡：
   toShowCheckTaskTip(id) {
     // console.log('to show check task tip')
     this.setState({
@@ -108,7 +111,6 @@ export default class Mine extends Component {
       checkTaskId: id,
     })
   }
-
   toCheckTask(id) {
     // console.log('to check task ' + id)
     let token = UtilService.fetchToken();
@@ -147,14 +149,13 @@ export default class Mine extends Component {
       checkTaskTipVisible: false,
     })
   }
-
+  // 添加任务
   toShowAddTaskDialog() {
     // console.log('to show add task dialog')
     this.setState({
       addTaskDialogVisible: true,
     })
   }
-
   toAddTask() {
     // console.log('to add task')
     let token = UtilService.fetchToken();
@@ -188,7 +189,6 @@ export default class Mine extends Component {
       addTaskDate: '',
     })
   }
-
   generateFutureDates() {
     let date = new Date();
     let dateList = [];
@@ -200,7 +200,6 @@ export default class Mine extends Component {
     }
     return dateList;
   }
-
   toCancelAddTask() {
     this.setState({
       addTaskDialogVisible: false,
@@ -208,21 +207,19 @@ export default class Mine extends Component {
       addTaskDate: ''
     })
   }
-
   onChangeAddTaskContent = e => {
     let value = e.detail.value
     this.setState({
       addTaskContent: value
     })
   }
-
   onChangeAddTaskDate = e => {
     let value = e.detail.value
     this.setState({
       addTaskDate: value
     })
   }
-
+  // 编辑后显示删除按钮
   toShowDeleteButton() {
     this.setState({
       deleteButtonVisible: true,
@@ -235,14 +232,13 @@ export default class Mine extends Component {
       showEditImg: true,
     })
   }
-
+  // 删除任务
   toShowDeleteDialog(id) {
     this.setState({
       deleteDialogVisible: true,
       deleteTaskId: id,
     })
   }
-
   toDeleteTask(id) {
     let token = UtilService.fetchToken();
     let that = this;
@@ -276,6 +272,19 @@ export default class Mine extends Component {
       deleteDialogVisible: false
     })
   }
+  // 隐藏所有已打卡任务
+  toHideTaskFinished() {
+    this.setState({
+      is_hide: true,
+      showHideImg: false
+    })
+  }
+  toDisplayTaskFinished() {
+    this.setState({
+      is_hide: false,
+      showHideImg: true
+    })
+  }
 
   onChangeDate = e => {
     this.setState({
@@ -304,63 +313,68 @@ export default class Mine extends Component {
           </View>
         </View>
         <View className='schedule-assign'>
-          {this.state.assigns.map((assign)=>(
-            <View
-              key={assign.assignment_id}
-              className='schedule-assign-item'
-            >
-              <View className='schedule-assign-item-mate'>
-                {
-                  assign.mate_status
-                    ?
-                    <Image
-                      src={checkfixedPic}
-                      className='schedule-assign-item-mate-img'
-                    />
-                    :
-                    <Image
-                      src={framefixedPic}
-                      className='schedule-assign-item-mate-img'
-                    />
-                }
-              </View>
-              <View className='schedule-assign-item-text'>
-                <View className='schedule-assign-item-title'>
-                  <View className='schedule-assign-item-time'>
-                    {assign.assignment_date + ' :'}
-                  </View>
+          {this.state.assigns.map((assign)=>(  
+            <View key={assign.assignment_id}> 
+            {
+              this.state.is_hide && assign.my_status && assign.mate_status
+              ?
+              null
+              :
+              <View className='schedule-assign-item'>
+                <View className='schedule-assign-item-mate'>
                   {
-                    this.state.deleteButtonVisible
+                    assign.mate_status
                       ?
                       <Image
-                        src={deletePic}
-                        className='schedule-assign-item-delete'
-                        onClick={()=>{this.toShowDeleteDialog(assign.assignment_id)}}
+                        src={checkfixedPic}
+                        className='schedule-assign-item-mate-img'
                       />
                       :
-                      null
+                      <Image
+                        src={framefixedPic}
+                        className='schedule-assign-item-mate-img'
+                      />
                   }
                 </View>
-                <View className='schedule-assign-item-content'>
-                  {assign.content}
+                <View className='schedule-assign-item-text'>
+                  <View className='schedule-assign-item-title'>
+                    <View className='schedule-assign-item-time'>
+                      {assign.assignment_date + ' :'}
+                    </View>
+                    {
+                      this.state.deleteButtonVisible
+                        ?
+                        <Image
+                          src={deletePic}
+                          className='schedule-assign-item-delete'
+                          onClick={()=>{this.toShowDeleteDialog(assign.assignment_id)}}
+                        />
+                        :
+                        null
+                    }
+                  </View>
+                  <View className='schedule-assign-item-content'>
+                    {assign.content}
+                  </View>
+                </View>
+                <View className='schedule-assign-item-mine'>
+                  {
+                    assign.my_status
+                      ?
+                      <Image
+                        src={checkPic}
+                        className='schedule-assign-item-mine-img'
+                      />
+                      :
+                      <Image
+                        src={framePic}
+                        className='schedule-assign-item-mine-img'
+                        onClick={()=>{this.toShowCheckTaskTip(assign.assignment_id)}}
+                      />
+                  }
                 </View>
               </View>
-              <View className='schedule-assign-item-mine'>
-                {
-                  assign.my_status
-                    ?
-                    <Image
-                      src={checkPic}
-                      className='schedule-assign-item-mine-img'
-                    />
-                    :
-                    <Image
-                      src={framePic}
-                      className='schedule-assign-item-mine-img'
-                      onClick={()=>{this.toShowCheckTaskTip(assign.assignment_id)}}
-                    />
-                }
-              </View>
+            }
             </View>
           ))}
         </View>
@@ -388,6 +402,31 @@ export default class Mine extends Component {
               />
           }
         </AtFab>
+        <View>
+          {
+            this.state.showEditImg
+            ?
+            null
+            :
+            <AtFab className='schedule-hide'>
+            {
+              this.state.showHideImg
+              ?
+              <Image
+                src={hidePic}
+                className='schedule-hide-img'
+                onClick={()=>{this.toHideTaskFinished()}}
+              />
+              :
+              <Image
+                src={displayPic}
+                className='schedule-hide-img'
+                onClick={()=>{this.toDisplayTaskFinished()}}
+              />
+            }
+            </AtFab>
+          }
+        </View>
         <View>
           {
             this.state.checkTaskTipVisible
