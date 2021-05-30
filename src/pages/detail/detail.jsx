@@ -192,7 +192,6 @@ export default class Detail extends Component {
             is_joined: true
           });
           UtilService.showHint(res.data.message, '', 'success', 1200)
-          that.getCourseResources(that.state.course.course_id, that.state.showType);
         } else {
           UtilService.showHint(res.data, '', 'none')
         }
@@ -203,9 +202,34 @@ export default class Detail extends Component {
       }
     })
   }
-  toQuitCourse(invitation_code) {
-    console.log('to quit course' + invitation_code)
+  toQuitCourse(course_id) {
+    console.log('to quit course ' + course_id)
     // TO DO
+    let token = UtilService.fetchToken();
+    let that = this;
+    Taro.request({
+      url: UtilService.BASE_URL + '/course/dropOutCourse',
+      header: {
+        'Token': token
+      },
+      data: {
+        'course_id': course_id
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.statusCode == 200) {
+          that.setState({
+            is_joined: false
+          });
+          UtilService.showHint(res.data.message, '', 'success', 1200)
+        } else {
+          UtilService.showHint(res.data, '', 'none')
+        }
+      },
+      fail: function (res) {
+        UtilService.showHint('退出课程失败', '请稍后重试', 'fail');
+      }
+    })
   }
   // 公开课程
   toShowPubCourseDialog(invitation_code) {
@@ -251,7 +275,7 @@ export default class Detail extends Component {
       delCourseDialogVisible: false
     })
   }
-  //获取资源、课友信息 
+  //获取资源、课友信息
   toShowCar() {
     this.setState({
       showCar: true,
@@ -486,7 +510,7 @@ export default class Detail extends Component {
                   ?
                   <View
                     onClick={() => {
-                      this.toQuitCourse(this.state.course.invitation_code)
+                      this.toQuitCourse(this.state.course.course_id)
                     }}
                     className='detail-msg-button-join'
                   >
